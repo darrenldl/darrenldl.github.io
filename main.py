@@ -2,7 +2,7 @@ import os
 import subprocess
 
 CONTENT_DIR = "content"
-OUT_DIR = "site"
+OUT_DIR = "docs"
 
 def main():
     for root, dirs, files in os.walk('content'):
