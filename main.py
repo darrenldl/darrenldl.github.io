@@ -20,6 +20,8 @@ def main():
                        "--filter",
                        "./filter.py",
                        "--standalone",
+                       "--template",
+                       "template.html",
                        "-o",
                        out_path
                        ]
