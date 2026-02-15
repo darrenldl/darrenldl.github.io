@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>index</title>
+  <title>Docfd (page WIP)</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -172,12 +172,14 @@
   </style>
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">Docfd (page WIP)</h1>
+</header>
 <p><a href=".."><strong>Back to Home</strong></a></p>
-<h1 id="docfd-page-is-wip"><a
-href="https://github.com/darrenldl/docfd">Docfd</a> (Page is WIP)</h1>
 <h2 id="introduction">Introduction</h2>
-<p>Docfd is in essence a TUI program that allows you to fuzzy search for
-a phrase across multiple lines, across text files, PDFs, DOCX, etc.</p>
+<p><a href="https://github.com/darrenldl/docfd">Docfd</a> is in a TUI
+program that allows you to fuzzy search for a phrase across multiple
+lines, across text files, PDFs, DOCX, etc.</p>
 <p>While the README does a reasonable job briefing over what Docfd is, I
 still want to talk about Docfd in greater details. In part to document
 the engineering effort that went into Docfd, and in part as a portfolio
@@ -207,14 +209,15 @@ e.g. “hello world” becomes <code>hello.*world</code>,
 <code>hello.*\n.*world</code>, <code>hello.*\n.*\n.*world</code>, and so
 on, up to a limit.</li>
 <li>But then the number of regexes grows quickly with the number of
-words, especially if we allow reordering of words</li>
+words, especially if we allow reordering of words and desire typo
+tolerance.</li>
 </ul></li>
 </ul></li>
 <li><strong><a href="https://github.com/junegunn/fzf">fzf</a>, <a
 href="https://github.com/skim-rs/skim">skim</a>, <a
 href="https://github.com/alexpasmantier/television">television</a></strong>
 <ul>
-<li>Great for single line</li>
+<li>Great for fuzzy finding within a single line</li>
 <li>There are workarounds for multiline by replacing the new line
 character then using the <code>--read0</code> flag, e.g. <a
 href="https://github.com/xkcd386at/scripts/blob/master/vgc">vgc</a>, but
@@ -302,5 +305,40 @@ exist in the documents, but I cannot say the same for LLMs.</li>
 </ul>
 <h3 id="how-does-docfd-address-my-complaints">How does Docfd address my
 complaints?</h3>
+<ul>
+<li>Docfd accomplishes multiline search through a straightforward
+combination of inverted index and proximity search between words.
+<ul>
+<li>The inverted index (i.e. a mapping from a word to all its appearing
+positions) is first searched through once to find the matches for the
+first word in the search phrase.</li>
+<li>DFS is then used for the remaining words, where the word is searched
+within a specified distance from the previous word. In other words, the
+path in this DFS is the list/sequence of words in the document matching
+the search phrase.</li>
+</ul></li>
+<li>Fuzzy matching is handled by using the Levenshtein distance as part
+of the matching criteria for each word. An automaton is computed for
+each word of the search phrase for optimised repeated matching.</li>
+<li>Docfd only processes the current directory or the specified
+directories and files upon startup. Hashing is used to check if file has
+been previously indexed. This means there is no central storage
+requirement, and no background indexing.
+<ul>
+<li>In principle this causes slower start-up time in the general case
+compared to programs with background indexing. But since the set of
+documents of interest is usually small (&lt;1k documents), the start-up
+is often instantaneous.</li>
+<li>And if the set of documents is really large, then one can always
+fall back to having a long running session of docfd.</li>
+</ul></li>
+<li>A common speed up tactic for search engines is to load the inverted
+indices into memory, as they are on the hottest paths. Docfd instead
+keeps it in the on-disk SQLite DB to minimise memory usage, to avoid
+impacting performance of other desktop applications. The tradeoff is
+that at larger scale (say a few k documents), Docfd will noticeably
+struggle - results will take seconds instead of less than a second to
+show up.</li>
+</ul>
 </body>
 </html>

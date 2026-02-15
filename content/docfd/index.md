@@ -1,14 +1,13 @@
 ---
 maxwidth: 60%
+title: Docfd (page WIP)
 ---
 
 [**Back to Home**](..)
 
-# [Docfd](https://github.com/darrenldl/docfd) (Page is WIP)
-
 ## Introduction
 
-Docfd is in essence a TUI program that allows you to fuzzy search for
+[Docfd](https://github.com/darrenldl/docfd) is in a TUI program that allows you to fuzzy search for
 a phrase across multiple lines, across text files, PDFs, DOCX, etc.
 
 While the README does a reasonable job briefing over what Docfd is,
@@ -37,9 +36,9 @@ while providing "good" search results:
     - Bad if I want to search for a phrase across potentially more than 1 line
         - Technically there is a way to encode the problem into a regex,
           e.g. "hello world" becomes `hello.*world`, `hello.*\n.*world`, `hello.*\n.*\n.*world`, and so on, up to a limit.
-        - But then the number of regexes grows quickly with the number of words, especially if we allow reordering of words
+        - But then the number of regexes grows quickly with the number of words, especially if we allow reordering of words and desire typo tolerance.
 - **[fzf](https://github.com/junegunn/fzf), [skim](https://github.com/skim-rs/skim), [television](https://github.com/alexpasmantier/television)**
-    - Great for single line
+    - Great for fuzzy finding within a single line
     - There are workarounds for multiline by replacing the new line character then using the `--read0` flag,
       e.g. [vgc](https://github.com/xkcd386at/scripts/blob/master/vgc),
       but this does not allow searching across blank lines
@@ -92,3 +91,32 @@ while providing "good" search results:
       for LLMs.
 
 ### How does Docfd address my complaints?
+
+- Docfd accomplishes multiline search through a straightforward combination of
+  inverted index and proximity search between words.
+    - The inverted index (i.e. a mapping from a word to all its
+      appearing positions) is first searched through once to find the
+      matches for the first word in the search phrase.
+    - DFS is then used for the remaining words, where the word is searched
+      within a specified distance from the previous word.
+      In other words, the path in this DFS is the list/sequence of words in the document matching the search phrase.
+- Fuzzy matching is handled by using the Levenshtein distance as part of
+  the matching criteria for each word. An automaton is computed for
+  each word of the search phrase for optimised repeated matching.
+- Docfd only processes the current directory or the specified directories and
+  files upon startup. Hashing is used to check if file has been
+  previously indexed. This means there is no central storage requirement,
+  and no background indexing.
+    - In principle this causes slower start-up time in the general case
+      compared to programs with background indexing. But since the set
+      of documents of interest is usually small (<1k documents), the
+      start-up is often instantaneous.
+    - And if the set of documents is really large, then one can always
+      fall back to having a long running session of docfd.
+- A common speed up tactic for search engines is to load the inverted
+  indices into memory, as they are on the hottest paths. Docfd instead
+  keeps it in the on-disk SQLite DB to minimise memory usage, to avoid
+  impacting performance of other desktop applications. The tradeoff is
+  that at larger scale (say a few k documents), Docfd will noticeably
+  struggle - results will take seconds instead of less than a second
+  to show up.
