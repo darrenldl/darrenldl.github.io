@@ -1,6 +1,6 @@
 ---
 maxwidth: 60%
-title: Docfd (page WIP)
+title: Docfd (Page WIP)
 ---
 
 [**Back to Home**](..)
@@ -65,7 +65,7 @@ while providing "good" search results:
     - On a similar note, I also don't want the periodic CPU and/or
       memory spike from reindexing of files I am not looking at.
 - **[Elasticsearch](https://www.elastic.co/elasticsearch), [Lucene](https://lucene.apache.org/), [meilisearch](https://github.com/meilisearch/meilisearch), etc**
-    - Nothing beats the search quality of actual search engines, especially taking semantic search into account.
+    - Nothing beats the search performance of actual search engines.
       But the setup and running cost of these are not trivial.
     - Which are all fair enough, cause ultimately you need in-memory indices for hot data to serve at the scale needed,
       which takes time to build and they occupy memory space etc.
@@ -77,14 +77,16 @@ while providing "good" search results:
       of search engines also render them not viable for me.
     - But if I am deploying onto a dedicated hardware/host, then these remain the natural first choices obviously.
 - **Local LLMs, whether for chat or semantic search**
-    - I have found these to be quite quick to get started. But they are still very computationally heavy.
+    - I personally believe these could be the gold standard for information retrieval, but they are still very computationally heavy,
+      and there are a lot of fine-tuning needed in terms of chunking, etc, to yield optimal results. And even after
+      all that, we still face the issue of hallucinations.
     - Arguments of the energy efficiency aside, I simply don't want to build my core workflow around needing very powerful hardware.
       Even CPU optimised LLMs run quite sluggishly on my laptop last I tried.
     - If one day very powerful hardware is extremely prevalent and cheap,
       where computational inefficiency is simply strong-armed into irrelevance,
       then sure, local LLM why not. Or alternatively LLM becomes so efficient
       that we can use it on the most modest of machines while offering good results, that would suffice as well.
-    - But I am not confident we are close to that stage yet, so there are still merits to the traditional
+    - But I am not confident we are close to that stage yet, so there are still very real needs for the traditional
       approaches to searching, especially since LLMs still hallucinate wildly, and even if not,
       cannot give guarantee for its exhaustiveness. For instance, if grep does not give any results
       for a search word, then I am confident the word does not exist in the documents, but I cannot say the same
@@ -113,10 +115,24 @@ while providing "good" search results:
       start-up is often instantaneous.
     - And if the set of documents is really large, then one can always
       fall back to having a long running session of docfd.
-- A common speed up tactic for search engines is to load the inverted
-  indices into memory, as they are on the hottest paths. Docfd instead
-  keeps it in the on-disk SQLite DB to minimise memory usage, to avoid
-  impacting performance of other desktop applications. The tradeoff is
-  that at larger scale (say a few k documents), Docfd will noticeably
-  struggle - results will take seconds instead of less than a second
+- A common speed up tactic for search engines is to load the inverted indices
+  into memory, as they are on the hottest paths. Docfd instead keeps it only in
+  the on-disk SQLite DB to minimise memory usage, to avoid impacting
+  performance of other desktop applications. The tradeoff is that at larger
+  scale (say a few thousand documents, depending on the sizes), Docfd will
+  noticeably struggle - results will take seconds instead of less than a second
   to show up.
+
+### Structure of Remaining Text
+
+The rest of the Docfd text will revolve around showcasing the different vertical slices
+(the specific scenarios or workflows) of Docfd in the form of recordings,
+each followed by a technical write-up of how the
+implementation all worked together into delivering said vertical slice.
+
+I believe this both delivers a nice feature exploration experience for
+new and existing users, and splits the technical writing naturally by
+tangible, focused scenarios.
+
+## Showcase
+
