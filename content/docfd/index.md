@@ -7,6 +7,8 @@ title: Docfd (Page WIP)
 
 ## Introduction
 
+[Online Demo](https://demo.docfd.sh)
+
 [Docfd](https://github.com/darrenldl/docfd) is in a TUI program that allows you to fuzzy search for
 a phrase across multiple lines, across text files, PDFs, DOCX, etc.
 
