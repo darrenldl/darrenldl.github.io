@@ -1,13 +1,13 @@
 ---
-maxwidth: 60%
-title: Docfd (Page WIP)
+maxwidth: "80ch"
+title: Docfd
 ---
 
 [**Back to Home**](..)
 
 ## Introduction
 
-[Online Demo](https://demo.docfd.sh)
+[Online Demo](https://demo.docfd.sh) | [GitHub](https://github.com/darrenldl/docfd) | [Wiki](https://github.com/darrenldl/docfd/wiki)
 
 [Docfd](https://github.com/darrenldl/docfd) is in a TUI program that allows you to fuzzy search for
 a phrase across multiple lines, across text files, PDFs, DOCX, etc.
@@ -17,115 +17,47 @@ I still want to talk about Docfd in greater details.
 In part to document the engineering effort that went into
 Docfd, and in part as a portfolio building exercise.
 
-### Motivation
+> **TODO:** Add a concise project summary, the principal technical constraints, and the main technologies used.
 
-Docfd was born out of my personal frustrations with
-existing search tools in the context of human text search.
+![Docfd interactive demonstration](gifs/repo.gif)
 
-This is not to say I think the tools are not well implemented or
-not well designed, this is just me saying I don't fit into the usage patterns
-that these tools are designed for.
-In fact, given the specific intended usage patterns and constraints, I think
-most of these tools are likely implemented as well as one could.
+## Product Walkthrough
 
-So the following are not necessarily criticisms, but more of
-why they didn't fit my (perhaps admittedly niche) criteria of
-being able to run locally on a not very powerful machine
-while providing "good" search results:
+> **TODO:** Describe the interactive workflow shown above: startup and incremental indexing, multiline search, filtering, navigation, and opening a result.
 
-- **grep, [ripgrep](https://github.com/BurntSushi/ripgrep), etc**
-    - Great if I am searching for a single word
-    - Bad if I want to search for a phrase across potentially more than 1 line
-        - Technically there is a way to encode the problem into a regex,
-          e.g. "hello world" becomes `hello.*world`, `hello.*\n.*world`, `hello.*\n.*\n.*world`, and so on, up to a limit.
-        - But then the number of regexes grows quickly with the number of words, especially if we allow reordering of words and desire typo tolerance.
-- **[fzf](https://github.com/junegunn/fzf), [skim](https://github.com/skim-rs/skim), [television](https://github.com/alexpasmantier/television)**
-    - Great for fuzzy finding within a single line
-    - There are workarounds for multiline by replacing the new line character then using the `--read0` flag,
-      e.g. [vgc](https://github.com/xkcd386at/scripts/blob/master/vgc),
-      but this does not allow searching across blank lines
-    - Technically not a problem if you are only interested in searching
-      within paragraphs, but this assumes text is always well formed,
-      which is not necessarily the case with text extracted from PDFs.
-- **[Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx), [Papra](https://github.com/papra-hq/papra), [sist2](https://github.com/sist2app/sist2)**
-    - These are optimised for central storage of documents, where the storage
-      is not necessarily designed to be accessible to external programs (which
-      is fair enough, cause you want storage consistency).
-    - But I still want to use the file system as the main organisation mechanism to avoid vendor lock-in,
-      and to allow usage of other tools. In principle I can use both the central storage and file system, but then I am
-      using twice the storage space adn also need to keep things in sync somehow.
-    - That said, if I ever need to deploy for a use case for multi-user or concurrent access, then software with DB backed storage
-      is still likely my top pick. But here I am just looking to use locally on a single machine myself.
-- **[Recoll](https://www.recoll.org/), [Baloo](https://invent.kde.org/frameworks/baloo)**
-    - These (from my point of view) expect either a stable main collection of folders to scan from, or scan the whole home directory barring
-      ones like `Downloads`. They also utilise background daemon to index periodically.
-    - However, I usually jump to a specific project folder to search rather than the whole home directory, and I want
-      the index to be fully up-to-date with respect to the underlying files.
-      I don't want to wait for a background update to occur.
-    - While I can trigger the reindexing manually, I need to update the
-      settings in order to just reindex the specific folder I am in.
-    - On a similar note, I also don't want the periodic CPU and/or
-      memory spike from reindexing of files I am not looking at.
-- **[Elasticsearch](https://www.elastic.co/elasticsearch), [Lucene](https://lucene.apache.org/), [meilisearch](https://github.com/meilisearch/meilisearch), etc**
-    - Nothing beats the search performance of actual search engines.
-      But the setup and running cost of these are not trivial.
-    - Which are all fair enough, cause ultimately you need in-memory indices for hot data to serve at the scale needed,
-      which takes time to build and they occupy memory space etc.
-    - But I don't want anything long running. I just want to jump into
-      a folder, do my search, and be done. I don't want to wait for
-      more than a few seconds just to do a quick search, so starting
-      up a fresh search engine instance per session is a no-go.
-    - I also don't want the tool to disrupt other deskop applications I am running, so the typical resource usage requirements
-      of search engines also render them not viable for me.
-    - But if I am deploying onto a dedicated hardware/host, then these remain the natural first choices obviously.
-- **Local LLMs, whether for chat or semantic search**
-    - I personally believe these could be the gold standard for information retrieval, but they are still very computationally heavy,
-      and there are a lot of fine-tuning needed in terms of chunking, etc, to yield optimal results. And even after
-      all that, we still face the issue of hallucinations.
-    - Arguments of the energy efficiency aside, I simply don't want to build my core workflow around needing very powerful hardware.
-      Even CPU optimised LLMs run quite sluggishly on my laptop last I tried.
-    - If one day very powerful hardware is extremely prevalent and cheap,
-      where computational inefficiency is simply strong-armed into irrelevance,
-      then sure, local LLM why not. Or alternatively LLM becomes so efficient
-      that we can use it on the most modest of machines while offering good results, that would suffice as well.
-    - But I am not confident we are close to that stage yet, so there are still very real needs for the traditional
-      approaches to searching, especially since LLMs still hallucinate wildly, and even if not,
-      cannot give guarantee for its exhaustiveness. For instance, if grep does not give any results
-      for a search word, then I am confident the word does not exist in the documents, but I cannot say the same
-      for LLMs.
+![Docfd non-interactive demonstration](gifs/repo-non-interactive.gif)
 
-### How does Docfd address my complaints?
+> **TODO:** Describe the non-interactive and scripting workflow shown above.
 
-- Docfd accomplishes multiline search through a straightforward combination of
-  inverted index and proximity search between words.
-    - The inverted index (i.e. a mapping from a word to all its
-      appearing positions) is first searched through once to find the
-      matches for the first word in the search phrase.
-    - DFS is then used for the remaining words, where the word is searched
-      within a specified distance from the previous word.
-      In other words, the path in this DFS is the list/sequence of words in the document matching the search phrase.
-- Fuzzy matching is handled by using the Levenshtein distance as part of
-  the matching criteria for each word. An automaton is computed for
-  each word of the search phrase for optimised repeated matching.
-- Docfd only processes the current directory or the specified directories and
-  files upon startup. Hashing is used to check if file has been
-  previously indexed. This means there is no central storage requirement,
-  and no background indexing.
-    - In principle this causes slower start-up time in the general case
-      compared to programs with background indexing. But since the set
-      of documents of interest is usually small (<1k documents), the
-      start-up is often instantaneous.
-    - And if the set of documents is really large, then one can always
-      fall back to having a long running session of docfd.
-- A common speed up tactic for search engines is to load the inverted indices
-  into memory, as they are on the hottest paths. Docfd instead keeps it only in
-  the on-disk SQLite DB to minimise memory usage, to avoid impacting
-  performance of other desktop applications. The tradeoff is that at larger
-  scale (say a few thousand documents, depending on the sizes), Docfd will
-  noticeably struggle - results will take seconds instead of less than a second
-  to show up.
+## Engineering Overview
 
-### Structure of Remaining Text
+> **TODO:** Add a compact architecture diagram covering document conversion and tokenization, the SQLite inverted index, parallel search, session worker/manager, snapshots, and the Lwd/Nottui UI.
+
+> **TODO:** Summarise the ownership and concurrency boundaries between the UI domain, session manager, worker domain, executor pool, and SQLite connection pool.
+
+## Engineering Deep Dives
+
+- [Search engine and indexing](search-engine.md)
+- [Responsive asynchronous UI](async-ui.md)
+- [Session history, snapshots, and replay](session-history.md)
+- [Reliability and debugging](reliability.md)
+- [Design context and alternatives considered](design-context.md)
+
+## Testing and Release Engineering
+
+> **TODO:** Describe the unit, expect, and cram tests; container builds; release process; and dependency-version safeguards.
+
+## Constraints and Measured Trade-offs
+
+> **TODO:** Add measured performance results and describe the test corpus and hardware.
+
+> **TODO:** Summarise the trade-offs between startup work, memory usage, SQLite-backed search, current-file validation, asynchronous responsiveness, and snapshot reconstruction.
+
+## Project Status
+
+> **TODO:** Add current release status, supported platforms and document formats, installation links, and any planned work worth highlighting.
+
+## Structure of Remaining Text
 
 The rest of the Docfd text will revolve around showcasing the different vertical slices
 (the specific scenarios or workflows) of Docfd in the form of recordings,
@@ -135,6 +67,3 @@ implementation all worked together into delivering said vertical slice.
 I believe this both delivers a nice feature exploration experience for
 new and existing users, and splits the technical writing naturally by
 tangible, focused scenarios.
-
-## Showcase
-
