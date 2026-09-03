@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Docfd</title>
+  <title>Docfd User Guide - Getting Started</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -242,136 +242,49 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Docfd</h1>
+<h1 class="title">Docfd User Guide - Getting Started</h1>
 </header>
-<p><a href=".."><strong>Back to Home</strong></a></p>
-<h2 id="introduction">Introduction</h2>
-<p><a href="https://demo.docfd.sh">Online Demo</a> | <a
-href="guide/index.html">User Guide</a> | <a
-href="https://github.com/darrenldl/docfd">GitHub</a></p>
-<p><a href="https://github.com/darrenldl/docfd">Docfd</a> is in a local
-search engine with a Terminal User Interface (TUI) that allows you to
-fuzzy search for a phrase across multiple lines, across text files,
-PDFs, DOCX, etc.</p>
-<p>Compared to other local search engines, Docfd allows for a more
-ad-hoc search style, where users are not not required to set up a
-managed central document repository/directory, or pre-configure
-folders/files in your home directory to include or exclude. Instead,
-Docfd processes unindexed files on-demand when invoked, defaulting to
-the scanning the current directory recursively. This overall avoids the
-sometimes unexpected spikes in CPU and memory usage with periodic
-indexers which may disrupt other desktop applications.</p>
-<p>Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom
-search engine with custom ranking over an inverted index backed by
-on-disk SQLite DB.</p>
-<figure>
-<img src="gifs/repo.gif" alt="Docfd interactive demonstration" />
-<figcaption aria-hidden="true">Docfd interactive
-demonstration</figcaption>
-</figure>
-<figure>
-<img src="gifs/repo-non-interactive.gif"
-alt="Docfd non-interactive demonstration" />
-<figcaption aria-hidden="true">Docfd non-interactive
-demonstration</figcaption>
-</figure>
-<h2 id="walkthrough">Walkthrough</h2>
-<p>This section demonstrates what using Docfd feels like and connects
-the visible behaviour to the engineering behind it. For operating
-instructions, see the <a href="guide/getting-started.html">getting
-started tutorial</a>.</p>
-<h3 id="searching-docfd-with-docfd">Searching Docfd with Docfd</h3>
-<p>The primary interactive recording will use the Docfd repository
-itself as the corpus. This makes the example real rather than staged:
-the initial result set can span implementation files, interfaces, cram
-tests, documentation, and the release history.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docfd</span> <span class="at">--exts</span><span class="op">=</span>md,txt <span class="at">--single-line-exts</span><span class="op">=</span>ml,mli,t .</span></code></pre></div>
-<p>The recording should:</p>
-<ol type="1">
-<li>Search for <code>filter</code> across the repository.</li>
-<li>Show matches from source, tests, and <code>CHANGELOG.md</code>.</li>
-<li>Apply a path-fuzzy filter for <code>lib</code>.</li>
-<li>Replace it with a path-fuzzy filter for <code>cram</code>.</li>
-<li>Navigate to and open a source result in the editor.</li>
-<li>Undo the filter change to demonstrate session history.</li>
-</ol>
+<p><a href="index.html"><strong>User Guide</strong></a> | <a
+href="../index.html"><strong>Engineering Case Study</strong></a></p>
+<h2 id="your-first-search">Your First Search</h2>
 <blockquote>
-<p><strong>TODO:</strong> Record the workflow and explain how
-asynchronous search, cancellation, path ranking, editor integration, and
-snapshots contribute to the visible interaction.</p>
+<p><strong>TODO:</strong> Walk through starting Docfd, entering a
+search, selecting a result, and opening it.</p>
 </blockquote>
-<h3 id="searching-technical-pdfs">Searching Technical PDFs</h3>
-<p>A shorter second recording will use public-use NASA technical reports
-to show document conversion and direct navigation to a PDF result. A
-query such as <code>verification and validation</code>,
-<code>requirements traceability</code>, or a deliberately misspelled
-technical phrase should produce results across several reports.</p>
-<p>The recording should:</p>
-<ol type="1">
-<li>Start Docfd over a directory containing several related PDFs.</li>
-<li>Search for a phrase that returns matches in several documents,
-including a match that crosses line breaks within one document.</li>
-<li>Filter the results by a meaningful filename or subdirectory such as
-<code>software-process</code> or <code>coding-standards</code>.</li>
-<li>Open a selected result at the matching PDF page.</li>
-</ol>
+<p>The Docfd source repository can be used as a concrete practice
+corpus:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/docfd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docfd</span> <span class="at">--exts</span><span class="op">=</span>md,txt <span class="at">--single-line-exts</span><span class="op">=</span>ml,mli,t .</span></code></pre></div>
+<p>Try searching for <code>filter</code>. The results should include
+relevant implementation, test, documentation, or changelog files.
+Navigate between the matches and open one to verify that the editor is
+positioned at the result.</p>
 <blockquote>
-<p><strong>TODO:</strong> Select the final public-use corpus, record the
-workflow, and add source attribution next to the recording.</p>
+<p><strong>TODO:</strong> Add the exact keys for entering search mode,
+accepting the query, navigating results, and opening the selected
+match.</p>
 </blockquote>
 <blockquote>
-<p><strong>TODO:</strong> Describe the non-interactive and scripting
-workflow shown above.</p>
+<p><strong>RECORDING TODO (15–25 seconds):</strong> Start with a clean
+terminal, launch Docfd, enter one search, move through at least two
+results, and open one in the configured editor or PDF viewer. Keep this
+simpler than the portfolio recording and avoid introducing filters or
+history yet.</p>
 </blockquote>
-<h2 id="engineering-overview">Engineering Overview</h2>
+<h2 id="what-to-try-next">What to Try Next</h2>
 <blockquote>
-<p><strong>TODO:</strong> Add a compact architecture diagram covering
-document conversion and tokenization, the SQLite inverted index,
-parallel search, session worker/manager, snapshots, and the Lwd/Nottui
-UI.</p>
+<p><strong>TODO:</strong> Point users towards filtering, scripts, and
+configuration without explaining their implementation.</p>
 </blockquote>
-<blockquote>
-<p><strong>TODO:</strong> Summarise the ownership and concurrency
-boundaries between the UI domain, session manager, worker domain,
-executor pool, and SQLite connection pool.</p>
-</blockquote>
-<h2 id="engineering-deep-dives">Engineering Deep Dives</h2>
+<p>After completing the first search, try narrowing the same result set
+to <code>lib</code> or <code>cram</code>. See <a
+href="filtering-and-navigation.html">Filtering and navigating
+results</a> for the complete workflow.</p>
+<h2 id="related-reading">Related Reading</h2>
 <ul>
-<li><a href="search-engine.html">Search engine and indexing</a></li>
-<li><a href="async-ui.html">Responsive asynchronous UI</a></li>
-<li><a href="session-history.html">Session history, snapshots, and
-replay</a></li>
-<li><a href="reliability.html">Reliability and debugging</a></li>
-<li><a href="design-context.html">Design context and alternatives
-considered</a></li>
+<li><a href="searching.html">Searching</a></li>
+<li><a href="filtering-and-navigation.html">Filtering and navigating
+results</a></li>
 </ul>
-<h2 id="testing-and-release-engineering">Testing and Release
-Engineering</h2>
-<p>Formally, Docfd is tested in two ways: CLI behavioural tests (cram
-tests) and direct testing of internal components. But informally I also
-pick up bugs throguh dogfooding during my (almost) daily usage of Docfd,
-as an actual test suite interacting with the TUI is not straightforward
-to accomplish.</p>
-<p>The cram tests cover coverage and regression guard, only two internal
-components are directly tested:</p>
-<p>Docfd has been primarily tested at the CLI level via cra, but two
-specific internal critical components</p>
-<p>Unit tests are used to test regression</p>
-<blockquote>
-<p><strong>TODO:</strong> Describe the unit, expect, and cram tests;
-container builds; release process; and dependency-version
-safeguards.</p>
-</blockquote>
-<h2 id="constraints-and-measured-trade-offs">Constraints and Measured
-Trade-offs</h2>
-<blockquote>
-<p><strong>TODO:</strong> Add measured performance results and describe
-the test corpus and hardware.</p>
-</blockquote>
-<blockquote>
-<p><strong>TODO:</strong> Summarise the trade-offs between startup work,
-memory usage, SQLite-backed search, current-file validation,
-asynchronous responsiveness, and snapshot reconstruction.</p>
-</blockquote>
 </body>
 </html>

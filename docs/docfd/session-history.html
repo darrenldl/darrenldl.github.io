@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Darren Li’s Page</title>
+  <title>Docfd - Session History, Snapshots, and Replay</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 36em;
+      max-width: 80ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -177,15 +177,45 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Darren Li’s Page</h1>
+<h1 class="title">Docfd - Session History, Snapshots, and Replay</h1>
 </header>
-<p>Hello, welcome to my page!</p>
-<p>You might also know me as <a
-href="https://github.com/darrenldl">darrenldl</a>.</p>
-<p>I put my writings about specific projects or random topics here.</p>
-<h2 id="current-side-projects">Current Side Projects</h2>
-<ul>
-<li><a href="docfd/index.html">Docfd</a> (OSS)</li>
-</ul>
+<p><a href="index.html"><strong>Back to Docfd</strong></a></p>
+<h2 id="editingviewing-command-history">Editing/viewing command
+history</h2>
+<blockquote>
+<p><strong>TODO:</strong> Add an up-to-date walkthrough of undo/redo,
+editing command history, and saving or replaying the resulting commands
+as a Docfd script.</p>
+</blockquote>
+<h2 id="commands-and-immutable-state">Commands and Immutable State</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe the command representation, session
+state, committed versus preview commands, and how snapshots connect
+commands to states.</p>
+</blockquote>
+<h2 id="checkpointing-and-pruning">Checkpointing and Pruning</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain why retaining every snapshot state
+consumed too much memory, which states are retained, and when compaction
+occurs.</p>
+</blockquote>
+<h2 id="reconstruction">Reconstruction</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain how a missing snapshot is
+reconstructed from the nearest preceding checkpoint by replaying
+commands.</p>
+</blockquote>
+<h2 id="undoredo-semantics">Undo/Redo Semantics</h2>
+<blockquote>
+<p><strong>TODO:</strong> Cover history truncation after editing an
+older version, input-field synchronization, worker quiescence, and the
+blocking reconstruction overlay.</p>
+</blockquote>
+<h2 id="trade-offs">Trade-offs</h2>
+<blockquote>
+<p><strong>TODO:</strong> Discuss the memory-versus-reconstruction-time
+trade-off and whether timing command replay could support better
+checkpoint heuristics.</p>
+</blockquote>
 </body>
 </html>

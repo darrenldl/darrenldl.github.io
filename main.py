@@ -11,6 +11,7 @@ def main():
             if ext == ".md":
                 in_path = os.path.join(root, file)
                 out_path = os.path.join(OUT_DIR, root.removeprefix(CONTENT_DIR).removeprefix("/"), f"{file_no_ext}.html")
+                os.makedirs(os.path.dirname(out_path), exist_ok=True)
                 print(f"{in_path}")
                 print(f"    -> {out_path}")
                 cmd = ["uv",

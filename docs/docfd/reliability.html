@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Darren Li’s Page</title>
+  <title>Docfd - Reliability and Debugging</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 36em;
+      max-width: 80ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -177,15 +177,47 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Darren Li’s Page</h1>
+<h1 class="title">Docfd - Reliability and Debugging</h1>
 </header>
-<p>Hello, welcome to my page!</p>
-<p>You might also know me as <a
-href="https://github.com/darrenldl">darrenldl</a>.</p>
-<p>I put my writings about specific projects or random topics here.</p>
-<h2 id="current-side-projects">Current Side Projects</h2>
-<ul>
-<li><a href="docfd/index.html">Docfd</a> (OSS)</li>
-</ul>
+<p><a href="index.html"><strong>Back to Docfd</strong></a></p>
+<h2 id="failure-model">Failure Model</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe the main failure classes: recoverable
+document conversion failures, OCaml exceptions, worker cancellation,
+SQLite busy/transaction failures, native crashes, and apparent UI
+freezes.</p>
+</blockquote>
+<h2 id="sqlite-hardening">SQLite Hardening</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe exclusive connection checkout,
+<code>FULLMUTEX</code> connections, statement finalization, transaction
+cleanup, bounded busy retries, and connection disposal after callback
+failure.</p>
+</blockquote>
+<h2 id="worker-failure-reporting">Worker Failure Reporting</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe worker exception capture,
+preservation of raw backtraces, debug-log reporting, and why native
+signals require core dumps rather than OCaml exception handling.</p>
+</blockquote>
+<h2 id="native-crash-case-study">Native Crash Case Study</h2>
+<blockquote>
+<p><strong>TODO:</strong> Document the investigation from a rare
+SIGSEGV, through the <code>sqlite3_finalize</code>/invalid-mutex
+backtrace, to the sqlite3-ocaml 5.4.2 GC-rooting fix and the raised
+dependency floor.</p>
+</blockquote>
+<h2 id="testing">Testing</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe unit and expect tests for search
+behavior, cram tests for complete CLI workflows and exit statuses, and
+clean container builds for native dependency changes.</p>
+</blockquote>
+<h2 id="lessons-and-remaining-limits">Lessons and Remaining Limits</h2>
+<blockquote>
+<p><strong>TODO:</strong> Summarise what the hardening work changed,
+which risks are intentionally accepted, and what diagnostics remain
+available if another rare freeze or native crash occurs.</p>
+</blockquote>
 </body>
 </html>

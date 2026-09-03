@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Darren Li’s Page</title>
+  <title>Docfd - Responsive Asynchronous UI</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 36em;
+      max-width: 80ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -177,15 +177,42 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Darren Li’s Page</h1>
+<h1 class="title">Docfd - Responsive Asynchronous UI</h1>
 </header>
-<p>Hello, welcome to my page!</p>
-<p>You might also know me as <a
-href="https://github.com/darrenldl">darrenldl</a>.</p>
-<p>I put my writings about specific projects or random topics here.</p>
-<h2 id="current-side-projects">Current Side Projects</h2>
-<ul>
-<li><a href="docfd/index.html">Docfd</a> (OSS)</li>
-</ul>
+<p><a href="index.html"><strong>Back to Docfd</strong></a></p>
+<h2 id="observable-behaviour">Observable Behaviour</h2>
+<p>Search is asynchronous, specifically: - Editing of search field is
+not blocked by search progress - Updating/clearing the search field
+cancels the current search and starts a new search immediately</p>
+<h2 id="problem-and-constraints">Problem and Constraints</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe why search and filtering cannot run
+on the UI domain and why Lwd updates must remain on the main domain.</p>
+</blockquote>
+<h2 id="worker-and-manager-design">Worker and Manager Design</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe the UI requester, lock-protected
+request cells, worker domain, manager fiber, egress acknowledgement, and
+immutable snapshot publication.</p>
+</blockquote>
+<h2 id="cancellation-and-debouncing">Cancellation and Debouncing</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain stop signals, request
+overwriting/coalescing, the workload-centric debounce window, and the
+deliberate distinction between cancellation and interruption.</p>
+</blockquote>
+<h2 id="blocking-versus-non-blocking-feedback">Blocking Versus
+Non-blocking Feedback</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain why asynchronous search/filter
+progress belongs in the status line, while synchronous snapshot
+reconstruction and document reload use a noninteractive overlay.</p>
+</blockquote>
+<h2 id="trade-offs-and-alternatives">Trade-offs and Alternatives</h2>
+<blockquote>
+<p><strong>TODO:</strong> Discuss the synchronization complexity caused
+by Lwd not being thread-safe, and compare the current design with a
+single-domain implementation or a fully message-driven state owner.</p>
+</blockquote>
 </body>
 </html>

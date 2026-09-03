@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docfd - Search Engine and Indexing</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 80ch;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Docfd - Search Engine and Indexing</h1>
+</header>
+<p><a href="index.html"><strong>Back to Docfd</strong></a></p>
+<h2 id="how-does-docfd-address-my-complaints">How does Docfd address my
+complaints?</h2>
+<ul>
+<li>Docfd accomplishes multiline search through a straightforward
+combination of inverted index and proximity search between words.
+<ul>
+<li>The inverted index (i.e. a mapping from a word to all its appearing
+positions) is first searched through once to find the matches for the
+first word in the search phrase.</li>
+<li>DFS is then used for the remaining words, where the word is searched
+within a specified distance from the previous word. In other words, the
+path in this DFS is the list/sequence of words in the document matching
+the search phrase.</li>
+</ul></li>
+<li>Fuzzy matching is handled by using the Levenshtein distance as part
+of the matching criteria for each word. An automaton is computed for
+each word of the search phrase for optimised repeated matching.</li>
+<li>Docfd only processes the current directory or the specified
+directories and files upon startup. Hashing is used to check if file has
+been previously indexed. This means there is no central storage
+requirement, and no background indexing.
+<ul>
+<li>In principle this causes slower start-up time in the general case
+compared to programs with background indexing. But since the set of
+documents of interest is usually small (&lt;1k documents), the start-up
+is often instantaneous.</li>
+<li>And if the set of documents is really large, then one can always
+fall back to having a long running session of docfd.</li>
+</ul></li>
+<li>A common speed up tactic for search engines is to load the inverted
+indices into memory, as they are on the hottest paths. Docfd instead
+keeps it only in the on-disk SQLite DB to minimise memory usage, to
+avoid impacting performance of other desktop applications. The tradeoff
+is that at larger scale (say a few thousand documents, depending on the
+sizes), Docfd will noticeably struggle - results will take seconds
+instead of less than a second to show up.</li>
+</ul>
+<h2 id="search-phrase-and-search-procedure">Search Phrase and Search
+Procedure</h2>
+<p>Document content and user input in the search field are
+tokenized/segmented in the same way, based on: - Contiguous alphanumeric
+characters - Individual symbols - Individual UTF-8 characters -
+Spaces</p>
+<p>A search phrase is a list of said tokens.</p>
+<p>Search procedure is a DFS through the document index, where the
+search range for a word is fixed to a configured range surrounding the
+previous word (when applicable).</p>
+<p>A token in the index matches a token in the search phrase if they
+fall into one of the following cases: - They are a case-insensitive
+exact match - They are a case-insensitive substring match (token in
+search phrase being the substring) - They are within the configured
+case-insensitive edit distance threshold</p>
+<p>Search results are then ranked using a heuristic.</p>
+<h2 id="indexing-pipeline">Indexing Pipeline</h2>
+<blockquote>
+<p><strong>TODO:</strong> Describe document discovery, format detection,
+PDF/DOCX conversion, tokenization, document ID allocation, incremental
+hashing, and SQLite transactions.</p>
+</blockquote>
+<h2 id="candidate-generation-and-pruning">Candidate Generation and
+Pruning</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain global first-word candidate
+generation, document pruning, search scopes, and how the search is
+divided into parallel jobs.</p>
+</blockquote>
+<h2 id="ranking">Ranking</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain the result-ranking heuristic and the
+interaction between content relevance, path ordering, and path fuzzy
+ranking.</p>
+</blockquote>
+<h2 id="storage-and-performance-trade-offs">Storage and Performance
+Trade-offs</h2>
+<blockquote>
+<p><strong>TODO:</strong> Add measured data for index size, startup
+time, search latency, and memory use. State the corpus and hardware used
+for each measurement.</p>
+</blockquote>
+<h2 id="search-language">Search Language</h2>
+<blockquote>
+<p><strong>TODO:</strong> Decide whether to include a small
+representative example here or link to the complete <a
+href="https://github.com/darrenldl/docfd/wiki/Content-searching">search-language
+documentation</a>.</p>
+</blockquote>
+</body>
+</html>

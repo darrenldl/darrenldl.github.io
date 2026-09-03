@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Darren Li’s Page</title>
+  <title>Docfd User Guide - Searching</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 36em;
+      max-width: 80ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -177,15 +177,55 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Darren Li’s Page</h1>
+<h1 class="title">Docfd User Guide - Searching</h1>
 </header>
-<p>Hello, welcome to my page!</p>
-<p>You might also know me as <a
-href="https://github.com/darrenldl">darrenldl</a>.</p>
-<p>I put my writings about specific projects or random topics here.</p>
-<h2 id="current-side-projects">Current Side Projects</h2>
-<ul>
-<li><a href="docfd/index.html">Docfd</a> (OSS)</li>
-</ul>
+<p><a href="index.html"><strong>User Guide</strong></a> | <a
+href="../index.html"><strong>Engineering Case Study</strong></a></p>
+<h2 id="search-modes">Search Modes</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain the available search modes from the
+user’s perspective.</p>
+</blockquote>
+<h2 id="multiline-and-fuzzy-search">Multiline and Fuzzy Search</h2>
+<blockquote>
+<p><strong>TODO:</strong> Provide task-oriented examples and describe
+the expected results.</p>
+</blockquote>
+<p>Useful searches against the Docfd repository include:</p>
+<pre class="text"><code>filter
+configuration file
+command history
+search results
+cancellation</code></pre>
+<p>To exercise document conversion separately, start Docfd over a
+directory of technical PDFs and try phrases such as:</p>
+<pre class="text"><code>verification and validation
+requirements traceability
+static analysis</code></pre>
+<p>A misspelling such as <code>maintainence and testing</code> can be
+used to demonstrate fuzzy matching.</p>
+<blockquote>
+<p><strong>TODO:</strong> Explain how to tune fuzzy and proximity
+behaviour and how users can tell which search mode is being used.</p>
+</blockquote>
+<h2 id="search-pdfs">Search PDFs</h2>
+<p>Public-use government technical reports make a reproducible example
+corpus. Keep related documents in descriptive subdirectories so the same
+corpus can also be used to practise filtering:</p>
+<pre class="text"><code>technical-reports/
+├── automotive/
+├── coding-standards/
+├── secure-development/
+└── software-process/</code></pre>
+<blockquote>
+<p><strong>TODO:</strong> Add the final report download links,
+attribution, optional PDF converter requirements, and the exact command
+used to start Docfd.</p>
+</blockquote>
+<h2 id="non-interactive-search">Non-interactive Search</h2>
+<blockquote>
+<p><strong>TODO:</strong> Document relevant command-line workflows and
+exit behaviour.</p>
+</blockquote>
 </body>
 </html>

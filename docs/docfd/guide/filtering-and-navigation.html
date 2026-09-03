@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Darren Li’s Page</title>
+  <title>Docfd User Guide - Filtering and Navigating Results</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 36em;
+      max-width: 80ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -177,15 +177,68 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Darren Li’s Page</h1>
+<h1 class="title">Docfd User Guide - Filtering and Navigating
+Results</h1>
 </header>
-<p>Hello, welcome to my page!</p>
-<p>You might also know me as <a
-href="https://github.com/darrenldl">darrenldl</a>.</p>
-<p>I put my writings about specific projects or random topics here.</p>
-<h2 id="current-side-projects">Current Side Projects</h2>
-<ul>
-<li><a href="docfd/index.html">Docfd</a> (OSS)</li>
-</ul>
+<p><a href="index.html"><strong>User Guide</strong></a> | <a
+href="../index.html"><strong>Engineering Case Study</strong></a></p>
+<h2 id="filter-results">Filter Results</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain content and path filtering with
+concrete examples.</p>
+</blockquote>
+<p>For a Docfd repository search such as <code>filter</code>, use
+path-fuzzy filters to move between different kinds of results without
+changing the content query:</p>
+<pre class="text"><code>path-fuzzy:lib
+path-fuzzy:cram
+path-fuzzy:changelog</code></pre>
+<p>For a directory of technical reports, the same technique can
+distinguish domains:</p>
+<pre class="text"><code>path-fuzzy:automotive
+path-fuzzy:coding-standards
+path-fuzzy:secure-development</code></pre>
+<p>This works best when documents are stored under meaningful directory
+names, rather than collected into one flat directory.</p>
+<blockquote>
+<p><strong>TODO:</strong> Add the exact keys for opening, applying,
+editing, clearing, and cancelling a filter.</p>
+</blockquote>
+<blockquote>
+<p><strong>RECORDING TODO (15–20 seconds):</strong> Reuse the relevant
+portion of the “Searching Docfd with Docfd” portfolio recording if it
+remains clear without its engineering narration. Begin with results for
+<code>filter</code>, apply <code>path-fuzzy:lib</code>, replace it with
+<code>path-fuzzy:cram</code>, then clear or undo the filter.</p>
+</blockquote>
+<h2 id="navigate-results">Navigate Results</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain selection, result movement, and
+opening documents.</p>
+</blockquote>
+<p>The repository example should culminate in opening an implementation
+result in the configured editor. The PDF example should culminate in
+opening the selected report at the page containing the match.</p>
+<h2 id="undo-and-redo">Undo and Redo</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain the user-visible history workflow and
+its limits.</p>
+</blockquote>
+<p>As a practice exercise, switch the repository filter from
+<code>lib</code> to <code>cram</code>, then undo and redo that change
+while keeping the content search intact.</p>
+<h2 id="narrow-search-scope">Narrow Search Scope</h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain how narrowing differs from filtering:
+a filter controls which current results are visible, while narrowing
+constrains the document scope used by a subsequent search.</p>
+</blockquote>
+<blockquote>
+<p><strong>OPTIONAL RECORDING TODO (15–20 seconds):</strong> Run a broad
+search, narrow the scope to the current results, run a second search,
+show that excluded documents do not return, and finally reset the scope.
+Record this only if the distinction is still difficult to understand
+after the written example is complete.</p>
+</blockquote>
 </body>
 </html>
