@@ -96,19 +96,45 @@ is provided for
 - [Reliability and debugging](reliability.md)
 - [Design context and alternatives considered](design-context.md)
 
-## Testing and Release Engineering
+## Testing
 
-Formally, Docfd is tested in two ways: CLI behavioural tests (cram tests) and direct testing of internal components.
-Many cram tests are regression guards for bugs found through dogfooding, as an actual test suite
-interacting with the TUI is not straightforward to accomplish.
+Docfd is tested in two ways:
+- CLI behavioural tests (cram tests)
+- Direct testing of internal components.
 
-The cram tests cover coverage and regression guard, only two internal components are directly tested:
+For the cram tests, initial basic test cases are added as part of development, with the more complicated test cases
+slowly accumulated as I dogfood Docfd. The main benefit is to establish a corpos of expected behaviour and to guard
+against regression in future releases systematically. These include:
+- `file-collection-tests`
+- `line-wrapping-tests`
+- `misc-behavior-tests`
+- `printing-tests`
+- `match-type-tests`
+- `open-with-tests`
+- `non-interactive-mode-return-code-tests`
+- `search-scope-narrowing-tests`
+- `script-tests`
+- `config-tests`
 
-Docfd has been primarily tested at the CLI level via cra, but two specific internal critical components
+Since the CLI interface of Docfd can already trigger many code paths,
+direct testing of the internal library components is not heavily utilised.
+Though the particularly error prone components are directly tested in the form of unit tests:
+- Search expression parsing which includes some Abstract Syntax Tree (AST) rewriting/normalisation
+- Normalisation of file system paths to absolute paths
 
-Unit tests are used to test regression
+## Versioning and Releasing
 
-> **TODO:** Describe the unit, expect, and cram tests; container builds; release process; and dependency-version safeguards.
+Docfd follows [Semantic Versioning](https://semver.org/) (SemVer), with the occassional suffices such as `-alpha.X` when
+the some design decisions are still in flux and committing to SemVer fully would have lead to many version bumps.
+
+Releases for tagged versions are built through GitHub CI/CD pipeline, which was chosen for convenience and for macOS build support.
+Prior to adding macOS builds pipeline, Docfd was more or less following the reproducible build principle with version locking
+via opam lockfile (opam is the go-to package manager for most OCaml users).
+But since opam lockfile is [not yet crossplatform](https://github.com/ocaml/opam/issues/6587) (as of 2026 Sep 3),
+the use of lockfile was dropped.
+
+In principle there are ways around, e.g. run the project dependency tracking file through a script to lock down the concrete versions,
+but this was not explored further as this is fairly low priority for a non-safety-critical project such as Docfd.
 
 ## Constraints and Measured Trade-offs
 
