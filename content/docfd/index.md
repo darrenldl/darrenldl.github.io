@@ -9,18 +9,17 @@ title: Docfd
 
 [Online Demo](https://demo.docfd.sh) | [User Guide](guide/index.md) | [GitHub](https://github.com/darrenldl/docfd)
 
-[Docfd](https://github.com/darrenldl/docfd) is in a local search engine with a Terminal User Interface (TUI) that allows you to fuzzy search for
+[Docfd](https://github.com/darrenldl/docfd) is local document search tool with a Terminal User Interface (TUI) that allows you to fuzzy search for
 a phrase across multiple lines, across text files, PDFs, DOCX, etc.
 
-Compared to other local search engines, Docfd allows for a more ad-hoc search style,
-where users are not not required to set up a managed central document repository/directory, or pre-configure folders/files
-in your home directory to include or exclude.
-Instead, Docfd processes unindexed files on-demand when invoked, defaulting to the scanning the current directory recursively.
-This overall avoids the sometimes unexpected spikes in CPU and memory usage with periodic indexers which may disrupt other
-desktop applications.
+Compared with other local search tools, Docfd supports a more ad hoc search style.
+Users are not required to set up a managed central document repository or preconfigure which folders in their home directory
+should be included or excluded.
+Instead, Docfd processes unindexed files on demand when invoked, defaulting to scanning the current directory recursively.
+Because it does not periodically index files in the background, its CPU and memory use occurs when the user explicitly runs it,
+reducing the possibility of unexpected resource usage disrupting other desktop applications.
 
-Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search engine
-with custom ranking over an inverted index backed by on-disk SQLite DB.
+Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search engine backed by on-disk SQLite DB.
 
 ![Docfd interactive demonstration](gifs/repo.gif)
 
@@ -77,10 +76,12 @@ The recording should:
 
 ### Non-interactive use
 
-Docfd also provides a non-interactive mode Although this is not the main use case Docfd is optimised for, a non-interactive mode
-is provided for
+Docfd also provides a non-interactive mode for scripting uses:
 
 ![Docfd non-interactive demonstration](gifs/repo-non-interactive.gif)
+
+But since this is not the primary use case, and some gaps remain, e.g.
+structured JSON output of search results.
 
 ## Engineering Overview
 
@@ -105,20 +106,34 @@ Docfd is tested in two ways:
 For the cram tests, initial basic test cases are added as part of development, with the more complicated test cases
 slowly accumulated as I dogfood Docfd. The main benefit is to establish a corpos of expected behaviour and to guard
 against regression in future releases systematically. These include:
-- `file-collection-tests`
-- `line-wrapping-tests`
-- `misc-behavior-tests`
-- `printing-tests`
-- `match-type-tests`
-- `open-with-tests`
-- `non-interactive-mode-return-code-tests`
-- `search-scope-narrowing-tests`
-- `script-tests`
-- `config-tests`
 
-Since the CLI interface of Docfd can already trigger many code paths,
+- `file-collection-tests`
+    - Recursive scanning behaviour, e.g. scan depth, filter by extension and glob, filtering precedence
+- `line-wrapping-tests`
+    - Text rendering with line wrapping at word boundary, and word breaking as
+      last resort when width is less size of word
+- `misc-behavior-tests`
+    - Temp file handling when text is piped through stdin, search result
+      printing with `--underline` formatting flag
+- `printing-tests`
+    - Non-interactive mode search result printing behaviour
+- `match-type-tests`
+    - Search expression edge cases testing
+- `open-with-tests`
+    - `--open-with` variable substitution and command invocation
+- `non-interactive-mode-return-code-tests`
+    - Exit code of Docfd command in non-interactive mode
+- `search-scope-narrowing-tests`
+    - Correctness of search scope narrowing
+- `script-tests`
+    - Docfd script loading and lookup behaviour
+- `config-tests`
+    - Docfd config loading behaviour
+
+Since the CLI interface of Docfd can already trigger majority of the code paths,
 direct testing of the internal library components is not heavily utilised.
-Though the particularly error prone components are directly tested in the form of unit tests:
+Though some particularly error prone components are directly tested in the form of unit tests:
+
 - Search expression parsing which includes some Abstract Syntax Tree (AST) rewriting/normalisation
 - Normalisation of file system paths to absolute paths
 
