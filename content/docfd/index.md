@@ -99,36 +99,24 @@ structured JSON output of search results.
 
 ## Testing
 
-Docfd is tested in two ways:
-- CLI behavioural tests (cram tests)
-- Direct testing of internal components.
+Docfd is tested in two ways: CLI behavioural tests (cram tests), and direct testing of internal components.
 
 For the cram tests, initial basic test cases are added as part of development, with the more complicated test cases
 slowly accumulated as I dogfood Docfd. The main benefit is to establish a corpos of expected behaviour and to guard
 against regression in future releases systematically. These include:
 
-- `file-collection-tests`
-    - Recursive scanning behaviour, e.g. scan depth, filter by extension and glob, filtering precedence
-- `line-wrapping-tests`
-    - Text rendering with line wrapping at word boundary, and word breaking as
-      last resort when width is less size of word
-- `misc-behavior-tests`
-    - Temp file handling when text is piped through stdin, search result
-      printing with `--underline` formatting flag
-- `printing-tests`
-    - Non-interactive mode search result printing behaviour
-- `match-type-tests`
-    - Search expression edge cases testing
-- `open-with-tests`
-    - `--open-with` variable substitution and command invocation
-- `non-interactive-mode-return-code-tests`
-    - Exit code of Docfd command in non-interactive mode
-- `search-scope-narrowing-tests`
-    - Correctness of search scope narrowing
-- `script-tests`
-    - Docfd script loading and lookup behaviour
-- `config-tests`
-    - Docfd config loading behaviour
+| Test suite | Description |
+| --- | --- |
+| `file-collection-tests` | Recursive scanning behaviour, e.g. scan depth, filter by extension and glob, filtering precedence |
+| `line-wrapping-tests` | Text rendering with line wrapping at word boundary, and word breaking as last resort when width is less size of word |
+| `misc-behavior-tests` | Temp file handling when text is piped through stdin, search result printing with `--underline` formatting flag |
+| `printing-tests` | Non-interactive mode search result printing behaviour |
+| `match-type-tests` | Search expression edge cases testing |
+| `open-with-tests` | `--open-with` variable substitution and command invocation |
+| `non-interactive-mode-return-code-tests` | Exit code of Docfd command in non-interactive mode |
+| `search-scope-narrowing-tests` | Correctness of search scope narrowing |
+| `script-tests` | Docfd script loading and lookup behaviour |
+| `config-tests` | Docfd config loading behaviour |
 
 Since the CLI interface of Docfd can already trigger majority of the code paths,
 direct testing of the internal library components is not heavily utilised.
@@ -154,5 +142,14 @@ but this was not explored further as this is fairly low priority for a non-safet
 ## Constraints and Measured Trade-offs
 
 > **TODO:** Add measured performance results and describe the test corpus and hardware.
+
+JSON+GZIP vs CBOR+GZIP vs SQlite size on-disk (9.0.0)
+
+JSON+GZIP vs CBOR+GZIP serialisation/deserialisation speed
+
+BLAKE2B OCaml vs C backend (9.0.0-rc1)
+
+Things that were thinking of exploring
+- In-memory compression
 
 > **TODO:** Summarise the trade-offs between startup work, memory usage, SQLite-backed search, current-file validation, asynchronous responsiveness, and snapshot reconstruction.

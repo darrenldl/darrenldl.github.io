@@ -238,6 +238,9 @@
     code span.va { color: #19177c; } /* Variable */
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    tbody tr + tr {
+      border-top: 1px solid #d8d8d8;
+    }
   </style>
 </head>
 <body>
@@ -249,30 +252,24 @@
 <p><a href="https://demo.docfd.sh">Online Demo</a> | <a
 href="guide/index.html">User Guide</a> | <a
 href="https://github.com/darrenldl/docfd">GitHub</a></p>
-<p><a href="https://github.com/darrenldl/docfd">Docfd</a> is in a local
-search engine with a Terminal User Interface (TUI) that allows you to
-fuzzy search for a phrase across multiple lines, across text files,
-PDFs, DOCX, etc.</p>
-<p>Compared to other local search engines, Docfd allows for a more
-ad-hoc search style, where users are not not required to set up a
-managed central document repository/directory, or pre-configure
-folders/files in your home directory to include or exclude. Instead,
-Docfd processes unindexed files on-demand when invoked, defaulting to
-the scanning the current directory recursively. This overall avoids the
-sometimes unexpected spikes in CPU and memory usage with periodic
-indexers which may disrupt other desktop applications.</p>
+<p><a href="https://github.com/darrenldl/docfd">Docfd</a> is local
+document search tool with a Terminal User Interface (TUI) that allows
+you to fuzzy search for a phrase across multiple lines, across text
+files, PDFs, DOCX, etc.</p>
+<p>Compared with other local search tools, Docfd supports a more ad hoc
+search style. Users are not required to set up a managed central
+document repository or preconfigure which folders in their home
+directory should be included or excluded. Instead, Docfd processes
+unindexed files on demand when invoked, defaulting to scanning the
+current directory recursively. Because it does not periodically index
+files in the background, its CPU and memory use occurs when the user
+explicitly runs it, reducing the possibility of unexpected resource
+usage disrupting other desktop applications.</p>
 <p>Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom
-search engine with custom ranking over an inverted index backed by
-on-disk SQLite DB.</p>
+search engine backed by on-disk SQLite DB.</p>
 <figure>
 <img src="gifs/repo.gif" alt="Docfd interactive demonstration" />
 <figcaption aria-hidden="true">Docfd interactive
-demonstration</figcaption>
-</figure>
-<figure>
-<img src="gifs/repo-non-interactive.gif"
-alt="Docfd non-interactive demonstration" />
-<figcaption aria-hidden="true">Docfd non-interactive
 demonstration</figcaption>
 </figure>
 <h2 id="walkthrough">Walkthrough</h2>
@@ -323,6 +320,16 @@ workflow, and add source attribution next to the recording.</p>
 <p><strong>TODO:</strong> Describe the non-interactive and scripting
 workflow shown above.</p>
 </blockquote>
+<h3 id="non-interactive-use">Non-interactive use</h3>
+<p>Docfd also provides a non-interactive mode for scripting uses:</p>
+<figure>
+<img src="gifs/repo-non-interactive.gif"
+alt="Docfd non-interactive demonstration" />
+<figcaption aria-hidden="true">Docfd non-interactive
+demonstration</figcaption>
+</figure>
+<p>But since this is not the primary use case, and some gaps remain,
+e.g. structured JSON output of search results.</p>
 <h2 id="engineering-overview">Engineering Overview</h2>
 <blockquote>
 <p><strong>TODO:</strong> Add a compact architecture diagram covering
@@ -345,29 +352,108 @@ replay</a></li>
 <li><a href="design-context.html">Design context and alternatives
 considered</a></li>
 </ul>
-<h2 id="testing-and-release-engineering">Testing and Release
-Engineering</h2>
-<p>Formally, Docfd is tested in two ways: CLI behavioural tests (cram
-tests) and direct testing of internal components. But informally I also
-pick up bugs throguh dogfooding during my (almost) daily usage of Docfd,
-as an actual test suite interacting with the TUI is not straightforward
-to accomplish.</p>
-<p>The cram tests cover coverage and regression guard, only two internal
-components are directly tested:</p>
-<p>Docfd has been primarily tested at the CLI level via cra, but two
-specific internal critical components</p>
-<p>Unit tests are used to test regression</p>
-<blockquote>
-<p><strong>TODO:</strong> Describe the unit, expect, and cram tests;
-container builds; release process; and dependency-version
-safeguards.</p>
-</blockquote>
+<h2 id="testing">Testing</h2>
+<p>Docfd is tested in two ways: CLI behavioural tests (cram tests), and
+direct testing of internal components.</p>
+<p>For the cram tests, initial basic test cases are added as part of
+development, with the more complicated test cases slowly accumulated as
+I dogfood Docfd. The main benefit is to establish a corpos of expected
+behaviour and to guard against regression in future releases
+systematically. These include:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Test suite</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file-collection-tests</code></td>
+<td>Recursive scanning behaviour, e.g. scan depth, filter by extension
+and glob, filtering precedence</td>
+</tr>
+<tr>
+<td><code>line-wrapping-tests</code></td>
+<td>Text rendering with line wrapping at word boundary, and word
+breaking as last resort when width is less size of word</td>
+</tr>
+<tr>
+<td><code>misc-behavior-tests</code></td>
+<td>Temp file handling when text is piped through stdin, search result
+printing with <code>--underline</code> formatting flag</td>
+</tr>
+<tr>
+<td><code>printing-tests</code></td>
+<td>Non-interactive mode search result printing behaviour</td>
+</tr>
+<tr>
+<td><code>match-type-tests</code></td>
+<td>Search expression edge cases testing</td>
+</tr>
+<tr>
+<td><code>open-with-tests</code></td>
+<td><code>--open-with</code> variable substitution and command
+invocation</td>
+</tr>
+<tr>
+<td><code>non-interactive-mode-return-code-tests</code></td>
+<td>Exit code of Docfd command in non-interactive mode</td>
+</tr>
+<tr>
+<td><code>search-scope-narrowing-tests</code></td>
+<td>Correctness of search scope narrowing</td>
+</tr>
+<tr>
+<td><code>script-tests</code></td>
+<td>Docfd script loading and lookup behaviour</td>
+</tr>
+<tr>
+<td><code>config-tests</code></td>
+<td>Docfd config loading behaviour</td>
+</tr>
+</tbody>
+</table>
+<p>Since the CLI interface of Docfd can already trigger majority of the
+code paths, direct testing of the internal library components is not
+heavily utilised. Though some particularly error prone components are
+directly tested in the form of unit tests:</p>
+<ul>
+<li>Search expression parsing which includes some Abstract Syntax Tree
+(AST) rewriting/normalisation</li>
+<li>Normalisation of file system paths to absolute paths</li>
+</ul>
+<h2 id="versioning-and-releasing">Versioning and Releasing</h2>
+<p>Docfd follows <a href="https://semver.org/">Semantic Versioning</a>
+(SemVer), with the occassional suffices such as <code>-alpha.X</code>
+when the some design decisions are still in flux and committing to
+SemVer fully would have lead to many version bumps.</p>
+<p>Releases for tagged versions are built through GitHub CI/CD pipeline,
+which was chosen for convenience and for macOS build support. Prior to
+adding macOS builds pipeline, Docfd was more or less following the
+reproducible build principle with version locking via opam lockfile
+(opam is the go-to package manager for most OCaml users). But since opam
+lockfile is <a href="https://github.com/ocaml/opam/issues/6587">not yet
+crossplatform</a> (as of 2026 Sep 3), the use of lockfile was
+dropped.</p>
+<p>In principle there are ways around, e.g. run the project dependency
+tracking file through a script to lock down the concrete versions, but
+this was not explored further as this is fairly low priority for a
+non-safety-critical project such as Docfd.</p>
 <h2 id="constraints-and-measured-trade-offs">Constraints and Measured
 Trade-offs</h2>
 <blockquote>
 <p><strong>TODO:</strong> Add measured performance results and describe
 the test corpus and hardware.</p>
 </blockquote>
+<p>JSON+GZIP vs CBOR+GZIP vs SQlite size on-disk (9.0.0)</p>
+<p>JSON+GZIP vs CBOR+GZIP serialisation/deserialisation speed</p>
+<p>BLAKE2B OCaml vs C backend (9.0.0-rc1)</p>
+<p>Things that were thinking of exploring - In-memory compression</p>
 <blockquote>
 <p><strong>TODO:</strong> Summarise the trade-offs between startup work,
 memory usage, SQLite-backed search, current-file validation,
