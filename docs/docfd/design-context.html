@@ -183,7 +183,7 @@
 <h1 class="title">Docfd - Design Context</h1>
 </header>
 <p><a href="index.html"><strong>Back to Docfd</strong></a></p>
-<h2 id="motivation">Motivation</h2>
+<h2 id="initial-motivation">Initial Motivation</h2>
 <p>Docfd was born out of my personal frustrations with existing search
 tools in the context of human text search.</p>
 <p>This is not to say I think the tools are not well implemented or not
@@ -304,7 +304,112 @@ give any results for a search word, then I am confident the word does
 not exist in the documents, but I cannot say the same for LLMs.</li>
 </ul></li>
 </ul>
-<h2 id="resulting-design-constraints">Resulting Design Constraints</h2>
+<h2 id="design-decisions">Design Decisions</h2>
+<h3 id="primary-use-case-and-main-technical-requirements">Primary Use
+Case and Main Technical Requirements</h3>
+<p>The main use case Docfd targets is a user navigating through an
+unstructured folder of human text documents with a mix of text files and
+PDFs at a scale more commonly seen at personal storage or small office
+level, e.g. a few hundred files to scan through at a time.</p>
+<p>To make the requirements concrete, CC-MAIN-2021-31-PDF-UNTRUNCATED
+0000.zip from <a
+href="https://github.com/pdf-association/pdf-corpora">PDF Corpora</a>
+was used as benchmark on a mid-tier level laptop with the following
+specification:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>13th Gen Intel(R) Core(TM) i5-1334U (4+8) @ 4.60 GHz</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>16GB</td>
+</tr>
+</tbody>
+</table>
+<p>0000.zip consists of 1k PDF documents with an average file size of
+1.3 MiB average.</p>
+<p>After extensive “dogfooding”, I arrived at the following final set of
+technical requirements:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Description</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docfd needs to index fresh files relatively quickly</td>
+<td>&lt;5 minutes</td>
+</tr>
+<tr>
+<td>Docfd needs to finish processing files already indexed significantly
+faster than unindexed files, as otherwise what’s the point</td>
+<td>&lt;10 seconds</td>
+</tr>
+<tr>
+<td>Docfd needs to not compete for RAM too heavily as it’s mainly run on
+desktop environment rather than dedicated server</td>
+<td>&lt;200MB upon start, before any user action</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-a-custom-search-engine">Why a Custom Search Engine</h3>
+<p>I opted to implement a custom search engine instead of using an
+off-the-shelf engine for a mix of reasons:</p>
+<ul>
+<li>I wanted to stay in OCaml, and there wasn’t an off-the-shelf engine
+available in OCaml.</li>
+<li>The core search functionality I wanted (proximity search + DFS) is
+fairly straightforward to implement correctly, and I only need the
+implementation to be “good enough” for the type of workload I’m
+expecting myself (&lt;1k files to search through at a time).</li>
+<li>I want to have precise control over fundamental components,
+including the search behaviour, result ranking heuristics, and the
+design of the query language. A custom search engine is a simplest way
+to ensure this.</li>
+<li>And lastly, I want side projects to give a good learning or
+exploratory experience, and I thought it would be nice to get a concrete
+feel of the core search and ranking problem.</li>
+</ul>
+<p>Suffice to say my choices would be different had this been an actual
+product that targets more general and larger use cases, as it is very
+difficult to beat the optimisation of existing search engines. And even
+if a custom query language is needed, a translation layer on top of the
+search engine’s native query language would likely cover all the
+practical cases.</p>
+<h3 id="supporting-ad-hoc-workflow">Supporting Ad Hoc Workflow</h3>
+<p>Docfd only processes the current directory or the specified
+directories and files upon startup. Hashing is used to check if file has
+been previously indexed. This means there is no central storage
+requirement, and no background indexing.</p>
+<p>In principle, this causes slower start-up time in the general case
+compared to programs with background indexing. But since the set of
+documents of interest is usually small (&lt;100 documents), the start-up
+is often instantaneous.</p>
+<h3 id="resource-constraints">Resource Constraints</h3>
+<p>There were some concessions made to avoid disrupting other desktop
+applications. One particularly noticeable choice is giving up storage of
+heavy indices in memory and instead rely on disk I/O via SQLite.</p>
+<p>The tradeoff is that at larger scale (say a few thousand documents,
+depending on the sizes), Docfd will noticeably struggle where results
+will take seconds instead of less than a second to show up.</p>
+<p>There are naturally middleground tactics that can be adopted,
+e.g. holding indices into a caching memory layer, and optionally
+pre-warming the layer with heuristics, but this was not further explored
+as basic design already suffices for the scale targetted.</p>
 <blockquote>
 <p><strong>TODO:</strong> Distil the constraints established above into
 a short list and link each constraint to the corresponding engineering

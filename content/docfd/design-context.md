@@ -5,7 +5,7 @@ title: Docfd - Design Context
 
 [**Back to Docfd**](index.md)
 
-## Motivation
+## Initial Motivation
 
 Docfd was born out of my personal frustrations with
 existing search tools in the context of human text search.
@@ -82,6 +82,85 @@ while providing "good" search results:
       for a search word, then I am confident the word does not exist in the documents, but I cannot say the same
       for LLMs.
 
-## Resulting Design Constraints
+## Design Decisions
+
+### Primary Use Case and Main Technical Requirements
+
+The main use case Docfd targets is a user navigating through an unstructured
+folder of human text documents with a mix of text files and PDFs at
+a scale more commonly seen at personal storage or small office level, e.g. a few hundred files to scan through at a time.
+
+To make the requirements concrete, CC-MAIN-2021-31-PDF-UNTRUNCATED 0000.zip
+from [PDF Corpora](https://github.com/pdf-association/pdf-corpora) was used as
+benchmark on a mid-tier level laptop with the following specification:
+
+| Component | Details |
+| --- | --- |
+| CPU | 13th Gen Intel(R) Core(TM) i5-1334U (4+8) @ 4.60 GHz |
+| RAM | 16GB |
+| Disk | SAMSUNG MZVL8512HELU-00BTW |
+
+0000.zip consists of 1k PDF documents with an average file size of 1.3 MiB average.
+
+After extensive "dogfooding", I arrived at the following final set of technical requirements:
+
+| Description | Constraint |
+| --- | --- |
+| Docfd needs to index fresh files relatively quickly | <5 minutes |
+| Docfd needs to finish processing files already indexed significantly faster than unindexed files, as otherwise what's the point | <10 seconds |
+| Docfd needs to not compete for RAM too heavily as it's mainly run on desktop environment rather than dedicated server | <200MB upon start, before any user action |
+
+### Why a Custom Search Engine
+
+I opted to implement a custom search engine instead of using an off-the-shelf
+engine for a mix of reasons:
+
+- I wanted to stay in OCaml, and there wasn't an off-the-shelf engine
+  available in OCaml.
+- The core search functionality I wanted (proximity search + DFS) is fairly
+  straightforward to implement correctly, and I only need the
+  implementation to be "good enough" for the type of workload I'm expecting
+  myself (<1k files to search through at a time).
+- I want to have precise control over fundamental components, including the
+  search behaviour, result ranking heuristics, and the design of the query
+  language. A custom search engine is a simplest way to ensure
+  this.
+- And lastly, I want side projects to give a good learning or
+  exploratory experience, and I thought it would be nice to get a concrete
+  feel of the core search and ranking problem.
+
+Suffice to say my choices would be different had this been an actual product
+that targets more general and larger use cases,
+as it is very difficult to beat the optimisation of existing search engines.
+And even if a custom query language is needed, a translation layer on top of
+the search engine's native query language would likely
+cover all the practical cases.
+
+### Supporting Ad Hoc Workflow
+
+Docfd only processes the current directory or the specified directories and
+files upon startup. Hashing is used to check if file has been previously
+indexed. This means there is no central storage requirement, and no background
+indexing.
+
+In principle, this causes slower start-up time in the general case
+compared to programs with background indexing. But since the set
+of documents of interest is usually small (<100 documents), the
+start-up is often instantaneous.
+
+### Resource Constraints
+
+There were some concessions made to avoid disrupting other desktop
+applications. One particularly noticeable choice is giving up storage of
+heavy indices in memory and instead rely on disk I/O via SQLite.
+
+The tradeoff is that at larger scale (say a few thousand documents, depending
+on the sizes), Docfd will noticeably struggle where results will take seconds
+instead of less than a second to show up.
+
+There are naturally middleground tactics that can be adopted, e.g. holding
+indices into a caching memory layer, and optionally pre-warming the layer with
+heuristics, but this was not further explored as basic design already suffices
+for the scale targetted.
 
 > **TODO:** Distil the constraints established above into a short list and link each constraint to the corresponding engineering decision.

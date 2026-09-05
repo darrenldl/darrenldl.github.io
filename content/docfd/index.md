@@ -91,11 +91,11 @@ structured JSON output of search results.
 
 ## Engineering Deep Dives
 
-- [Search engine and indexing](search-engine.md)
-- [Responsive asynchronous UI](async-ui.md)
-- [Session history, snapshots, and replay](session-history.md)
-- [Reliability and debugging](reliability.md)
-- [Design context and alternatives considered](design-context.md)
+- [Design Context](design-context.md)
+- [Search Engine and Indexing](search-engine.md)
+- [Responsive Asynchronous UI](async-ui.md)
+- [Session History, Snapshots, and Replay](session-history.md)
+- [Reliability and Debugging](reliability.md)
 
 ## Testing
 

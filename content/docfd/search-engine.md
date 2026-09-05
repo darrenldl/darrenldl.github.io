@@ -5,8 +5,6 @@ title: Docfd - Search Engine and Indexing
 
 [**Back to Docfd**](index.md)
 
-## How does Docfd address my complaints?
-
 - Docfd accomplishes multiline search through a straightforward combination of
   inverted index and proximity search between words.
     - The inverted index (i.e. a mapping from a word to all its
@@ -18,23 +16,6 @@ title: Docfd - Search Engine and Indexing
 - Fuzzy matching is handled by using the Levenshtein distance as part of
   the matching criteria for each word. An automaton is computed for
   each word of the search phrase for optimised repeated matching.
-- Docfd only processes the current directory or the specified directories and
-  files upon startup. Hashing is used to check if file has been
-  previously indexed. This means there is no central storage requirement,
-  and no background indexing.
-    - In principle this causes slower start-up time in the general case
-      compared to programs with background indexing. But since the set
-      of documents of interest is usually small (<1k documents), the
-      start-up is often instantaneous.
-    - And if the set of documents is really large, then one can always
-      fall back to having a long running session of docfd.
-- A common speed up tactic for search engines is to load the inverted indices
-  into memory, as they are on the hottest paths. Docfd instead keeps it only in
-  the on-disk SQLite DB to minimise memory usage, to avoid impacting
-  performance of other desktop applications. The tradeoff is that at larger
-  scale (say a few thousand documents, depending on the sizes), Docfd will
-  noticeably struggle - results will take seconds instead of less than a second
-  to show up.
 
 ## Search Phrase and Search Procedure
 
