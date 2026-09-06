@@ -88,9 +88,11 @@ while providing "good" search results:
 
 The main use case Docfd targets is a user navigating through an unstructured
 folder of human text documents with a mix of text files and PDFs at
-a scale more commonly seen at personal storage or small office level, e.g. a few hundred files to scan through at a time.
+a scale more commonly seen at personal storage or small office level, e.g. a
+few hundred files to scan through at a time, using a relatively modern
+mid-tier system.
 
-To make the requirements concrete, CC-MAIN-2021-31-PDF-UNTRUNCATED 0000.zip
+To make the requirements a bit more concrete, CC-MAIN-2021-31-PDF-UNTRUNCATED 0000.zip
 from [PDF Corpora](https://github.com/pdf-association/pdf-corpora) was used as
 benchmark on a mid-tier level laptop with the following specification:
 
@@ -98,7 +100,7 @@ benchmark on a mid-tier level laptop with the following specification:
 | --- | --- |
 | CPU | 13th Gen Intel(R) Core(TM) i5-1334U (4+8) @ 4.60 GHz |
 | RAM | 16GB |
-| Disk | SAMSUNG MZVL8512HELU-00BTW |
+| SSD | SAMSUNG MZVL8512HELU-00BTW |
 
 0000.zip consists of 1k PDF documents with an average file size of 1.3 MiB average.
 
