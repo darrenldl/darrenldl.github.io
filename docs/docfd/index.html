@@ -267,6 +267,14 @@ explicitly runs it, reducing the possibility of unexpected resource
 usage disrupting other desktop applications.</p>
 <p>Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom
 search engine backed by on-disk SQLite DB.</p>
+<p>Docfd is designed for personal or small-office collections of up to
+roughly a thousand documents. Its main design targets were quick cached
+startup, acceptable fresh indexing time, and modest memory use on an
+ordinary laptop. These constraints led to on-demand indexing and a
+disk-backed inverted index, trading large-corpus performance for a
+smaller desktop footprint.</p>
+<p><a href="design-context.html">Read about the design constraints and
+alternatives considered.</a></p>
 <figure>
 <img src="gifs/repo.gif" alt="Docfd interactive demonstration" />
 <figcaption aria-hidden="true">Docfd interactive
@@ -443,20 +451,5 @@ dropped.</p>
 tracking file through a script to lock down the concrete versions, but
 this was not explored further as this is fairly low priority for a
 non-safety-critical project such as Docfd.</p>
-<h2 id="constraints-and-measured-trade-offs">Constraints and Measured
-Trade-offs</h2>
-<blockquote>
-<p><strong>TODO:</strong> Add measured performance results and describe
-the test corpus and hardware.</p>
-</blockquote>
-<p>JSON+GZIP vs CBOR+GZIP vs SQlite size on-disk (9.0.0)</p>
-<p>JSON+GZIP vs CBOR+GZIP serialisation/deserialisation speed</p>
-<p>BLAKE2B OCaml vs C backend (9.0.0-rc1)</p>
-<p>Things that were thinking of exploring - In-memory compression</p>
-<blockquote>
-<p><strong>TODO:</strong> Summarise the trade-offs between startup work,
-memory usage, SQLite-backed search, current-file validation,
-asynchronous responsiveness, and snapshot reconstruction.</p>
-</blockquote>
 </body>
 </html>

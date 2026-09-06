@@ -21,6 +21,12 @@ reducing the possibility of unexpected resource usage disrupting other desktop a
 
 Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search engine backed by on-disk SQLite DB.
 
+Docfd is designed for personal or small-office collections of up to roughly a thousand documents.
+Its main design targets were quick cached startup, acceptable fresh indexing time, and modest memory use on an ordinary laptop.
+These constraints led to on-demand indexing and a disk-backed inverted index, trading large-corpus performance for a smaller desktop footprint.
+
+[Read about the design constraints and alternatives considered.](design-context.md)
+
 ![Docfd interactive demonstration](gifs/repo.gif)
 
 ## Walkthrough
@@ -138,18 +144,3 @@ the use of lockfile was dropped.
 
 In principle there are ways around, e.g. run the project dependency tracking file through a script to lock down the concrete versions,
 but this was not explored further as this is fairly low priority for a non-safety-critical project such as Docfd.
-
-## Constraints and Measured Trade-offs
-
-> **TODO:** Add measured performance results and describe the test corpus and hardware.
-
-JSON+GZIP vs CBOR+GZIP vs SQlite size on-disk (9.0.0)
-
-JSON+GZIP vs CBOR+GZIP serialisation/deserialisation speed
-
-BLAKE2B OCaml vs C backend (9.0.0-rc1)
-
-Things that were thinking of exploring
-- In-memory compression
-
-> **TODO:** Summarise the trade-offs between startup work, memory usage, SQLite-backed search, current-file validation, asynchronous responsiveness, and snapshot reconstruction.
