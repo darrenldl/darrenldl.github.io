@@ -87,14 +87,14 @@ while providing "good" search results:
 ### Primary Use Case and Main Technical Requirements
 
 The main use case Docfd targets is a user navigating through an unstructured
-folder of human text documents with a mix of text files and PDFs at
+folder of human text documents with a mix of text files and PDFs, at
 a scale more commonly seen at personal storage or small office level, e.g. a
 few hundred files to scan through at a time, using a relatively modern
-mid-tier system.
+mid-tier system (1-1.5k AUD laptop).
 
-To make the requirements a bit more concrete, CC-MAIN-2021-31-PDF-UNTRUNCATED 0000.zip
-from [PDF Corpora](https://github.com/pdf-association/pdf-corpora) was used as
-benchmark on a mid-tier level laptop with the following specification:
+To make the requirements a bit more concrete, we used a set of PDFs from
+[PDF Corpora](https://github.com/pdf-association/pdf-corpora) (specifically CC-MAIN-2021-31-PDF-UNTRUNCATED series, 0000.zip)
+as benchmark on a mid-tier level laptop with the following specification:
 
 | Component | Details |
 | --- | --- |
@@ -102,31 +102,33 @@ benchmark on a mid-tier level laptop with the following specification:
 | RAM | 16GB |
 | SSD | SAMSUNG MZVL8512HELU-00BTW |
 
-0000.zip consists of 1k PDF documents with an average file size of 1.3 MiB average.
+0000.zip consists of 1k PDF documents with an average file size of 1.3 MiB.
 
-After extensive "dogfooding", I arrived at the following final set of technical requirements:
+After extensive use of Docfd myself for document management and navigation, I arrived at the following final set of technical requirements
+for collection of documents up to 1k in total:
 
 | Description | Constraint |
 | --- | --- |
 | Docfd needs to index fresh files relatively quickly | <5 minutes |
-| Docfd needs to finish processing files already indexed significantly faster than unindexed files, as otherwise what's the point | <10 seconds |
-| Docfd needs to not compete for RAM too heavily as it's mainly run on desktop environment rather than dedicated server | <200MB upon start, before any user action |
+| Docfd needs to finish processing files already indexed significantly faster than unindexed files (otherwise what's the point) | <10 seconds |
+| Docfd needs to not compete for RAM too heavily as it's mainly run on a desktop environment rather than dedicated server | <200MB upon start, before any user action |
 
 ### Why a Custom Search Engine
 
 I opted to implement a custom search engine instead of using an off-the-shelf
-engine for a mix of reasons:
+engine for a mix of reasons, listed in the order of relevance:
 
-- I wanted to stay in OCaml, and there wasn't an off-the-shelf engine
-  available in OCaml.
-- The core search functionality I wanted (proximity search + DFS) is fairly
-  straightforward to implement correctly, and I only need the
-  implementation to be "good enough" for the type of workload I'm expecting
-  myself (<1k files to search through at a time).
+- I wanted to use OCaml as it is my favourite language and is excellent for
+  implementation of complex systems and query language processing, but there
+  wasn't an off-the-shelf engine available in OCaml.
 - I want to have precise control over fundamental components, including the
   search behaviour, result ranking heuristics, and the design of the query
   language. A custom search engine is a simplest way to ensure
   this.
+- The core search functionality I wanted (proximity search + DFS) is fairly
+  straightforward to implement correctly, and I only need the
+  implementation to be "good enough" for the type of workload I'm expecting
+  myself (<1k files to search through at a time).
 - And lastly, I want side projects to give a good learning or
   exploratory experience, and I thought it would be nice to get a concrete
   feel of the core search and ranking problem.
@@ -164,5 +166,3 @@ There are naturally middleground tactics that can be adopted, e.g. holding
 indices into a caching memory layer, and optionally pre-warming the layer with
 heuristics, but this was not further explored as basic design already suffices
 for the scale targetted.
-
-> **TODO:** Distil the constraints established above into a short list and link each constraint to the corresponding engineering decision.
