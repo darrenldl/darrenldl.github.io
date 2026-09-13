@@ -21,6 +21,7 @@ title: Docfd - Search Engine and Indexing
 
 Document content and user input in the search field are tokenized/segmented
 in the same way, based on:
+
 - Contiguous alphanumeric characters
 - Individual symbols
 - Individual UTF-8 characters
@@ -43,6 +44,31 @@ Search results are then ranked using a heuristic.
 ## Indexing Pipeline
 
 > **TODO:** Describe document discovery, format detection, PDF/DOCX conversion, tokenization, document ID allocation, incremental hashing, and SQLite transactions.
+
+We begin by examining the naive setup:
+
+![Figure: Single-threaded Naive Timeline](docfd-indexing-naive-timeline.drawio.png)
+
+This is a classic case of unnecessary delay where I/O of a work item
+waits for CPU work of the previous work item, and vice versa.
+
+A more ideal timeline would look closer to:
+
+![Figure: Single-threaded Optimal Timeline](docfd-indexing-optimal-timeline.drawio.png)
+
+This is straightforward to implement by using an actor model design:
+
+![Figure: Single-threaded Pipeline Design](docfd-indexing-pipeline-simple.drawio.png)
+
+Finally, we also try to saturate I/O and CPU by changing the first two
+layers into using multiple workers intead of just one worker. The final
+DB write layer remains a single worker as there is no benefit to
+parallel writes for SQLite DB unless WAL is used, but WAL is not
+enabled for simplicity and some minor reliability issues observed
+during development (likely some errors on my end, but did not have time
+to investigate fully).
+
+![Figure: Final Pipeline Design](docfd-indexing-pipeline.drawio.png)
 
 ### Hashing Performance
 

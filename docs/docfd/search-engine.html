@@ -202,9 +202,13 @@ each word of the search phrase for optimised repeated matching.</li>
 <h2 id="search-phrase-and-search-procedure">Search Phrase and Search
 Procedure</h2>
 <p>Document content and user input in the search field are
-tokenized/segmented in the same way, based on: - Contiguous alphanumeric
-characters - Individual symbols - Individual UTF-8 characters -
-Spaces</p>
+tokenized/segmented in the same way, based on:</p>
+<ul>
+<li>Contiguous alphanumeric characters</li>
+<li>Individual symbols</li>
+<li>Individual UTF-8 characters</li>
+<li>Spaces</li>
+</ul>
 <p>A search phrase is a list of said tokens.</p>
 <p>Search procedure is a DFS through the document index, where the
 search range for a word is fixed to a configured range surrounding the
@@ -221,6 +225,50 @@ case-insensitive edit distance threshold</p>
 PDF/DOCX conversion, tokenization, document ID allocation, incremental
 hashing, and SQLite transactions.</p>
 </blockquote>
+<p>We begin by examining the naive setup:</p>
+<figure>
+<img src="docfd-indexing-naive-timeline.drawio.png"
+alt="Figure: Single-threaded Naive Timeline" />
+<figcaption aria-hidden="true">Figure: Single-threaded Naive
+Timeline</figcaption>
+</figure>
+<p>This is a classic case of unnecessary delay where I/O of a work item
+waits for CPU work of the previous work item, and vice versa.</p>
+<p>A more ideal timeline would look closer to:</p>
+<figure>
+<img src="docfd-indexing-optimal-timeline.drawio.png"
+alt="Figure: Single-threaded Optimal Timeline" />
+<figcaption aria-hidden="true">Figure: Single-threaded Optimal
+Timeline</figcaption>
+</figure>
+<p>This is straightforward to implement by using an actor model
+design:</p>
+<figure>
+<img src="docfd-indexing-pipeline-simple.drawio.png"
+alt="Figure: Single-threaded Pipeline Design" />
+<figcaption aria-hidden="true">Figure: Single-threaded Pipeline
+Design</figcaption>
+</figure>
+<p>Finally, we also try to saturate I/O and CPU by changing the first
+two layers into using multiple workers intead of just one worker. The
+final DB write layer remains a single worker as there is no benefit to
+parallel writes for SQLite DB unless WAL is used, but WAL is not enabled
+for simplicity and some minor reliability issues observed during
+development (likely some errors on my end, but did not have time to
+investigate fully).</p>
+<figure>
+<img src="docfd-indexing-pipeline.drawio.png"
+alt="Figure: Final Pipeline Design" />
+<figcaption aria-hidden="true">Figure: Final Pipeline
+Design</figcaption>
+</figure>
+<h3 id="hashing-performance">Hashing Performance</h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 9.0.0-rc1: Explain why detecting
+changed files made hashing part of startup performance, and why the
+BLAKE2B implementation was moved from the OCaml backend to the C
+backend.</p>
+</blockquote>
 <h2 id="candidate-generation-and-pruning">Candidate Generation and
 Pruning</h2>
 <blockquote>
@@ -233,6 +281,38 @@ divided into parallel jobs.</p>
 <p><strong>TODO:</strong> Explain the result-ranking heuristic and the
 interaction between content relevance, path ordering, and path fuzzy
 ranking.</p>
+</blockquote>
+<h2 id="evolution-of-index-storage">Evolution of Index Storage</h2>
+<h3 id="json-and-compression">JSON and Compression</h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 7.1.0: Explain why GZIP compression
+was added to the JSON index and what it improved without changing the
+fully materialized index design.</p>
+</blockquote>
+<h3 id="moving-to-cbor">Moving to CBOR</h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 9.0.0-rc1: Explain why JSON+GZIP was
+replaced by CBOR+GZIP, and which serialization costs or limitations
+remained.</p>
+</blockquote>
+<h3 id="moving-to-sqlite">Moving to SQLite</h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 9.0.0: Explain why CBOR+GZIP was
+replaced by SQLite after the in-memory index reached 1.9 GB on the 1.4
+GB PDF corpus, including the reduction to 39 MB and the resulting
+search-speed trade-off.</p>
+</blockquote>
+<h3 id="subsequent-sqlite-optimisation">Subsequent SQLite
+Optimisation</h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 10.0.0: Explain why the database
+schema was redesigned, how this reduced index size by roughly 60%, and
+why the change required rebuilding existing indexes.</p>
+</blockquote>
+<blockquote>
+<p><strong>TODO:</strong> Version 12.0.0-alpha.13: Explain why a global
+word table was introduced, how it reduced duplication and improved
+search speed, and why this caused another breaking database change.</p>
 </blockquote>
 <h2 id="storage-and-performance-trade-offs">Storage and Performance
 Trade-offs</h2>
