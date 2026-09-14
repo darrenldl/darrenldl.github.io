@@ -46,14 +46,14 @@ release history.
 docfd --exts=md,txt --single-line-exts=ml,mli,t .
 ```
 
-The recording should:
-
-1. Search for `filter` across the repository.
-2. Show matches from source, tests, and `CHANGELOG.md`.
-3. Apply a path-fuzzy filter for `lib`.
-4. Replace it with a path-fuzzy filter for `cram`.
-5. Navigate to and open a source result in the editor.
-6. Undo the filter change to demonstrate session history.
+> **TODO**: Make recording to show:
+> 
+> 1. Search for `filter` across the repository.
+> 2. Show matches from source, tests, and `CHANGELOG.md`.
+> 3. Apply a path-fuzzy filter for `lib`.
+> 4. Replace it with a path-fuzzy filter for `cram`.
+> 5. Navigate to and open a source result in the editor.
+> 6. Undo the filter change to demonstrate session history.
 
 > **TODO:** Record the workflow and explain how asynchronous search,
 > cancellation, path ranking, editor integration, and snapshots contribute to
@@ -66,14 +66,14 @@ document conversion and direct navigation to a PDF result. A query such as
 `verification and validation`, `requirements traceability`, or a deliberately
 misspelled technical phrase should produce results across several reports.
 
-The recording should:
-
-1. Start Docfd over a directory containing several related PDFs.
-2. Search for a phrase that returns matches in several documents, including a
-   match that crosses line breaks within one document.
-3. Filter the results by a meaningful filename or subdirectory such as
-   `software-process` or `coding-standards`.
-4. Open a selected result at the matching PDF page.
+> **TODO**: Make recording to show:
+> 
+> 1. Start Docfd over a directory containing several related PDFs.
+> 2. Search for a phrase that returns matches in several documents, including a
+>    match that crosses line breaks within one document.
+> 3. Filter the results by a meaningful filename or subdirectory such as
+>    `software-process` or `coding-standards`.
+> 4. Open a selected result at the matching PDF page.
 
 > **TODO:** Select the final public-use corpus, record the workflow, and add
 > source attribution next to the recording.
