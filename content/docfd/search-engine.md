@@ -47,18 +47,18 @@ Search results are then ranked using a heuristic.
 
 We begin by examining the naive setup:
 
-![Figure: Single-threaded Naive Timeline](docfd-indexing-naive-timeline.drawio.png)
+![Figure: Single-threaded Naive Timeline](docfd-indexing-naive-timeline.png)
 
 This is a classic case of unnecessary delay where I/O of a work item
 waits for CPU work of the previous work item, and vice versa.
 
 A more ideal timeline would look closer to:
 
-![Figure: Single-threaded Optimal Timeline](docfd-indexing-optimal-timeline.drawio.png)
+![Figure: Single-threaded Optimal Timeline](docfd-indexing-optimal-timeline.png)
 
 This is straightforward to implement by using an actor model design:
 
-![Figure: Single-threaded Pipeline Design](docfd-indexing-pipeline-simple.drawio.png)
+![Figure: Single-threaded Pipeline Design](docfd-indexing-pipeline-simple.png)
 
 Finally, we also try to saturate I/O and CPU by changing the first two
 layers into using multiple workers intead of just one worker. The final
@@ -68,7 +68,7 @@ enabled for simplicity and some minor reliability issues observed
 during development (likely some errors on my end, but did not have time
 to investigate fully).
 
-![Figure: Final Pipeline Design](docfd-indexing-pipeline.drawio.png)
+![Figure: Final Pipeline Design](docfd-indexing-pipeline.png)
 
 ### Hashing Performance
 

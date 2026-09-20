@@ -227,7 +227,7 @@ hashing, and SQLite transactions.</p>
 </blockquote>
 <p>We begin by examining the naive setup:</p>
 <figure>
-<img src="docfd-indexing-naive-timeline.drawio.png"
+<img src="docfd-indexing-naive-timeline.png"
 alt="Figure: Single-threaded Naive Timeline" />
 <figcaption aria-hidden="true">Figure: Single-threaded Naive
 Timeline</figcaption>
@@ -236,7 +236,7 @@ Timeline</figcaption>
 waits for CPU work of the previous work item, and vice versa.</p>
 <p>A more ideal timeline would look closer to:</p>
 <figure>
-<img src="docfd-indexing-optimal-timeline.drawio.png"
+<img src="docfd-indexing-optimal-timeline.png"
 alt="Figure: Single-threaded Optimal Timeline" />
 <figcaption aria-hidden="true">Figure: Single-threaded Optimal
 Timeline</figcaption>
@@ -244,7 +244,7 @@ Timeline</figcaption>
 <p>This is straightforward to implement by using an actor model
 design:</p>
 <figure>
-<img src="docfd-indexing-pipeline-simple.drawio.png"
+<img src="docfd-indexing-pipeline-simple.png"
 alt="Figure: Single-threaded Pipeline Design" />
 <figcaption aria-hidden="true">Figure: Single-threaded Pipeline
 Design</figcaption>
@@ -257,7 +257,7 @@ for simplicity and some minor reliability issues observed during
 development (likely some errors on my end, but did not have time to
 investigate fully).</p>
 <figure>
-<img src="docfd-indexing-pipeline.drawio.png"
+<img src="docfd-indexing-pipeline.png"
 alt="Figure: Final Pipeline Design" />
 <figcaption aria-hidden="true">Figure: Final Pipeline
 Design</figcaption>
