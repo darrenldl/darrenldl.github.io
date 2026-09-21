@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 80ch;
+      max-width: 80%;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -192,12 +192,18 @@ cancels the current search and starts a new search immediately</p>
 <p><strong>TODO:</strong> Describe why search and filtering cannot run
 on the UI domain and why Lwd updates must remain on the main domain.</p>
 </blockquote>
-<h2 id="worker-and-manager-design">Worker and Manager Design</h2>
+<h2 id="session-manager-design">Session Manager Design</h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe the UI requester, lock-protected
 request cells, worker domain, manager fiber, egress acknowledgement, and
 immutable snapshot publication.</p>
 </blockquote>
+<figure>
+<img src="docfd-session-manager.png"
+alt="Figure: Interaction between UI and Session Manager Module" />
+<figcaption aria-hidden="true">Figure: Interaction between UI and
+Session Manager Module</figcaption>
+</figure>
 <h2 id="cancellation-and-debouncing">Cancellation and Debouncing</h2>
 <blockquote>
 <p><strong>TODO:</strong> Explain stop signals, request

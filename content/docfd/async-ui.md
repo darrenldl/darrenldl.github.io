@@ -1,5 +1,5 @@
 ---
-maxwidth: "80ch"
+maxwidth: "80%"
 title: Docfd - Responsive Asynchronous UI
 ---
 
@@ -16,9 +16,11 @@ Search is asynchronous, specifically:
 
 > **TODO:** Describe why search and filtering cannot run on the UI domain and why Lwd updates must remain on the main domain.
 
-## Worker and Manager Design
+## Session Manager Design
 
 > **TODO:** Describe the UI requester, lock-protected request cells, worker domain, manager fiber, egress acknowledgement, and immutable snapshot publication.
+
+![Figure: Interaction between UI and Session Manager Module](docfd-session-manager.png)
 
 ## Cancellation and Debouncing
 
