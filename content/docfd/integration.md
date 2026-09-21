@@ -13,7 +13,7 @@ for the following editors:
 - `micro`
 - `jed`/`xjed`
 
-## PDF integration
+## PDF viewer integration
 
 Docfd guesses the default PDF viewer based on the output
 of `xdg-mime query default application/pdf`,
