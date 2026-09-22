@@ -1,4 +1,9 @@
-## Filter language
+---
+maxwidth: "80ch"
+title: Docfd User Guide - Filter Language
+---
+
+[**User Guide**](index.md) | [**Engineering Case Study**](../index.md)
 
 The filter language is designed around narrowing the set of documents listed,
 but does not impact the fine-grained search results otherwise.
