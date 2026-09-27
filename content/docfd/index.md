@@ -27,60 +27,17 @@ These constraints led to on-demand indexing and a disk-backed inverted index, tr
 
 [Read about the design constraints and alternatives considered.](design-context.md)
 
+## Demonstrations
+
+### Searching Through Text Files
+
 ![Docfd interactive demonstration](https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo.gif)
 
-## Walkthrough
+### Searching Through PDF
 
-This section demonstrates what using Docfd feels like and connects the visible
-behaviour to the engineering behind it. For operating instructions, see the
-[getting started tutorial](guide/getting-started.md).
+TODO
 
-### Searching Docfd with Docfd
-
-The primary interactive recording will use the Docfd repository itself as the
-corpus. This makes the example real rather than staged: the initial result set
-can span implementation files, interfaces, cram tests, documentation, and the
-release history.
-
-```sh
-docfd --exts=md,txt --single-line-exts=ml,mli,t .
-```
-
-> **TODO**: Make recording to show:
-> 
-> 1. Search for `filter` across the repository.
-> 2. Show matches from source, tests, and `CHANGELOG.md`.
-> 3. Apply a path-fuzzy filter for `lib`.
-> 4. Replace it with a path-fuzzy filter for `cram`.
-> 5. Navigate to and open a source result in the editor.
-> 6. Undo the filter change to demonstrate session history.
-
-> **TODO:** Record the workflow and explain how asynchronous search,
-> cancellation, path ranking, editor integration, and snapshots contribute to
-> the visible interaction.
-
-### Searching Technical PDFs
-
-A shorter second recording will use public-use NASA technical reports to show
-document conversion and direct navigation to a PDF result. A query such as
-`verification and validation`, `requirements traceability`, or a deliberately
-misspelled technical phrase should produce results across several reports.
-
-> **TODO**: Make recording to show:
-> 
-> 1. Start Docfd over a directory containing several related PDFs.
-> 2. Search for a phrase that returns matches in several documents, including a
->    match that crosses line breaks within one document.
-> 3. Filter the results by a meaningful filename or subdirectory such as
->    `software-process` or `coding-standards`.
-> 4. Open a selected result at the matching PDF page.
-
-> **TODO:** Select the final public-use corpus, record the workflow, and add
-> source attribution next to the recording.
-
-> **TODO:** Describe the non-interactive and scripting workflow shown above.
-
-### Non-interactive use
+### Non-interactive Use
 
 Docfd also provides a non-interactive mode for scripting uses:
 
@@ -89,13 +46,13 @@ Docfd also provides a non-interactive mode for scripting uses:
 But since this is not the primary use case, and some gaps remain, e.g.
 structured JSON output of search results.
 
-## Engineering Overview
+## Getting Started
 
-> **TODO:** Add a compact architecture diagram covering document conversion and tokenization, the SQLite inverted index, parallel search, session worker/manager, snapshots, and the Lwd/Nottui UI.
-
-> **TODO:** Summarise the ownership and concurrency boundaries between the UI domain, session manager, worker domain, executor pool, and SQLite connection pool.
+See [here](guide/getting-started.md).
 
 ## Engineering Deep Dives
+
+The following pages document the design and architecture of Docfd.
 
 - [Design Context](design-context.md)
 - [Search Engine and Indexing](search-engine.md)
