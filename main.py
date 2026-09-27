@@ -26,7 +26,7 @@ def blake2_hash(path):
 def main():
     old_hashes = load_hashes()
     new_hashes = {}
-    for root, dirs, files in os.walk('content'):
+    for root, dirs, files in os.walk(CONTENT_DIR):
         for file in files:
             file_no_ext, ext = os.path.splitext(file)
             if ext == ".md":
@@ -52,6 +52,16 @@ def main():
                        out_path
                        ]
                 subprocess.run(cmd, check=True)
+
+    for root, dirs, files in os.walk(OUT_DIR):
+        for file in files:
+            file_no_ext, ext = os.path.splitext(file)
+            if ext == ".html":
+                content_path = os.path.join(CONTENT_DIR, root.removeprefix(OUT_DIR).removeprefix("/"), f"{file_no_ext}.md")
+                if not os.path.exists(content_path):
+                    html_path = os.path.join(root, file)
+                    print(f"Removing {html_path}")
+                    os.remove(html_path)
 
     with open(CACHE_PATH, "w") as f:
         json.dump(new_hashes, f, indent=2, sort_keys=True)
