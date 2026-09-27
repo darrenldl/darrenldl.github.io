@@ -1,5 +1,5 @@
 ---
-maxwidth: "80ch"
+maxwidth: "120ch"
 title: Docfd User Guide - Searching
 ---
 
