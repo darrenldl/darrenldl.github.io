@@ -48,7 +48,7 @@ structured JSON output of search results.
 
 ## Getting Started
 
-See [here](guide/getting-started.md).
+Check out [User Guide](guide/index.md).
 
 ## Engineering Deep Dives
 
