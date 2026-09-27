@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Docfd - Reliability and Debugging</title>
+  <title>Docfd - Session History, Snapshots, and Replay</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 80ch;
+      max-width: 120ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -180,47 +180,45 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Docfd - Reliability and Debugging</h1>
+<h1 class="title">Docfd - Session History, Snapshots, and Replay</h1>
 </header>
 <p><a href="index.html"><strong>Back to Docfd</strong></a></p>
-<h2 id="failure-model">Failure Model</h2>
+<h2 id="editingviewing-command-history">Editing/viewing command
+history</h2>
 <blockquote>
-<p><strong>TODO:</strong> Describe the main failure classes: recoverable
-document conversion failures, OCaml exceptions, worker cancellation,
-SQLite busy/transaction failures, native crashes, and apparent UI
-freezes.</p>
+<p><strong>TODO:</strong> Add an up-to-date walkthrough of undo/redo,
+editing command history, and saving or replaying the resulting commands
+as a Docfd script.</p>
 </blockquote>
-<h2 id="sqlite-hardening">SQLite Hardening</h2>
+<h2 id="commands-and-immutable-state">Commands and Immutable State</h2>
 <blockquote>
-<p><strong>TODO:</strong> Describe exclusive connection checkout,
-<code>FULLMUTEX</code> connections, statement finalization, transaction
-cleanup, bounded busy retries, and connection disposal after callback
-failure.</p>
+<p><strong>TODO:</strong> Describe the command representation, session
+state, committed versus preview commands, and how snapshots connect
+commands to states.</p>
 </blockquote>
-<h2 id="worker-failure-reporting">Worker Failure Reporting</h2>
+<h2 id="checkpointing-and-pruning">Checkpointing and Pruning</h2>
 <blockquote>
-<p><strong>TODO:</strong> Describe worker exception capture,
-preservation of raw backtraces, debug-log reporting, and why native
-signals require core dumps rather than OCaml exception handling.</p>
+<p><strong>TODO:</strong> Explain why retaining every snapshot state
+consumed too much memory, which states are retained, and when compaction
+occurs.</p>
 </blockquote>
-<h2 id="native-crash-case-study">Native Crash Case Study</h2>
+<h2 id="reconstruction">Reconstruction</h2>
 <blockquote>
-<p><strong>TODO:</strong> Document the investigation from a rare
-SIGSEGV, through the <code>sqlite3_finalize</code>/invalid-mutex
-backtrace, to the sqlite3-ocaml 5.4.2 GC-rooting fix and the raised
-dependency floor.</p>
+<p><strong>TODO:</strong> Explain how a missing snapshot is
+reconstructed from the nearest preceding checkpoint by replaying
+commands.</p>
 </blockquote>
-<h2 id="testing">Testing</h2>
+<h2 id="undoredo-semantics">Undo/Redo Semantics</h2>
 <blockquote>
-<p><strong>TODO:</strong> Describe unit and expect tests for search
-behavior, cram tests for complete CLI workflows and exit statuses, and
-clean container builds for native dependency changes.</p>
+<p><strong>TODO:</strong> Cover history truncation after editing an
+older version, input-field synchronization, worker quiescence, and the
+blocking reconstruction overlay.</p>
 </blockquote>
-<h2 id="lessons-and-remaining-limits">Lessons and Remaining Limits</h2>
+<h2 id="trade-offs">Trade-offs</h2>
 <blockquote>
-<p><strong>TODO:</strong> Summarise what the hardening work changed,
-which risks are intentionally accepted, and what diagnostics remain
-available if another rare freeze or native crash occurs.</p>
+<p><strong>TODO:</strong> Discuss the memory-versus-reconstruction-time
+trade-off and whether timing command replay could support better
+checkpoint heuristics.</p>
 </blockquote>
 </body>
 </html>

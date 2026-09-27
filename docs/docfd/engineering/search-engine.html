@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 80%;
+      max-width: 120ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -321,116 +321,5 @@ Trade-offs</h2>
 time, search latency, and memory use. State the corpus and hardware used
 for each measurement.</p>
 </blockquote>
-<h2 id="search-language">Search Language</h2>
-<blockquote>
-<p><strong>TODO:</strong> Decide whether to include a small
-representative example here or link to the complete <a
-href="https://github.com/darrenldl/docfd/wiki/Content-searching">search-language
-documentation</a>.</p>
-</blockquote>
-<p>An expression in the search language is one of:</p>
-<ul>
-<li>Search phrase</li>
-<li><code>?expression</code> (optional)</li>
-<li><code>(expression)</code></li>
-<li><code>expression | expression</code> (or),
-e.g. <code>go ( left | right )</code></li>
-</ul>
-<p>To use literal <code>?</code>, <code>(</code>, <code>)</code> or
-<code>|</code>, a backslash (<code>\</code>) needs to be placed in front
-of the character.</p>
-<p>A search phrase is a sequence of tokens where a token is one of:</p>
-<ul>
-<li>Unannotated (fuzzy match, e.g. <code>hello</code> means fuzzy match
-<code>hello</code>)</li>
-<li><code>'tok</code> (<code>'</code> prefix means exact match the
-token)</li>
-<li><code>^tok</code> (<code>^</code> prefix means prefix match the
-token)</li>
-<li><code>tok$</code> (<code>$</code> suffix means suffix match the
-token)</li>
-<li><code>~</code> (explicit spaces, i.e. contiguous sequence of spaces,
-tabs, etc)</li>
-</ul>
-<p>Tokens that are not separated by spaces, operators, or parentheses
-are treated specially, we call these linked tokens. For example,
-<code>12</code>, <code>:</code>, <code>30</code> are linked in
-<code>12:30</code>, but not in <code>12 : 30</code>. Linked tokens have
-a much stricter search distance by default, e.g. in <code>12:30</code>,
-Docfd will search for <code>:</code> only up to a few tokens away from
-<code>12</code>, and so on. This allows user to state intention of
-reduced fuzziness.</p>
-<p>To link spaces to tokens, one needs to be make use of <code>~</code>.
-For example, to search for “John Smith” (“John” and “Smith” separated by
-some number of spaces), one can use <code>John~Smith</code> to establish
-linkage.</p>
-<p>For <code>'</code>, <code>^</code>, <code>$</code> to be considered
-annotation markers, there cannot be space between the marker and token,
-e.g. <code>^abc</code> means “prefix match <code>abc</code>”, but
-<code>^ abc</code> means “fuzzy match <code>^</code> and fuzzy match
-<code>abc</code>”.</p>
-<p>Annotated linked tokens are also treated specially:</p>
-<ul>
-<li><code>^12:30</code> is equivalent to <code>'12</code>
-<code>':</code> <code>^30</code></li>
-<li><code>'12:30</code> is equivalent to <code>'12</code>
-<code>':</code> <code>'30</code></li>
-<li><code>12:30$</code> is equivalent to <code>12$</code>
-<code>':</code> <code>'30</code></li>
-</ul>
-<p>But with even stricter search restriction than the normal linked
-tokens, namely the next matching token must follow immediately from the
-current match, e.g. <code>^12:3</code> will not match
-<code>12 : 30</code> but will match <code>12:30</code></p>
-<h3 id="operator-handling-specifics">? operator handling specifics</h3>
-<p>For a phrase with the optional operator, such as
-<code>?word0 word1 ...</code>, the first word is grouped implicitly,
-i.e. it is treated as <code>(?word0) word1 ...</code>.</p>
-<h3 id="why-is-there-no-operator">Why is there no &amp; operator?</h3>
-<p>This one comes more from author’s personal preference than
-implementation difficulty.</p>
-<h3 id="explanation">Explanation</h3>
-<p>There are a lot of similar software that provide a <code>&amp;</code>
-operator in the primary search/filter field, so it seems natural for
-Docfd to carry it in the search language as well. However, there is a
-mismatch in where a search result sits in the hierarchy of data between
-Docfd and other programs, which means the design in Docfd demands
-different considerations.</p>
-<p>For programs that carry <code>&amp;</code> operator or something
-comparable, the search result is often limited at the container boundary
-level, e.g. document, section. For instance, searching
-<code>a &amp; b</code> in a document management system will give you
-documents that contain both “a” and “b”. At this level, a conjunction
-makes sense as a filter/membership test. It is obvious that when
-document satisfies <code>a &amp; b</code>.</p>
-<p>And indeed, the filter language of Docfd supports this, e.g. one may
-use <code>"a" and "b"</code> or <code>content:"a" and content:"b"</code>
-to distill down to the set of documents with both “a” and “b” in the
-content.</p>
-<p>In Docfd, however, a search result is not just “the relevant
-document”, it’s a selection in document content that may cross arbitrary
-boundaries.</p>
-<p>As a search phrase, e.g. “hello world”, already implies proximity
-search in Docfd, it does not make sense to assign the same meaning to
-<code>&amp;</code>. Now, suppose we assign <code>&amp;</code> to mean
-“less nearby”, e.g. <code>hello world &amp; good morning</code> assigns
-an independent search distance between “hello world” and “good morning”,
-what defines a search result then? If we have “hello world” at start of
-a long paragraph, and “good morning” at the end of it, do we record the
-entire paragraph as a search result? What about when the matches span
-across multiple paragraphs, do we record all of them? Even if we skip
-the inner text of the paragraphs, this still pose a
-scalability/generalisation problem of how to extend the rendering
-algorithm for an arbitrarily long <code>&amp;</code> chain.</p>
-<p>If we instead show a joined list of matches for <code>a</code> and
-<code>b</code>, then we run into a different issue - none of the search
-results actually satisfies <code>a &amp; b</code>. “hello world”, for
-instance, does not satisfy <code>hello world &amp; good morning</code>.
-Or if it does, then we are drawing an equivalence between
-<code>a | b</code> and <code>a &amp; b</code>, which would immediately
-beg the question of why introduce <code>&amp;</code> at all.</p>
-<p>Filter language on the other hand lives only at the level of
-documents, and thus there is no issue with the inclusion of
-<code>AND</code> operator there.</p>
 </body>
 </html>

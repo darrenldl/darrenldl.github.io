@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Docfd - Session History, Snapshots, and Replay</title>
+  <title>Docfd User Guide - Filter Language</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -180,45 +180,91 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Docfd - Session History, Snapshots, and Replay</h1>
+<h1 class="title">Docfd User Guide - Filter Language</h1>
 </header>
-<p><a href="index.html"><strong>Back to Docfd</strong></a></p>
-<h2 id="editingviewing-command-history">Editing/viewing command
-history</h2>
-<blockquote>
-<p><strong>TODO:</strong> Add an up-to-date walkthrough of undo/redo,
-editing command history, and saving or replaying the resulting commands
-as a Docfd script.</p>
-</blockquote>
-<h2 id="commands-and-immutable-state">Commands and Immutable State</h2>
-<blockquote>
-<p><strong>TODO:</strong> Describe the command representation, session
-state, committed versus preview commands, and how snapshots connect
-commands to states.</p>
-</blockquote>
-<h2 id="checkpointing-and-pruning">Checkpointing and Pruning</h2>
-<blockquote>
-<p><strong>TODO:</strong> Explain why retaining every snapshot state
-consumed too much memory, which states are retained, and when compaction
-occurs.</p>
-</blockquote>
-<h2 id="reconstruction">Reconstruction</h2>
-<blockquote>
-<p><strong>TODO:</strong> Explain how a missing snapshot is
-reconstructed from the nearest preceding checkpoint by replaying
-commands.</p>
-</blockquote>
-<h2 id="undoredo-semantics">Undo/Redo Semantics</h2>
-<blockquote>
-<p><strong>TODO:</strong> Cover history truncation after editing an
-older version, input-field synchronization, worker quiescence, and the
-blocking reconstruction overlay.</p>
-</blockquote>
-<h2 id="trade-offs">Trade-offs</h2>
-<blockquote>
-<p><strong>TODO:</strong> Discuss the memory-versus-reconstruction-time
-trade-off and whether timing command replay could support better
-checkpoint heuristics.</p>
-</blockquote>
+<p><a href="index.html"><strong>User Guide</strong></a> | <a
+href="../index.html"><strong>Engineering Case Study</strong></a></p>
+<p>The filter language is designed around narrowing the set of documents
+listed, but does not impact the fine-grained search results
+otherwise.</p>
+<p>An expression in the filter language is one of: -
+<code>"search_exp"</code>, <code>'search_exp'</code> or
+<code>content:search_exp</code> - <code>search_exp</code> is the same
+search expression supported by content search field, but only determines
+whether the document is listed and does not impact the search results
+listed - <code>path-date:"op date"</code>,
+e.g. <code>path-date:&gt;2025-01-01</code>,
+<code>path-date:"&gt;= 2025-01-10"</code> - <code>op</code> is one of
+<code>=</code>, <code>&gt;=</code>, <code>&lt;=</code>,
+<code>&gt;</code>, <code>&lt;</code> - <code>date</code> is ISO8601
+date, i.e. <code>yyyy-mm-dd</code> - <code>path-fuzzy:search_exp</code>,
+e.g. <code>path-fuzzy:"meeting notes 2025"</code>,
+<code>path-fuzzy:changelog</code> - <code>search_exp</code> is the same
+search expression supported by content search field -
+<code>path-glob:/**/*.md</code> - <code>ext:txt</code> -
+<code>expression OR expression</code> (<code>OR</code> is
+case-insensitive) - <code>expression AND expression</code>
+(<code>AND</code> is case-insensitive) - <code>NOT expression</code>
+(<code>NOT</code> is case-insensitive) - <code>(expression)</code></p>
+<p>All arguments after the colon may be quoted via either single
+quotation marks (<code>'</code>) or double quotation mark
+(<code>"</code>).</p>
+<p>Note that the handling of quoted strings is relaxed in one situation
+to allow for more immediate user feedback of the filtering. If the
+expression using a quoted string is in the rightmost position, then the
+closing quotation mark is optional, e.g.</p>
+<pre><code>ext:md AND path-fuzzy:&quot;meeting notes</code></pre>
+<p>is the same as</p>
+<pre><code>ext:md AND path-fuzzy:&quot;meeting notes&quot;</code></pre>
+<p>This allows for the results of filtering to be updated in the UI as
+one types even when the quoted string is, strictly speaking,
+incomplete.</p>
+<h2 id="date-extraction-from-document-path">Date extraction from
+document path</h2>
+<p>Docfd recognizes the following patterns from a document path: -
+<code>yyyy-mm-dd</code> - where<code>-</code> is a mandatory separator
+that is not a digit - <code>yyyymmdd</code> - <code>yyyy-mmm-dd</code>,
+<code>dd-mmm-yyyy</code> - where <code>-</code> is an optional separator
+that is neither a digit nor a letter - and <code>mmm</code> is an
+abbreviated month name (case-insensitive), e.g. <code>jan</code>,
+<code>Mar</code>, <code>SEP</code> - <code>yyyy-mmmm-dd</code>,
+<code>dd-mmmm-yyyy</code> - where <code>-</code> is an optional
+separator that is neither a digit nor a letter - and <code>mmmm</code>
+is a full month name (case-insensitive), e.g. <code>january</code>,
+<code>March</code>, <code>SEPTEMBER</code></p>
+<p>which recognises the rightmost sequence of <code>yyyy</code>
+<code>mm</code> <code>dd</code> separated by any non-digit
+character.</p>
+<p>Examples:</p>
+<table>
+<thead>
+<tr>
+<th>Document path</th>
+<th>Date extracted from path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/home/user/2025-01-16.md</code></td>
+<td><code>2025-01-16</code></td>
+</tr>
+<tr>
+<td><code>/home/user/2025 Jan 16.md</code></td>
+<td><code>2025-01-16</code></td>
+</tr>
+<tr>
+<td><code>/home/user/16 Jan 2025.md</code></td>
+<td><code>2025-01-16</code></td>
+</tr>
+<tr>
+<td><code>/home/user/2025/01/02/test.txt</code></td>
+<td><code>2025-01-02</code></td>
+</tr>
+<tr>
+<td><code>/home/user/2025/01/02/2025-04-10.txt</code></td>
+<td><code>2025-04-10</code></td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>
