@@ -1,18 +1,48 @@
 ---
-maxwidth: "80ch"
+maxwidth: "120ch"
 title: Docfd User Guide
 ---
 
 [**Back to Docfd engineering case study**](../index.md)
 
-## Introduction
+## Installation
 
-> **TODO:** Briefly state who this guide is for and what users can accomplish with Docfd.
+Docfd is primarily distributed as statically linked binaries via [GitHub Releases](https://github.com/darrenldl/docfd/releases)
 
-## Start Here
+Refer to the [Installation](https://github.com/darrenldl/docfd#installation) section for other distribution channels.
 
-- [Installation](installation.md)
-- [Getting started](getting-started.md)
+## Getting Started
+
+### Your First Search
+
+> **TODO:** Walk through starting Docfd, entering a search, selecting a result, and opening it.
+
+The Docfd source repository can be used as a concrete practice corpus:
+
+```sh
+cd /path/to/docfd
+docfd --exts=md,txt --single-line-exts=ml,mli,t .
+```
+
+Try searching for `filter`. The results should include relevant
+implementation, test, documentation, or changelog files. Navigate between the
+matches and open one to verify that the editor is positioned at the result.
+
+> **TODO:** Add the exact keys for entering search mode, accepting the query,
+> navigating results, and opening the selected match.
+
+> **RECORDING TODO (15–25 seconds):** Start with a clean terminal, launch
+> Docfd, enter one search, move through at least two results, and open one in
+> the configured editor or PDF viewer. Keep this simpler than the portfolio
+> recording and avoid introducing filters or history yet.
+
+### What to Try Next
+
+> **TODO:** Point users towards filtering, scripts, and configuration without explaining their implementation.
+
+After completing the first search, try narrowing the same result set to `lib`
+or `cram`. See [Filtering and navigating results](filtering-and-navigation.md)
+for the complete workflow.
 
 ## Using Docfd
 
