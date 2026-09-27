@@ -1,5 +1,5 @@
 ---
-maxwidth: "80%"
+maxwidth: "120ch"
 title: Docfd - Responsive Asynchronous UI
 ---
 

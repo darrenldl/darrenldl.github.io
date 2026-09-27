@@ -1,5 +1,5 @@
 ---
-maxwidth: "80%"
+maxwidth: "120ch"
 title: Docfd - Search Engine and Indexing
 ---
 
