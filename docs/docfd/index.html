@@ -233,7 +233,7 @@ demonstration</figcaption>
 <p>But since this is not the primary use case, and some gaps remain,
 e.g. structured JSON output of search results.</p>
 <h2 id="getting-started">Getting Started</h2>
-<p>See <a href="guide/getting-started.html">here</a>.</p>
+<p>Check out <a href="guide/index.html">User Guide</a>.</p>
 <h2 id="engineering-deep-dives">Engineering Deep Dives</h2>
 <p>The following pages document the design and architecture of
 Docfd.</p>
@@ -243,82 +243,7 @@ Docfd.</p>
 <li><a href="async-ui.html">Responsive Asynchronous UI</a></li>
 <li><a href="session-history.html">Session History, Snapshots, and
 Replay</a></li>
-<li><a href="reliability.html">Reliability and Debugging</a></li>
-</ul>
-<h2 id="testing">Testing</h2>
-<p>Docfd is tested in two ways: CLI behavioural tests (cram tests), and
-direct testing of internal components.</p>
-<p>For the cram tests, initial basic test cases are added as part of
-development, with the more complicated test cases slowly accumulated as
-I dogfood Docfd. The main benefit is to establish a corpos of expected
-behaviour and to guard against regression in future releases
-systematically. These include:</p>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th>Test suite</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>file-collection-tests</code></td>
-<td>Recursive scanning behaviour, e.g. scan depth, filter by extension
-and glob, filtering precedence</td>
-</tr>
-<tr>
-<td><code>line-wrapping-tests</code></td>
-<td>Text rendering with line wrapping at word boundary, and word
-breaking as last resort when width is less size of word</td>
-</tr>
-<tr>
-<td><code>misc-behavior-tests</code></td>
-<td>Temp file handling when text is piped through stdin, search result
-printing with <code>--underline</code> formatting flag</td>
-</tr>
-<tr>
-<td><code>printing-tests</code></td>
-<td>Non-interactive mode search result printing behaviour</td>
-</tr>
-<tr>
-<td><code>match-type-tests</code></td>
-<td>Search expression edge cases testing</td>
-</tr>
-<tr>
-<td><code>open-with-tests</code></td>
-<td><code>--open-with</code> variable substitution and command
-invocation</td>
-</tr>
-<tr>
-<td><code>non-interactive-mode-return-code-tests</code></td>
-<td>Exit code of Docfd command in non-interactive mode</td>
-</tr>
-<tr>
-<td><code>search-scope-narrowing-tests</code></td>
-<td>Correctness of search scope narrowing</td>
-</tr>
-<tr>
-<td><code>script-tests</code></td>
-<td>Docfd script loading and lookup behaviour</td>
-</tr>
-<tr>
-<td><code>config-tests</code></td>
-<td>Docfd config loading behaviour</td>
-</tr>
-</tbody>
-</table>
-<p>Since the CLI interface of Docfd can already trigger majority of the
-code paths, direct testing of the internal library components is not
-heavily utilised. Though some particularly error prone components are
-directly tested in the form of unit tests:</p>
-<ul>
-<li>Search expression parsing which includes some Abstract Syntax Tree
-(AST) rewriting/normalisation</li>
-<li>Normalisation of file system paths to absolute paths</li>
+<li><a href="reliability.html">Reliability and Testing</a></li>
 </ul>
 <h2 id="versioning-and-releasing">Versioning and Releasing</h2>
 <p>Docfd follows <a href="https://semver.org/">Semantic Versioning</a>
