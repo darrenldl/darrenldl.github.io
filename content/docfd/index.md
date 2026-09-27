@@ -1,5 +1,5 @@
 ---
-maxwidth: "80ch"
+maxwidth: "120ch"
 title: Docfd
 ---
 
@@ -27,7 +27,7 @@ These constraints led to on-demand indexing and a disk-backed inverted index, tr
 
 [Read about the design constraints and alternatives considered.](design-context.md)
 
-![Docfd interactive demonstration](gifs/repo.gif)
+![Docfd interactive demonstration](https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo.gif)
 
 ## Walkthrough
 
@@ -84,7 +84,7 @@ misspelled technical phrase should produce results across several reports.
 
 Docfd also provides a non-interactive mode for scripting uses:
 
-![Docfd non-interactive demonstration](gifs/repo-non-interactive.gif)
+![Docfd non-interactive demonstration](https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo-non-interactive.gif)
 
 But since this is not the primary use case, and some gaps remain, e.g.
 structured JSON output of search results.
