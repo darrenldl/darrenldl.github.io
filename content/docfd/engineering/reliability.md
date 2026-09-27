@@ -1,6 +1,6 @@
 ---
 maxwidth: "120ch"
-title: Docfd - Reliability and Debugging
+title: Docfd - Reliability and Testing
 ---
 
 [**Back to Docfd**](index.md)
@@ -23,7 +23,31 @@ title: Docfd - Reliability and Debugging
 
 ## Testing
 
-> **TODO:** Describe unit and expect tests for search behavior, cram tests for complete CLI workflows and exit statuses, and clean container builds for native dependency changes.
+Docfd is tested in two ways: CLI behavioural tests (cram tests), and direct testing of internal components.
+
+For the cram tests, initial basic test cases are added as part of development, with the more complicated test cases
+slowly accumulated as I dogfood Docfd. The main benefit is to establish a corpos of expected behaviour and to guard
+against regression in future releases systematically. These include:
+
+| Test suite | Description |
+| --- | --- |
+| `file-collection-tests` | Recursive scanning behaviour, e.g. scan depth, filter by extension and glob, filtering precedence |
+| `line-wrapping-tests` | Text rendering with line wrapping at word boundary, and word breaking as last resort when width is less size of word |
+| `misc-behavior-tests` | Temp file handling when text is piped through stdin, search result printing with `--underline` formatting flag |
+| `printing-tests` | Non-interactive mode search result printing behaviour |
+| `match-type-tests` | Search expression edge cases testing |
+| `open-with-tests` | `--open-with` variable substitution and command invocation |
+| `non-interactive-mode-return-code-tests` | Exit code of Docfd command in non-interactive mode |
+| `search-scope-narrowing-tests` | Correctness of search scope narrowing |
+| `script-tests` | Docfd script loading and lookup behaviour |
+| `config-tests` | Docfd config loading behaviour |
+
+Since the CLI interface of Docfd can already trigger majority of the code paths,
+direct testing of the internal library components is not heavily utilised.
+Though some particularly error prone components are directly tested in the form of unit tests:
+
+- Search expression parsing which includes some Abstract Syntax Tree (AST) rewriting/normalisation
+- Normalisation of file system paths to absolute paths
 
 ## Lessons and Remaining Limits
 
