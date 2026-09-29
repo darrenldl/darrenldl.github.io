@@ -19,8 +19,6 @@ Instead, Docfd processes unindexed files on demand when invoked, defaulting to s
 Because it does not periodically index files in the background, its CPU and memory use occurs when the user explicitly runs it,
 reducing the possibility of unexpected resource usage disrupting other desktop applications.
 
-Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search engine backed by on-disk SQLite DB.
-
 Docfd is designed for personal or small-office collections of up to roughly a thousand documents.
 Its main design targets were quick cached startup, acceptable fresh indexing time, and modest memory use on an ordinary laptop.
 These constraints led to on-demand indexing and a disk-backed inverted index, trading large-corpus performance for a smaller desktop footprint.
@@ -51,6 +49,13 @@ structured JSON output of search results.
 Check out [User Guide](guide/index.md).
 
 ## Engineering Deep Dives
+
+Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search
+engine backed by on-disk SQLite DB.
+Architecture wise, Docfd uses
+actor model
+the "functional core, imperative shell" for
+and actor model 
 
 The following pages document the design and architecture of Docfd.
 
