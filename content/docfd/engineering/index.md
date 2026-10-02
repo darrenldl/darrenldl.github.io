@@ -16,4 +16,3 @@ See the following for discussions of specific topics:
 - [Responsive Asynchronous UI](async-ui.md)
 - [Session History, Snapshots, and Replay](session-history.md)
 - [Reliability and Testing](reliability.md)
-
