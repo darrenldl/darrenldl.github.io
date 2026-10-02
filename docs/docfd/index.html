@@ -200,16 +200,14 @@ current directory recursively. Because it does not periodically index
 files in the background, its CPU and memory use occurs when the user
 explicitly runs it, reducing the possibility of unexpected resource
 usage disrupting other desktop applications.</p>
-<p>Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom
-search engine backed by on-disk SQLite DB.</p>
 <p>Docfd is designed for personal or small-office collections of up to
 roughly a thousand documents. Its main design targets were quick cached
 startup, acceptable fresh indexing time, and modest memory use on an
 ordinary laptop. These constraints led to on-demand indexing and a
 disk-backed inverted index, trading large-corpus performance for a
 smaller desktop footprint.</p>
-<p><a href="design-context.html">Read about the design constraints and
-alternatives considered.</a></p>
+<p><a href="engineering/design-context.html">Read about the design
+constraints and alternatives considered.</a></p>
 <h2 id="demonstrations">Demonstrations</h2>
 <h3 id="searching-through-text-files">Searching Through Text Files</h3>
 <figure>
@@ -233,18 +231,9 @@ demonstration</figcaption>
 <p>But since this is not the primary use case, and some gaps remain,
 e.g. structured JSON output of search results.</p>
 <h2 id="getting-started">Getting Started</h2>
-<p>Check out <a href="guide/index.html">User Guide</a>.</p>
-<h2 id="engineering-deep-dives">Engineering Deep Dives</h2>
-<p>The following pages document the design and architecture of
-Docfd.</p>
-<ul>
-<li><a href="design-context.html">Design Context</a></li>
-<li><a href="search-engine.html">Search Engine and Indexing</a></li>
-<li><a href="async-ui.html">Responsive Asynchronous UI</a></li>
-<li><a href="session-history.html">Session History, Snapshots, and
-Replay</a></li>
-<li><a href="reliability.html">Reliability and Testing</a></li>
-</ul>
+<p>See <a href="guide/index.html">here</a>.</p>
+<h2 id="engineering">Engineering</h2>
+<p>See <a href="engineering/index.html">here</a>.</p>
 <h2 id="versioning-and-releasing">Versioning and Releasing</h2>
 <p>Docfd follows <a href="https://semver.org/">Semantic Versioning</a>
 (SemVer), with the occassional suffices such as <code>-alpha.X</code>

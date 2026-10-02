@@ -3,7 +3,7 @@ maxwidth: "120ch"
 title: Docfd - Responsive Asynchronous UI
 ---
 
-[**Back to Docfd**](index.md)
+[**Back to Main Page**](../index.md)
 
 ## Observable Behaviour
 

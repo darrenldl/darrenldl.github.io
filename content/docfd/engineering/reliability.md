@@ -3,7 +3,7 @@ maxwidth: "120ch"
 title: Docfd - Reliability and Testing
 ---
 
-[**Back to Docfd**](index.md)
+[**Back to Main Page**](../index.md)
 
 ## Failure Model
 

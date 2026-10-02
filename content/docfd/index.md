@@ -23,7 +23,7 @@ Docfd is designed for personal or small-office collections of up to roughly a th
 Its main design targets were quick cached startup, acceptable fresh indexing time, and modest memory use on an ordinary laptop.
 These constraints led to on-demand indexing and a disk-backed inverted index, trading large-corpus performance for a smaller desktop footprint.
 
-[Read about the design constraints and alternatives considered.](design-context.md)
+[Read about the design constraints and alternatives considered.](engineering/design-context.md)
 
 ## Demonstrations
 
@@ -46,24 +46,11 @@ structured JSON output of search results.
 
 ## Getting Started
 
-Check out [User Guide](guide/index.md).
+See [here](guide/index.md).
 
-## Engineering Deep Dives
+## Engineering
 
-Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search
-engine backed by on-disk SQLite DB.
-Architecture wise, Docfd uses
-actor model
-the "functional core, imperative shell" for
-and actor model 
-
-The following pages document the design and architecture of Docfd.
-
-- [Design Context](design-context.md)
-- [Search Engine and Indexing](search-engine.md)
-- [Responsive Asynchronous UI](async-ui.md)
-- [Session History, Snapshots, and Replay](session-history.md)
-- [Reliability and Testing](reliability.md)
+See [here](engineering/index.md).
 
 ## Versioning and Releasing
 

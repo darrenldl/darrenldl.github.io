@@ -3,7 +3,7 @@ maxwidth: "120ch"
 title: Docfd - Session History, Snapshots, and Replay
 ---
 
-[**Back to Docfd**](index.md)
+[**Back to Main Page**](../index.md)
 
 ## Editing/viewing command history
 

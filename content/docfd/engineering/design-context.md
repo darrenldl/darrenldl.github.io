@@ -3,7 +3,7 @@ maxwidth: "120ch"
 title: Docfd - Design Context
 ---
 
-[**Back to Docfd**](index.md)
+[**Back to Main Page**](../index.md)
 
 ## Initial Motivation
 
