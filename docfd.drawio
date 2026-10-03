@@ -146,7 +146,7 @@
         <mxCell id="DHECWxTzr3rQd4kP51ZG-47" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Indexing Stage" vertex="1">
           <mxGeometry height="30" width="95" x="10" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="DHECWxTzr3rQd4kP51ZG-49" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="User Interaction Loop" vertex="1">
+        <mxCell id="DHECWxTzr3rQd4kP51ZG-49" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#6666FF;" value="User Interaction Loop" vertex="1">
           <mxGeometry height="30" width="95" x="10" y="560" as="geometry" />
         </mxCell>
         <mxCell id="DHECWxTzr3rQd4kP51ZG-50" edge="1" parent="1" source="DHECWxTzr3rQd4kP51ZG-45" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="DHECWxTzr3rQd4kP51ZG-1" value="">
