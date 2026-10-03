@@ -46,11 +46,13 @@ structured JSON output of search results.
 
 ## Getting Started
 
-See [here](guide/index.md).
+See [here](guide/index.md) to get started.
 
 ## Engineering
 
-See [here](engineering/index.md).
+![Figure: Workflow Overview](engineering/docfd-workflow-overview.png)
+
+See [here](engineering/index.md) for engineering details.
 
 ## Versioning and Releasing
 

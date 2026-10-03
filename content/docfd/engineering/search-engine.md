@@ -41,9 +41,13 @@ into one of the following cases:
 
 Search results are then ranked using a heuristic.
 
-## Indexing Pipeline
+## Document Preparation
 
 > **TODO:** Describe document discovery, format detection, PDF/DOCX conversion, tokenization, document ID allocation, incremental hashing, and SQLite transactions.
+
+## Indexing Pipeline
+
+Docfd uses the typical pipelining setup to avoid CPU bound tasks waiting on I/O bound tasks and vice versa.
 
 We begin by examining the naive setup:
 
