@@ -9,7 +9,7 @@ Architecture wise, Docfd uses
 the "functional core, imperative shell" as the core design and
 actor model for organising concurrent entities.
 
-![Figure: Workflow Overview](docfd-workflow-overview.png)
+![Figure: Workflow Overview](docfd-workflow-overview.svg)
 
 See the following for discussions of specific topics:
 

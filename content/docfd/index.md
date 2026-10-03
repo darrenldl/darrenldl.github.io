@@ -50,7 +50,7 @@ See [here](guide/index.md) to get started.
 
 ## Engineering
 
-![Figure: Workflow Overview](engineering/docfd-workflow-overview.png)
+![Figure: Workflow Overview](engineering/docfd-workflow-overview.svg)
 
 See [here](engineering/index.md) for engineering details.
 

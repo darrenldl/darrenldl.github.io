@@ -20,7 +20,7 @@ Search is asynchronous, specifically:
 
 > **TODO:** Describe the UI requester, lock-protected request cells, worker domain, manager fiber, egress acknowledgement, and immutable snapshot publication.
 
-![Figure: Interaction between UI and Session Manager Module](docfd-session-manager.png)
+![Figure: Interaction between UI and Session Manager Module](docfd-session-manager.svg)
 
 ## Cancellation and Debouncing
 
