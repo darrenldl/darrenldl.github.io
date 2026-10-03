@@ -1,5 +1,5 @@
 ---
-maxwidth: "120ch"
+maxwidth: "80ch"
 title: Docfd
 ---
 

@@ -1,9 +1,9 @@
 ---
-maxwidth: "120ch"
+maxwidth: "100ch"
 title: Docfd - Search Engine and Indexing
 ---
 
-[**Back to Main Page**](../index.md)
+[**Back to Main Page**](index.md)
 
 - Docfd accomplishes multiline search through a straightforward combination of
   inverted index and proximity search between words.

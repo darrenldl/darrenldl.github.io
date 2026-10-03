@@ -1,9 +1,9 @@
 ---
-maxwidth: "120ch"
+maxwidth: "100ch"
 title: Docfd - Responsive Asynchronous UI
 ---
 
-[**Back to Main Page**](../index.md)
+[**Back to Main Page**](index.md)
 
 ## Observable Behaviour
 

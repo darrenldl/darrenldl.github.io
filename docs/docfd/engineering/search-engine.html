@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 120ch;
+      max-width: 100ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -182,7 +182,7 @@
 <header id="title-block-header">
 <h1 class="title">Docfd - Search Engine and Indexing</h1>
 </header>
-<p><a href="../index.html"><strong>Back to Main Page</strong></a></p>
+<p><a href="index.html"><strong>Back to Main Page</strong></a></p>
 <ul>
 <li>Docfd accomplishes multiline search through a straightforward
 combination of inverted index and proximity search between words.
@@ -219,12 +219,15 @@ exact match - They are a case-insensitive substring match (token in
 search phrase being the substring) - They are within the configured
 case-insensitive edit distance threshold</p>
 <p>Search results are then ranked using a heuristic.</p>
-<h2 id="indexing-pipeline">Indexing Pipeline</h2>
+<h2 id="document-preparation">Document Preparation</h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe document discovery, format detection,
 PDF/DOCX conversion, tokenization, document ID allocation, incremental
 hashing, and SQLite transactions.</p>
 </blockquote>
+<h2 id="indexing-pipeline">Indexing Pipeline</h2>
+<p>Docfd uses the typical pipelining setup to avoid CPU bound tasks
+waiting on I/O bound tasks and vice versa.</p>
 <p>We begin by examining the naive setup:</p>
 <figure>
 <img src="docfd-indexing-naive-timeline.png"
