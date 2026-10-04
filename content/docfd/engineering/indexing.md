@@ -17,6 +17,8 @@ TODO
 
 ## Main Indexing Work
 
+### Text Extraction
+
 ### Tokenization
 
 Document content is tokenized based on:

@@ -51,6 +51,10 @@ for the complete workflow.
 - [Scripts and repeatable workflows](scripts.md)
 - [Configuration](configuration.md)
 
+## Editing/viewing command history
+
+> **TODO:** Add an up-to-date walkthrough of undo/redo, editing command history, and saving or replaying the resulting commands as a Docfd script.
+
 ## Reference and Help
 
 - [Keyboard reference](keyboard-reference.md)

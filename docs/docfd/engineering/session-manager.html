@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Docfd - Responsive Asynchronous UI</title>
+  <title>Docfd - Session Manager</title>
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -180,11 +180,21 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Docfd - Responsive Asynchronous UI</h1>
+<h1 class="title">Docfd - Session Manager</h1>
 </header>
 <p><a href="index.html"><strong>Back to Main Page</strong></a></p>
-<h2 id="observable-behaviour">Observable Behaviour <a
-href="#observable-behaviour" class="heading-anchor">#</a></h2>
+<p>Session Manager centralizes the management of session
+history/snapshots and handles the lifecycle of long-running operations
+(namely searching and filtering) to allow for a responsive asynchronous
+UI.</p>
+<figure>
+<img src="docfd-session-manager.svg"
+alt="Figure: Interaction between UI and Session Manager Module" />
+<figcaption aria-hidden="true">Figure: Interaction between UI and
+Session Manager Module</figcaption>
+</figure>
+<h2 id="asynchronous-ui">Asynchronous UI <a href="#asynchronous-ui"
+class="heading-anchor">#</a></h2>
 <p>Search is asynchronous, specifically: - Editing of search field is
 not blocked by search progress - Updating/clearing the search field
 cancels the current search and starts a new search immediately</p>
@@ -201,12 +211,6 @@ href="#session-manager-design" class="heading-anchor">#</a></h2>
 request cells, worker domain, manager fiber, egress acknowledgement, and
 immutable snapshot publication.</p>
 </blockquote>
-<figure>
-<img src="docfd-session-manager.svg"
-alt="Figure: Interaction between UI and Session Manager Module" />
-<figcaption aria-hidden="true">Figure: Interaction between UI and
-Session Manager Module</figcaption>
-</figure>
 <h2 id="cancellation-and-debouncing">Cancellation and Debouncing <a
 href="#cancellation-and-debouncing" class="heading-anchor">#</a></h2>
 <blockquote>
@@ -222,12 +226,35 @@ class="heading-anchor">#</a></h2>
 progress belongs in the status line, while synchronous snapshot
 reconstruction and document reload use a noninteractive overlay.</p>
 </blockquote>
-<h2 id="trade-offs-and-alternatives">Trade-offs and Alternatives <a
-href="#trade-offs-and-alternatives" class="heading-anchor">#</a></h2>
+<h2 id="session-history">Session History <a href="#session-history"
+class="heading-anchor">#</a></h2>
+<h3 id="commands-and-immutable-state">Commands and Immutable State <a
+href="#commands-and-immutable-state" class="heading-anchor">#</a></h3>
 <blockquote>
-<p><strong>TODO:</strong> Discuss the synchronization complexity caused
-by Lwd not being thread-safe, and compare the current design with a
-single-domain implementation or a fully message-driven state owner.</p>
+<p><strong>TODO:</strong> Describe the command representation, session
+state, committed versus preview commands, and how snapshots connect
+commands to states.</p>
+</blockquote>
+<h3 id="undoredo-semantics">Undo/Redo Semantics <a
+href="#undoredo-semantics" class="heading-anchor">#</a></h3>
+<blockquote>
+<p><strong>TODO:</strong> Cover history truncation after editing an
+older version, input-field synchronization, worker quiescence, and the
+blocking reconstruction overlay.</p>
+</blockquote>
+<h3 id="checkpointing-and-pruning">Checkpointing and Pruning <a
+href="#checkpointing-and-pruning" class="heading-anchor">#</a></h3>
+<blockquote>
+<p><strong>TODO:</strong> Explain why retaining every snapshot state
+consumed too much memory, which states are retained, and when compaction
+occurs.</p>
+</blockquote>
+<h2 id="reconstruction">Reconstruction <a href="#reconstruction"
+class="heading-anchor">#</a></h2>
+<blockquote>
+<p><strong>TODO:</strong> Explain how a missing snapshot is
+reconstructed from the nearest preceding checkpoint by replaying
+commands.</p>
 </blockquote>
 </body>
 </html>

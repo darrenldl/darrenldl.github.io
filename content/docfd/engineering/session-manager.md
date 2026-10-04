@@ -1,11 +1,17 @@
 ---
 maxwidth: "100ch"
-title: Docfd - Responsive Asynchronous UI
+title: Docfd - Session Manager
 ---
 
 [**Back to Main Page**](index.md)
 
-## Observable Behaviour
+Session Manager centralizes the management of session history/snapshots and
+handles the lifecycle of long-running operations (namely searching and
+filtering) to allow for a responsive asynchronous UI.
+
+![Figure: Interaction between UI and Session Manager Module](docfd-session-manager.svg)
+
+## Asynchronous UI
 
 Search is asynchronous, specifically:
 - Editing of search field is not blocked by search progress
@@ -20,8 +26,6 @@ Search is asynchronous, specifically:
 
 > **TODO:** Describe the UI requester, lock-protected request cells, worker domain, manager fiber, egress acknowledgement, and immutable snapshot publication.
 
-![Figure: Interaction between UI and Session Manager Module](docfd-session-manager.svg)
-
 ## Cancellation and Debouncing
 
 > **TODO:** Explain stop signals, request overwriting/coalescing, the workload-centric debounce window, and the deliberate distinction between cancellation and interruption.
@@ -30,6 +34,21 @@ Search is asynchronous, specifically:
 
 > **TODO:** Explain why asynchronous search/filter progress belongs in the status line, while synchronous snapshot reconstruction and document reload use a noninteractive overlay.
 
-## Trade-offs and Alternatives
+## Session History
 
-> **TODO:** Discuss the synchronization complexity caused by Lwd not being thread-safe, and compare the current design with a single-domain implementation or a fully message-driven state owner.
+### Commands and Immutable State
+
+> **TODO:** Describe the command representation, session state, committed versus preview commands, and how snapshots connect commands to states.
+
+### Undo/Redo Semantics
+
+> **TODO:** Cover history truncation after editing an older version, input-field synchronization, worker quiescence, and the blocking reconstruction overlay.
+
+### Checkpointing and Pruning
+
+> **TODO:** Explain why retaining every snapshot state consumed too much memory, which states are retained, and when compaction occurs.
+
+## Reconstruction
+
+> **TODO:** Explain how a missing snapshot is reconstructed from the nearest preceding checkpoint by replaying commands.
+

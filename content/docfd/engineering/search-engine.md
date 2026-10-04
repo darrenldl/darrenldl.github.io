@@ -1,6 +1,6 @@
 ---
 maxwidth: "100ch"
-title: Docfd - Search Engine and Indexing
+title: Docfd - Search Engine
 ---
 
 [**Back to Main Page**](index.md)
@@ -32,10 +32,6 @@ into one of the following cases:
 - They are within the configured case-insensitive edit distance threshold
 
 Search results are then ranked using a heuristic.
-
-## Document Preparation
-
-> **TODO:** Describe document discovery, format detection, PDF/DOCX conversion, tokenization, document ID allocation, incremental hashing, and SQLite transactions.
 
 ## Candidate Generation and Pruning
 

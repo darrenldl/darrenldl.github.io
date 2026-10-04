@@ -15,7 +15,6 @@ Discussions of specific topics:
 
 - [Design Context](design-context.md)
 - [Indexing](indexing.md)
-- [Search Engine](search-engine.md)
 - [Session Manager](session-manager.md)
-- [Session History, Snapshots, and Replay](session-history.md)
+- [Search Engine](search-engine.md)
 - [Reliability and Testing](reliability.md)

@@ -752,7 +752,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="2J1EmU7BXH1fdWmtGtlS-41" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Snapshots" vertex="1">
+        <mxCell id="2J1EmU7BXH1fdWmtGtlS-41" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Session History" vertex="1">
           <mxGeometry height="40" width="120" x="420" y="380" as="geometry" />
         </mxCell>
         <mxCell id="2J1EmU7BXH1fdWmtGtlS-45" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Append" vertex="1">
