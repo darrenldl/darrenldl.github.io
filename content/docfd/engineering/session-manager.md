@@ -3,15 +3,17 @@ maxwidth: "100ch"
 title: Docfd - Session Manager
 ---
 
-[**Back to Main Page**](index.md)
+[**Back to Engineering Page**](index.md)
+
+![Figure: Interaction between UI and Session Manager](docfd-session-manager.svg)
+
+## Purpose
 
 Session Manager centralizes the management of session history/snapshots and
 handles the lifecycle of long-running operations (namely searching and
 filtering) to allow for a responsive asynchronous UI.
 
-![Figure: Interaction between UI and Session Manager Module](docfd-session-manager.svg)
-
-## Asynchronous UI
+### Asynchronous UI
 
 Search is asynchronous, specifically:
 - Editing of search field is not blocked by search progress
@@ -51,4 +53,3 @@ Search is asynchronous, specifically:
 ## Reconstruction
 
 > **TODO:** Explain how a missing snapshot is reconstructed from the nearest preceding checkpoint by replaying commands.
-

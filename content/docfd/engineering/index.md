@@ -3,6 +3,8 @@ maxwidth: "80ch"
 title: Docfd - Engineering
 ---
 
+[**Back to Docfd Main Page**](../index.md)
+
 Docfd utilises OCaml 5 and Eio for multithreading, and uses a custom search
 engine backed by on-disk SQLite DB.
 Architecture wise, Docfd uses

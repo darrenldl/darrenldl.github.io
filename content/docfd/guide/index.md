@@ -3,7 +3,7 @@ maxwidth: "120ch"
 title: Docfd User Guide
 ---
 
-[**Back to Docfd main page**](../index.md)
+[**Back to Docfd Main Page**](../index.md)
 
 ## Installation
 
