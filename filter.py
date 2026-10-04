@@ -1,9 +1,13 @@
 import panflute as pf
 
 def action(elem, doc):
-    if isinstance(elem, pf.Link) and elem.url.endswith('.md'):
-        elem.url = elem.url[:-3] + '.html'
-        return elem
+    if isinstance(elem, pf.Link):
+        path, separator, fragment = elem.url.partition('#')
+        if path.endswith('.md'):
+            elem.url = path[:-3] + '.html'
+            if separator:
+                elem.url += separator + fragment
+            return elem
 
     if isinstance(elem, pf.Header) and elem.identifier:
         elem.content.append(pf.Space())
