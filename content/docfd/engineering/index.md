@@ -11,10 +11,11 @@ actor model for organising concurrent entities.
 
 ![Figure: Workflow Overview](docfd-workflow-overview.svg)
 
-See the following for discussions of specific topics:
+Discussions of specific topics:
 
 - [Design Context](design-context.md)
-- [Search Engine and Indexing](search-engine.md)
-- [Responsive Asynchronous UI](async-ui.md)
+- [Indexing](indexing.md)
+- [Search Engine](search-engine.md)
+- [Session Manager](session-manager.md)
 - [Session History, Snapshots, and Replay](session-history.md)
 - [Reliability and Testing](reliability.md)

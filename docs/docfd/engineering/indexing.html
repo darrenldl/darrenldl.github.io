@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docfd - Indexing</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 100ch;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    tbody tr + tr {
+      border-top: 1px solid #d8d8d8;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Docfd - Indexing</h1>
+</header>
+<p><a href="index.html"><strong>Back to Main Page</strong></a></p>
+<p>The core data structures behind Docfd search engine are a dictionary
+(collection of words observed across all documents) and inverted indices
+for documents, which are constructed by the indexing pipeline.</p>
+<h2 id="document-discovery">Document Discovery <a
+href="#document-discovery" class="heading-anchor">#</a></h2>
+<h2 id="hashing">Hashing <a href="#hashing"
+class="heading-anchor">#</a></h2>
+<p>TODO</p>
+<h2 id="main-indexing-work">Main Indexing Work <a
+href="#main-indexing-work" class="heading-anchor">#</a></h2>
+<h3 id="tokenization">Tokenization <a href="#tokenization"
+class="heading-anchor">#</a></h3>
+<p>Document content is tokenized based on:</p>
+<ul>
+<li>Contiguous alphanumeric characters</li>
+<li>Individual symbols</li>
+<li>Individual UTF-8 characters</li>
+<li>Spaces</li>
+</ul>
+<h2 id="indexing-pipeline">Indexing Pipeline <a
+href="#indexing-pipeline" class="heading-anchor">#</a></h2>
+<p>Docfd uses the typical pipelining setup to avoid CPU bound tasks
+waiting on I/O bound tasks and vice versa.</p>
+<p>We begin by examining the naive setup:</p>
+<figure>
+<img src="docfd-indexing-naive-timeline.svg"
+alt="Figure: Single-threaded Naive Timeline" />
+<figcaption aria-hidden="true">Figure: Single-threaded Naive
+Timeline</figcaption>
+</figure>
+<p>This is a classic case of unnecessary delay where I/O of a work item
+waits for CPU work of the previous work item, and vice versa.</p>
+<p>A more ideal timeline would look closer to:</p>
+<figure>
+<img src="docfd-indexing-optimal-timeline.svg"
+alt="Figure: Single-threaded Optimal Timeline" />
+<figcaption aria-hidden="true">Figure: Single-threaded Optimal
+Timeline</figcaption>
+</figure>
+<p>This is straightforward to implement by using an actor model
+design:</p>
+<figure>
+<img src="docfd-indexing-pipeline-simple.svg"
+alt="Figure: Single-threaded Pipeline Design" />
+<figcaption aria-hidden="true">Figure: Single-threaded Pipeline
+Design</figcaption>
+</figure>
+<p>Finally, we also try to saturate I/O and CPU by changing the first
+two layers into using multiple workers intead of just one worker. The
+final DB write layer remains a single worker as there is no benefit to
+parallel writes for SQLite DB unless WAL is used, but WAL is not enabled
+for simplicity and some minor reliability issues observed during
+development (likely some errors on my end, but did not have time to
+investigate fully).</p>
+<figure>
+<img src="docfd-indexing-pipeline.svg"
+alt="Figure: Final Pipeline Design" />
+<figcaption aria-hidden="true">Figure: Final Pipeline
+Design</figcaption>
+</figure>
+<h2 id="evolution-of-index-storage">Evolution of Index Storage <a
+href="#evolution-of-index-storage" class="heading-anchor">#</a></h2>
+<h3 id="json-and-compression">JSON and Compression <a
+href="#json-and-compression" class="heading-anchor">#</a></h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 7.1.0: Explain why GZIP compression
+was added to the JSON index and what it improved without changing the
+fully materialized index design.</p>
+</blockquote>
+<h3 id="moving-to-cbor">Moving to CBOR <a href="#moving-to-cbor"
+class="heading-anchor">#</a></h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 9.0.0-rc1: Explain why JSON+GZIP was
+replaced by CBOR+GZIP, and which serialization costs or limitations
+remained.</p>
+</blockquote>
+<h3 id="moving-to-sqlite">Moving to SQLite <a href="#moving-to-sqlite"
+class="heading-anchor">#</a></h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 9.0.0: Explain why CBOR+GZIP was
+replaced by SQLite after the in-memory index reached 1.9 GB on the 1.4
+GB PDF corpus, including the reduction to 39 MB and the resulting
+search-speed trade-off.</p>
+</blockquote>
+<h3 id="subsequent-sqlite-optimisation">Subsequent SQLite Optimisation
+<a href="#subsequent-sqlite-optimisation"
+class="heading-anchor">#</a></h3>
+<blockquote>
+<p><strong>TODO:</strong> Version 10.0.0: Explain why the database
+schema was redesigned, how this reduced index size by roughly 60%, and
+why the change required rebuilding existing indexes.</p>
+</blockquote>
+<blockquote>
+<p><strong>TODO:</strong> Version 12.0.0-alpha.13: Explain why a global
+word table was introduced, how it reduced duplication and improved
+search speed, and why this caused another breaking database change.</p>
+</blockquote>
+<h2 id="storage-and-performance-trade-offs">Storage and Performance
+Trade-offs <a href="#storage-and-performance-trade-offs"
+class="heading-anchor">#</a></h2>
+<blockquote>
+<p><strong>TODO:</strong> Add measured data for index size, startup
+time, search latency, and memory use. State the corpus and hardware used
+for each measurement.</p>
+</blockquote>
+</body>
+</html>
