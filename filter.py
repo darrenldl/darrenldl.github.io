@@ -5,6 +5,17 @@ def action(elem, doc):
         elem.url = elem.url[:-3] + '.html'
         return elem
 
+    if isinstance(elem, pf.Header) and elem.identifier:
+        elem.content.append(pf.Space())
+        elem.content.append(
+            pf.Link(
+                pf.Str('#'),
+                url=f'#{elem.identifier}',
+                classes=['heading-anchor'],
+            )
+        )
+        return elem
+
 def main(doc=None):
     return pf.run_filter(action, doc=doc)
 

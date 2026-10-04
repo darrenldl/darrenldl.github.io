@@ -1,3 +1,4 @@
 demo/*.pdf
 *.drawio.bkp
 .markdown-hashes.json
+__pycache__/*

@@ -183,34 +183,39 @@
 <h1 class="title">Docfd - Reliability and Testing</h1>
 </header>
 <p><a href="index.html"><strong>Back to Main Page</strong></a></p>
-<h2 id="failure-model">Failure Model</h2>
+<h2 id="failure-model">Failure Model <a href="#failure-model"
+class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe the main failure classes: recoverable
 document conversion failures, OCaml exceptions, worker cancellation,
 SQLite busy/transaction failures, native crashes, and apparent UI
 freezes.</p>
 </blockquote>
-<h2 id="sqlite-hardening">SQLite Hardening</h2>
+<h2 id="sqlite-hardening">SQLite Hardening <a href="#sqlite-hardening"
+class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe exclusive connection checkout,
 <code>FULLMUTEX</code> connections, statement finalization, transaction
 cleanup, bounded busy retries, and connection disposal after callback
 failure.</p>
 </blockquote>
-<h2 id="worker-failure-reporting">Worker Failure Reporting</h2>
+<h2 id="worker-failure-reporting">Worker Failure Reporting <a
+href="#worker-failure-reporting" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe worker exception capture,
 preservation of raw backtraces, debug-log reporting, and why native
 signals require core dumps rather than OCaml exception handling.</p>
 </blockquote>
-<h2 id="native-crash-case-study">Native Crash Case Study</h2>
+<h2 id="native-crash-case-study">Native Crash Case Study <a
+href="#native-crash-case-study" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Document the investigation from a rare
 SIGSEGV, through the <code>sqlite3_finalize</code>/invalid-mutex
 backtrace, to the sqlite3-ocaml 5.4.2 GC-rooting fix and the raised
 dependency floor.</p>
 </blockquote>
-<h2 id="testing">Testing</h2>
+<h2 id="testing">Testing <a href="#testing"
+class="heading-anchor">#</a></h2>
 <p>Docfd is tested in two ways: CLI behavioural tests (cram tests), and
 direct testing of internal components.</p>
 <p>For the cram tests, initial basic test cases are added as part of
@@ -285,7 +290,8 @@ directly tested in the form of unit tests:</p>
 (AST) rewriting/normalisation</li>
 <li>Normalisation of file system paths to absolute paths</li>
 </ul>
-<h2 id="lessons-and-remaining-limits">Lessons and Remaining Limits</h2>
+<h2 id="lessons-and-remaining-limits">Lessons and Remaining Limits <a
+href="#lessons-and-remaining-limits" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Summarise what the hardening work changed,
 which risks are intentionally accepted, and what diagnostics remain

@@ -183,16 +183,19 @@
 <h1 class="title">Docfd - Responsive Asynchronous UI</h1>
 </header>
 <p><a href="index.html"><strong>Back to Main Page</strong></a></p>
-<h2 id="observable-behaviour">Observable Behaviour</h2>
+<h2 id="observable-behaviour">Observable Behaviour <a
+href="#observable-behaviour" class="heading-anchor">#</a></h2>
 <p>Search is asynchronous, specifically: - Editing of search field is
 not blocked by search progress - Updating/clearing the search field
 cancels the current search and starts a new search immediately</p>
-<h2 id="problem-and-constraints">Problem and Constraints</h2>
+<h2 id="problem-and-constraints">Problem and Constraints <a
+href="#problem-and-constraints" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe why search and filtering cannot run
 on the UI domain and why Lwd updates must remain on the main domain.</p>
 </blockquote>
-<h2 id="session-manager-design">Session Manager Design</h2>
+<h2 id="session-manager-design">Session Manager Design <a
+href="#session-manager-design" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe the UI requester, lock-protected
 request cells, worker domain, manager fiber, egress acknowledgement, and
@@ -204,20 +207,23 @@ alt="Figure: Interaction between UI and Session Manager Module" />
 <figcaption aria-hidden="true">Figure: Interaction between UI and
 Session Manager Module</figcaption>
 </figure>
-<h2 id="cancellation-and-debouncing">Cancellation and Debouncing</h2>
+<h2 id="cancellation-and-debouncing">Cancellation and Debouncing <a
+href="#cancellation-and-debouncing" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Explain stop signals, request
 overwriting/coalescing, the workload-centric debounce window, and the
 deliberate distinction between cancellation and interruption.</p>
 </blockquote>
 <h2 id="blocking-versus-non-blocking-feedback">Blocking Versus
-Non-blocking Feedback</h2>
+Non-blocking Feedback <a href="#blocking-versus-non-blocking-feedback"
+class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Explain why asynchronous search/filter
 progress belongs in the status line, while synchronous snapshot
 reconstruction and document reload use a noninteractive overlay.</p>
 </blockquote>
-<h2 id="trade-offs-and-alternatives">Trade-offs and Alternatives</h2>
+<h2 id="trade-offs-and-alternatives">Trade-offs and Alternatives <a
+href="#trade-offs-and-alternatives" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Discuss the synchronization complexity caused
 by Lwd not being thread-safe, and compare the current design with a

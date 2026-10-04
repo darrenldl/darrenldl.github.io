@@ -238,14 +238,17 @@ e.g. <code>^abc</code> means “prefix match <code>abc</code>”, but
 tokens, namely the next matching token must follow immediately from the
 current match, e.g. <code>^12:3</code> will not match
 <code>12 : 30</code> but will match <code>12:30</code></p>
-<h3 id="operator-handling-specifics">? operator handling specifics</h3>
+<h3 id="operator-handling-specifics">? operator handling specifics <a
+href="#operator-handling-specifics" class="heading-anchor">#</a></h3>
 <p>For a phrase with the optional operator, such as
 <code>?word0 word1 ...</code>, the first word is grouped implicitly,
 i.e. it is treated as <code>(?word0) word1 ...</code>.</p>
-<h3 id="why-is-there-no-operator">Why is there no &amp; operator?</h3>
+<h3 id="why-is-there-no-operator">Why is there no &amp; operator? <a
+href="#why-is-there-no-operator" class="heading-anchor">#</a></h3>
 <p>This one comes more from author’s personal preference than
 implementation difficulty.</p>
-<h3 id="explanation">Explanation</h3>
+<h3 id="explanation">Explanation <a href="#explanation"
+class="heading-anchor">#</a></h3>
 <p>There are a lot of similar software that provide a <code>&amp;</code>
 operator in the primary search/filter field, so it seems natural for
 Docfd to carry it in the search language as well. However, there is a

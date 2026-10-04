@@ -183,38 +183,44 @@
 <h1 class="title">Docfd - Session History, Snapshots, and Replay</h1>
 </header>
 <p><a href="index.html"><strong>Back to Main Page</strong></a></p>
-<h2 id="editingviewing-command-history">Editing/viewing command
-history</h2>
+<h2 id="editingviewing-command-history">Editing/viewing command history
+<a href="#editingviewing-command-history"
+class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Add an up-to-date walkthrough of undo/redo,
 editing command history, and saving or replaying the resulting commands
 as a Docfd script.</p>
 </blockquote>
-<h2 id="commands-and-immutable-state">Commands and Immutable State</h2>
+<h2 id="commands-and-immutable-state">Commands and Immutable State <a
+href="#commands-and-immutable-state" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Describe the command representation, session
 state, committed versus preview commands, and how snapshots connect
 commands to states.</p>
 </blockquote>
-<h2 id="checkpointing-and-pruning">Checkpointing and Pruning</h2>
+<h2 id="checkpointing-and-pruning">Checkpointing and Pruning <a
+href="#checkpointing-and-pruning" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Explain why retaining every snapshot state
 consumed too much memory, which states are retained, and when compaction
 occurs.</p>
 </blockquote>
-<h2 id="reconstruction">Reconstruction</h2>
+<h2 id="reconstruction">Reconstruction <a href="#reconstruction"
+class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Explain how a missing snapshot is
 reconstructed from the nearest preceding checkpoint by replaying
 commands.</p>
 </blockquote>
-<h2 id="undoredo-semantics">Undo/Redo Semantics</h2>
+<h2 id="undoredo-semantics">Undo/Redo Semantics <a
+href="#undoredo-semantics" class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Cover history truncation after editing an
 older version, input-field synchronization, worker quiescence, and the
 blocking reconstruction overlay.</p>
 </blockquote>
-<h2 id="trade-offs">Trade-offs</h2>
+<h2 id="trade-offs">Trade-offs <a href="#trade-offs"
+class="heading-anchor">#</a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Discuss the memory-versus-reconstruction-time
 trade-off and whether timing command replay could support better
