@@ -13,39 +13,52 @@ Refer to the [Installation](https://github.com/darrenldl/docfd#installation) sec
 
 ## Getting Started
 
-### Your First Search
-
-We will use the Docfd Engineering pages of this GitHub site for this walkthrough.
-
-You can git clone this GitHub site via
+We will use the Docfd Engineering pages of this GitHub site for this walkthrough, which can be cloned by:
 
 ```
-git clone https://github.com/darrenldl/darrenldl.github.io.git
+$ git clone https://github.com/darrenldl/darrenldl.github.io.git
 ```
 
 But feel free to use any local directory as Docfd is fully offline
 and does not modify or move your documents.
 
-> **TODO:** Walk through starting Docfd, entering a search, selecting a result, and opening it.
+### Startup
 
-The Docfd source repository can be used as a concrete practice corpus:
-
-```sh
-cd /path/to/docfd
-docfd --exts=md,txt --single-line-exts=ml,mli,t .
+```
+$ cd darrenldl.github.io/
+$ docfd
 ```
 
-Try searching for `filter`. The results should include relevant
-implementation, test, documentation, or changelog files. Navigate between the
-matches and open one to verify that the editor is positioned at the result.
+TODO: screenshot upon start
 
-> **TODO:** Add the exact keys for entering search mode, accepting the query,
-> navigating results, and opening the selected match.
+### Filtering
 
-> **RECORDING TODO (15–25 seconds):** Start with a clean terminal, launch
-> Docfd, enter one search, move through at least two results, and open one in
-> the configured editor or PDF viewer. Keep this simpler than the portfolio
-> recording and avoid introducing filters or history yet.
+Steps:
+- Type `f` to enter FILTER mode
+- Type `p` and press Tab to autocomplete to `path-`
+- Type `f` and press Tab to autocomplete to `path-fuzzy:` as a whole
+- Type `"content engineering"` to complete the full string to `path-fuzzy:"content engineering"`
+- Press Enter to exit FILTER mode
+
+TODO: screenshot with autocomplete options
+
+TODO: final screenshot
+
+### Searching
+
+Steps:
+- Type `/` to enter SEARCH mode
+- Type `search engine`
+- Press Enter to exit SEARCH mode
+- Use `Shift` + `j`/`k` or up/down to select a search result within a document
+- Use `j`/`k` or up/down to select a document
+- Press Enter to open the search result in editor
+
+TODO: final screenshot
+
+TODO: opening a search result in editor
+
+#### Undo/redo
 
 ### What to Try Next
 
@@ -72,23 +85,3 @@ for the complete workflow.
 - [Troubleshooting](troubleshooting.md)
 
 > **TODO:** Add links to any additional reference pages once their scope becomes clear.
-
-## Recording TODOs
-
-- [ ] Record a 15–25 second first-search clip: start Docfd, enter a query,
-  navigate between results, and open one in its associated application.
-- [ ] Reuse or extract the filter/undo segment from the portfolio's
-  "Searching Docfd with Docfd" recording.
-- [ ] Record a 20–30 second history-and-script clip: perform several actions,
-  edit their command history, apply the edit, and save the result as a script.
-- [ ] Decide whether `--list-scripts`, `--script`, and `--start-with-script`
-  need a short recording or only a terminal transcript.
-- [ ] Decide whether search-scope narrowing needs a 15–20 second clip after
-  the filtering documentation has been written.
-- [ ] Reuse the portfolio PDF recording for PDF conversion and result opening;
-  do not make a duplicate guide recording unless the portfolio clip is too
-  engineering-focused.
-
-Installation, configuration precedence, non-interactive exit statuses,
-supported extensions, and debug logging should normally use commands and
-expected output rather than recordings.
