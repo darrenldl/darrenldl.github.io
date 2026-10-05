@@ -5,6 +5,8 @@ title: Docfd - Search Engine
 
 [**Back to Engineering Page**](index.md)
 
+## Introduction
+
 - The dictionary is first searched through once to find the
   matches for the first word in the search phrase.
 - DFS through the inverted index is then used for the remaining words,
@@ -15,7 +17,7 @@ title: Docfd - Search Engine
   the matching criteria for each word. An automaton is computed for
   each word of the search phrase for optimised repeated matching.
 
-## Search Phrase and Search Procedure
+## Search Procedure
 
 User input in the search field are tokenized
 in the same way as document content (see [here](indexing.md#tokenization)).
@@ -33,10 +35,12 @@ into one of the following cases:
 
 Search results are then ranked using a heuristic.
 
-## Candidate Generation and Pruning
+### First-word Candidate Generation and Pruning
 
 > **TODO:** Explain global first-word candidate generation, document pruning, search scopes, and how the search is divided into parallel jobs.
 
-## Ranking
+### Depth-first Search
+
+### Ranking
 
 > **TODO:** Explain the result-ranking heuristic and the interaction between content relevance, path ordering, and path fuzzy ranking.

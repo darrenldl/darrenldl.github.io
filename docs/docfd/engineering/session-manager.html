@@ -184,46 +184,35 @@
 </header>
 <p><a href="index.html"><strong>Back to Engineering
 Page</strong></a></p>
+<h2 id="introduction">Introduction <a href="#introduction"
+class="heading-anchor">#</a></h2>
+<p>Session Manager handles the lifecycle of long-running operations
+(namely searching and filtering) to allow for a responsive asynchronous
+UI, and centralizes the logic related to management of session
+history/snapshots to ensure consistency.</p>
 <figure>
 <img src="docfd-session-manager.svg"
 alt="Figure: Interaction between UI and Session Manager" />
 <figcaption aria-hidden="true">Figure: Interaction between UI and
 Session Manager</figcaption>
 </figure>
-<h2 id="purpose">Purpose <a href="#purpose"
+<h2 id="asynchronous-ui">Asynchronous UI <a href="#asynchronous-ui"
 class="heading-anchor">#</a></h2>
-<p>Session Manager centralizes the management of session
-history/snapshots and handles the lifecycle of long-running operations
-(namely searching and filtering) to allow for a responsive asynchronous
-UI.</p>
-<h3 id="asynchronous-ui">Asynchronous UI <a href="#asynchronous-ui"
-class="heading-anchor">#</a></h3>
+<p>Asynchronous UI was introduced to deliver a “search as you type” user
+experience.</p>
 <p>Search is asynchronous, specifically: - Editing of search field is
 not blocked by search progress - Updating/clearing the search field
 cancels the current search and starts a new search immediately</p>
-<h2 id="problem-and-constraints">Problem and Constraints <a
-href="#problem-and-constraints" class="heading-anchor">#</a></h2>
-<blockquote>
-<p><strong>TODO:</strong> Describe why search and filtering cannot run
-on the UI domain and why Lwd updates must remain on the main domain.</p>
-</blockquote>
-<h2 id="session-manager-design">Session Manager Design <a
-href="#session-manager-design" class="heading-anchor">#</a></h2>
-<blockquote>
-<p><strong>TODO:</strong> Describe the UI requester, lock-protected
-request cells, worker domain, manager fiber, egress acknowledgement, and
-immutable snapshot publication.</p>
-</blockquote>
-<h2 id="cancellation-and-debouncing">Cancellation and Debouncing <a
-href="#cancellation-and-debouncing" class="heading-anchor">#</a></h2>
+<h3 id="cancellation-and-debouncing">Cancellation and Debouncing <a
+href="#cancellation-and-debouncing" class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain stop signals, request
 overwriting/coalescing, the workload-centric debounce window, and the
 deliberate distinction between cancellation and interruption.</p>
 </blockquote>
-<h2 id="blocking-versus-non-blocking-feedback">Blocking Versus
+<h3 id="blocking-versus-non-blocking-feedback">Blocking Versus
 Non-blocking Feedback <a href="#blocking-versus-non-blocking-feedback"
-class="heading-anchor">#</a></h2>
+class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain why asynchronous search/filter
 progress belongs in the status line, while synchronous snapshot
@@ -231,15 +220,16 @@ reconstruction and document reload use a noninteractive overlay.</p>
 </blockquote>
 <h2 id="session-history">Session History <a href="#session-history"
 class="heading-anchor">#</a></h2>
-<h3 id="commands-and-immutable-state">Commands and Immutable State <a
-href="#commands-and-immutable-state" class="heading-anchor">#</a></h3>
+<h3 id="commands-and-immutable-snapshots">Commands and Immutable
+Snapshots <a href="#commands-and-immutable-snapshots"
+class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Describe the command representation, session
 state, committed versus preview commands, and how snapshots connect
 commands to states.</p>
 </blockquote>
-<h3 id="undoredo-semantics">Undo/Redo Semantics <a
-href="#undoredo-semantics" class="heading-anchor">#</a></h3>
+<h3 id="undoredo">Undo/Redo <a href="#undoredo"
+class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Cover history truncation after editing an
 older version, input-field synchronization, worker quiescence, and the
@@ -252,8 +242,8 @@ href="#checkpointing-and-pruning" class="heading-anchor">#</a></h3>
 consumed too much memory, which states are retained, and when compaction
 occurs.</p>
 </blockquote>
-<h2 id="reconstruction">Reconstruction <a href="#reconstruction"
-class="heading-anchor">#</a></h2>
+<h3 id="reconstruction">Reconstruction <a href="#reconstruction"
+class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain how a missing snapshot is
 reconstructed from the nearest preceding checkpoint by replaying

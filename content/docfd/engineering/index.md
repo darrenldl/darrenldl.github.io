@@ -19,4 +19,3 @@ Discussions of specific topics:
 - [Indexing](indexing.md)
 - [Session Manager](session-manager.md)
 - [Search Engine](search-engine.md)
-- [Reliability and Testing](reliability.md)

@@ -184,6 +184,8 @@
 </header>
 <p><a href="index.html"><strong>Back to Engineering
 Page</strong></a></p>
+<h2 id="introduction">Introduction <a href="#introduction"
+class="heading-anchor">#</a></h2>
 <ul>
 <li>The dictionary is first searched through once to find the matches
 for the first word in the search phrase.</li>
@@ -195,8 +197,7 @@ in the document matching the search phrase.</li>
 of the matching criteria for each word. An automaton is computed for
 each word of the search phrase for optimised repeated matching.</li>
 </ul>
-<h2 id="search-phrase-and-search-procedure">Search Phrase and Search
-Procedure <a href="#search-phrase-and-search-procedure"
+<h2 id="search-procedure">Search Procedure <a href="#search-procedure"
 class="heading-anchor">#</a></h2>
 <p>User input in the search field are tokenized in the same way as
 document content (see <a href="indexing.html#tokenization">here</a>). A
@@ -210,16 +211,19 @@ exact match - They are a case-insensitive substring match (token in
 search phrase being the substring) - They are within the configured
 case-insensitive edit distance threshold</p>
 <p>Search results are then ranked using a heuristic.</p>
-<h2 id="candidate-generation-and-pruning">Candidate Generation and
-Pruning <a href="#candidate-generation-and-pruning"
-class="heading-anchor">#</a></h2>
+<h3 id="first-word-candidate-generation-and-pruning">First-word
+Candidate Generation and Pruning <a
+href="#first-word-candidate-generation-and-pruning"
+class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain global first-word candidate
 generation, document pruning, search scopes, and how the search is
 divided into parallel jobs.</p>
 </blockquote>
-<h2 id="ranking">Ranking <a href="#ranking"
-class="heading-anchor">#</a></h2>
+<h3 id="depth-first-search">Depth-first Search <a
+href="#depth-first-search" class="heading-anchor">#</a></h3>
+<h3 id="ranking">Ranking <a href="#ranking"
+class="heading-anchor">#</a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain the result-ranking heuristic and the
 interaction between content relevance, path ordering, and path fuzzy

@@ -5,17 +5,28 @@ title: Docfd - Indexing
 
 [**Back to Engineering Page**](index.md)
 
-The core data structures behind Docfd search engine are a dictionary
-(collection of words observed across all documents) and inverted
-indices for documents, which are constructed by the indexing pipeline.
+## Introduction
 
-## Document Discovery
+The indexing stage of Docfd workflow is responsible for the construction
+of the core data structures behind Docfd search engine, which are the
+dictionary (collection of words observed across all documents) and the
+inverted indices for documents (mapping from words to positions within
+the documents).
 
-## Hashing
+The overall workflow inside the indexing stage begins with document
+discovery, identification of documents to be indexed, and finally the
+core indexing work is handled by the indexing pipeline to deal with
+the mix of I/O-bound and CPU-bound tasks efficiently.
+
+## Preparation for Indexing
+
+### Document Discovery
+
+### Hashing
 
 TODO
 
-## Main Indexing Work
+## Indexing Work
 
 ### Text Extraction
 
@@ -57,7 +68,7 @@ to investigate fully).
 
 ![Figure: Final Pipeline Design](docfd-indexing-pipeline.svg)
 
-## Evolution of Index Storage
+## Index Storage
 
 ### JSON and Compression
 
