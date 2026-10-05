@@ -162,7 +162,7 @@ The tradeoff is that at larger scale (say a few thousand documents, depending
 on the sizes), Docfd will noticeably struggle where results will take seconds
 instead of less than a second to show up.
 
-There are naturally middleground tactics that can be adopted, e.g. holding
-indices into a caching memory layer, and optionally pre-warming the layer with
-heuristics, but this was not further explored as basic design already suffices
-for the scale targetted.
+There are naturally middleground tactics that can be adopted, e.g.
+holding some indices into a caching memory layer with heuristic-based
+eviction, but this was not further explored as the basic design already
+suffices for the scale targetted.

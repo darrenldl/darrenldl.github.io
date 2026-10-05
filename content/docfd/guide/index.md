@@ -15,6 +15,17 @@ Refer to the [Installation](https://github.com/darrenldl/docfd#installation) sec
 
 ### Your First Search
 
+We will use the Docfd Engineering pages of this GitHub site for this walkthrough.
+
+You can git clone this GitHub site via
+
+```
+git clone https://github.com/darrenldl/darrenldl.github.io.git
+```
+
+But feel free to use any local directory as Docfd is fully offline
+and does not modify or move your documents.
+
 > **TODO:** Walk through starting Docfd, entering a search, selecting a result, and opening it.
 
 The Docfd source repository can be used as a concrete practice corpus:
