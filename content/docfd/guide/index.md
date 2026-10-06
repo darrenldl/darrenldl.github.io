@@ -1,5 +1,5 @@
 ---
-maxwidth: "120ch"
+maxwidth: "100ch"
 title: Docfd User Guide
 ---
 
@@ -29,24 +29,31 @@ $ cd darrenldl.github.io/
 $ docfd
 ```
 
-TODO: screenshot upon start
+![Figure: Docfd TUI Overview at Startup](docfd-tui-overview.svg)
 
 ### Filtering
 
 Steps:
+
 - Type `f` to enter FILTER mode
 - Type `p` and press Tab to autocomplete to `path-`
+
+![Figure: Docfd TUI After Filtering Step 2](docfd-screenshot-filtering-after-step-2.png)
+
 - Type `f` and press Tab to autocomplete to `path-fuzzy:` as a whole
+
+![Figure: Docfd TUI After Filtering Step 2](docfd-screenshot-filtering-after-step-3.png)
+
 - Type `"content engineering"` to complete the full string to `path-fuzzy:"content engineering"`
+
 - Press Enter to exit FILTER mode
 
-TODO: screenshot with autocomplete options
-
-TODO: final screenshot
+![Figure: Docfd TUI After Filtering Step 5](docfd-screenshot-filtering-after-step-5.png)
 
 ### Searching
 
 Steps:
+
 - Type `/` to enter SEARCH mode
 - Type `search engine`
 - Press Enter to exit SEARCH mode
@@ -60,28 +67,25 @@ TODO: opening a search result in editor
 
 #### Undo/redo
 
-### What to Try Next
+## What to Try Next
 
-> **TODO:** Point users towards filtering, scripts, and configuration without explaining their implementation.
+### Config File
 
-After completing the first search, try narrowing the same result set to `lib`
-or `cram`. See [Filtering and navigating results](filtering-and-navigation.md)
-for the complete workflow.
+TODO
 
-## Using Docfd
+### Editing Command History
+
+TODO
+
+### Docfd Script
+
+TODO
+
+## Reference and Help
 
 - [Searching](searching.md)
 - [Filtering and navigating results](filtering-and-navigation.md)
 - [Scripts and repeatable workflows](scripts.md)
 - [Configuration](configuration.md)
-
-## Editing/viewing command history
-
-> **TODO:** Add an up-to-date walkthrough of undo/redo, editing command history, and saving or replaying the resulting commands as a Docfd script.
-
-## Reference and Help
-
 - [Keyboard reference](keyboard-reference.md)
 - [Troubleshooting](troubleshooting.md)
-
-> **TODO:** Add links to any additional reference pages once their scope becomes clear.

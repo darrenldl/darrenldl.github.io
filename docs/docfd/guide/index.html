@@ -15,7 +15,7 @@
     }
     body {
       margin: 0 auto;
-      max-width: 120ch;
+      max-width: 100ch;
       padding-left: 50px;
       padding-right: 50px;
       padding-top: 50px;
@@ -203,66 +203,85 @@ and does not modify or move your documents.</p>
 class="heading-anchor">#</a></h3>
 <pre><code>$ cd darrenldl.github.io/
 $ docfd</code></pre>
-<p>TODO: screenshot upon start</p>
+<figure>
+<img src="docfd-tui-overview.svg"
+alt="Figure: Docfd TUI Overview at Startup" />
+<figcaption aria-hidden="true">Figure: Docfd TUI Overview at
+Startup</figcaption>
+</figure>
 <h3 id="filtering">Filtering <a href="#filtering"
 class="heading-anchor">#</a></h3>
-<p>Steps: - Type <code>f</code> to enter FILTER mode - Type
-<code>p</code> and press Tab to autocomplete to <code>path-</code> -
-Type <code>f</code> and press Tab to autocomplete to
-<code>path-fuzzy:</code> as a whole - Type
-<code>"content engineering"</code> to complete the full string to
-<code>path-fuzzy:"content engineering"</code> - Press Enter to exit
-FILTER mode</p>
-<p>TODO: screenshot with autocomplete options</p>
-<p>TODO: final screenshot</p>
+<p>Steps:</p>
+<ul>
+<li>Type <code>f</code> to enter FILTER mode</li>
+<li>Type <code>p</code> and press Tab to autocomplete to
+<code>path-</code></li>
+</ul>
+<figure>
+<img src="docfd-screenshot-filtering-after-step-2.png"
+alt="Figure: Docfd TUI After Filtering Step 2" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Filtering Step
+2</figcaption>
+</figure>
+<ul>
+<li>Type <code>f</code> and press Tab to autocomplete to
+<code>path-fuzzy:</code> as a whole</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-filtering-after-step-3.png"
+alt="Figure: Docfd TUI After Filtering Step 2" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Filtering Step
+2</figcaption>
+</figure>
+<ul>
+<li><p>Type <code>"content engineering"</code> to complete the full
+string to <code>path-fuzzy:"content engineering"</code></p></li>
+<li><p>Press Enter to exit FILTER mode</p></li>
+</ul>
+<figure>
+<img src="docfd-screenshot-filtering-after-step-5.png"
+alt="Figure: Docfd TUI After Filtering Step 5" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Filtering Step
+5</figcaption>
+</figure>
 <h3 id="searching">Searching <a href="#searching"
 class="heading-anchor">#</a></h3>
-<p>Steps: - Type <code>/</code> to enter SEARCH mode - Type
-<code>search engine</code> - Press Enter to exit SEARCH mode - Use
-<code>Shift</code> + <code>j</code>/<code>k</code> or up/down to select
-a search result within a document - Use <code>j</code>/<code>k</code> or
-up/down to select a document - Press Enter to open the search result in
-editor</p>
+<p>Steps:</p>
+<ul>
+<li>Type <code>/</code> to enter SEARCH mode</li>
+<li>Type <code>search engine</code></li>
+<li>Press Enter to exit SEARCH mode</li>
+<li>Use <code>Shift</code> + <code>j</code>/<code>k</code> or up/down to
+select a search result within a document</li>
+<li>Use <code>j</code>/<code>k</code> or up/down to select a
+document</li>
+<li>Press Enter to open the search result in editor</li>
+</ul>
 <p>TODO: final screenshot</p>
 <p>TODO: opening a search result in editor</p>
 <h4 id="undoredo">Undo/redo <a href="#undoredo"
 class="heading-anchor">#</a></h4>
-<h3 id="what-to-try-next">What to Try Next <a href="#what-to-try-next"
-class="heading-anchor">#</a></h3>
-<blockquote>
-<p><strong>TODO:</strong> Point users towards filtering, scripts, and
-configuration without explaining their implementation.</p>
-</blockquote>
-<p>After completing the first search, try narrowing the same result set
-to <code>lib</code> or <code>cram</code>. See <a
-href="filtering-and-navigation.html">Filtering and navigating
-results</a> for the complete workflow.</p>
-<h2 id="using-docfd">Using Docfd <a href="#using-docfd"
+<h2 id="what-to-try-next">What to Try Next <a href="#what-to-try-next"
 class="heading-anchor">#</a></h2>
+<h3 id="config-file">Config File <a href="#config-file"
+class="heading-anchor">#</a></h3>
+<p>TODO</p>
+<h3 id="editing-command-history">Editing Command History <a
+href="#editing-command-history" class="heading-anchor">#</a></h3>
+<p>TODO</p>
+<h3 id="docfd-script">Docfd Script <a href="#docfd-script"
+class="heading-anchor">#</a></h3>
+<p>TODO</p>
+<h2 id="reference-and-help">Reference and Help <a
+href="#reference-and-help" class="heading-anchor">#</a></h2>
 <ul>
 <li><a href="searching.html">Searching</a></li>
 <li><a href="filtering-and-navigation.html">Filtering and navigating
 results</a></li>
 <li><a href="scripts.html">Scripts and repeatable workflows</a></li>
 <li><a href="configuration.html">Configuration</a></li>
-</ul>
-<h2 id="editingviewing-command-history">Editing/viewing command history
-<a href="#editingviewing-command-history"
-class="heading-anchor">#</a></h2>
-<blockquote>
-<p><strong>TODO:</strong> Add an up-to-date walkthrough of undo/redo,
-editing command history, and saving or replaying the resulting commands
-as a Docfd script.</p>
-</blockquote>
-<h2 id="reference-and-help">Reference and Help <a
-href="#reference-and-help" class="heading-anchor">#</a></h2>
-<ul>
 <li><a href="keyboard-reference.html">Keyboard reference</a></li>
 <li><a href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
-<blockquote>
-<p><strong>TODO:</strong> Add links to any additional reference pages
-once their scope becomes clear.</p>
-</blockquote>
 </body>
 </html>
