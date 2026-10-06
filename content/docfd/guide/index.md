@@ -31,6 +31,12 @@ $ docfd
 
 ![Figure: Docfd TUI Overview at Startup](docfd-tui-overview.svg)
 
+**Useful tip about looking up key bindings:**
+
+- Press `<` or `>` to rotate the key binding info grid.
+- Generally the most commonly used key bindings are put closer to the
+  left side of the grid.
+
 ### Filtering
 
 Steps:
@@ -50,30 +56,81 @@ Steps:
 
 ![Figure: Docfd TUI After Filtering Step 5](docfd-screenshot-filtering-after-step-5.png)
 
+### Dropping
+
+To keep the UI less cluttered, it's often useful to "clear the table"
+and just focus on the documents at hand with input fields ready for new
+filter or search criteria.
+
+Steps:
+
+- Type `d` to enter DROP mode
+
+![Figure: Docfd TUI After Dropping Step 1](docfd-screenshot-dropping-after-step-1.png)
+
+- Type `Shift`+`L` to drop the unlisted documents (documents that do
+  not match the filter and search criteria). In this specific case, we
+  saw `7/44 documents listed` on the status bar prior, that means we will be
+  dropping 37 documents. After which the status bar should read `7/7 documents listed`.
+- Type `xf` to clear the filter field now that we don't need to keep
+  seeing the filter expression.
+
+![Figure: Docfd TUI After Dropping Step 3](docfd-screenshot-dropping-after-step-3.png)
+
 ### Searching
 
 Steps:
 
 - Type `/` to enter SEARCH mode
-- Type `search engine`
-- Press Enter to exit SEARCH mode
-- Use `Shift` + `j`/`k` or up/down to select a search result within a document
-- Use `j`/`k` or up/down to select a document
-- Press Enter to open the search result in editor
+- Type `search engine`.
+- Press Enter to submit and exit SEARCH mode. Note that since Docfd is
+  "search as you type", a lot of the times the search is already done by
+  the time you hit Enter.
 
-TODO: final screenshot
+![Figure: Docfd TUI After Searching Step 3](docfd-screenshot-searching-after-step-3.png)
 
-TODO: opening a search result in editor
+- Use `Shift` + `j`/`k` or up/down to select a search result within a document.
+- Use `j`/`k` or up/down to select a document.
 
-#### Undo/redo
+![Figure: Docfd TUI After Searching Step 5](docfd-screenshot-searching-after-step-5.png)
+
+- Press Enter to open the search result in editor. Docfd recognises
+  common text editors from `$VISUAL` or `$EDITOR`, and invokes the
+  editor with the line number to open to when possible.
+
+![Figure: Docfd TUI After Searching Step 6](docfd-screenshot-searching-after-step-6.png)
+
+### Undo/redo
+
+Steps:
+
+- Type `u` or `Ctrl`+`Z` to undo
+- Type `Ctrl`+`R` or `Ctrl`+`Y` to redo
+
+Note that as Docfd only stores a limited number of session snapshots at
+a time, sometimes undoing or redoing requires recomputation of search
+or filter result and can take longer.
+
+### Editing Command History
+
+If you want to undo in bulk, or just look at the actions done in the session thus far, you can make use of the command history functionality.
+
+Steps:
+
+- Type `h` to bring up the session command history into the editor.
+
+![Figure: Docfd TUI After Command History Step 1](docfd-screenshot-command-history-after-step-1.png)
+
+- Remove or add commands as desired, and upon saving Docfd will
+  recompute the session based on the revised history.
+
+TODO: screenshot for incorrect command
+
+TODO: screenshot for adjusted filter query
 
 ## What to Try Next
 
 ### Config File
-
-TODO
-
-### Editing Command History
 
 TODO
 

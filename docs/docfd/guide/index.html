@@ -209,6 +209,13 @@ alt="Figure: Docfd TUI Overview at Startup" />
 <figcaption aria-hidden="true">Figure: Docfd TUI Overview at
 Startup</figcaption>
 </figure>
+<p><strong>Useful tip about looking up key bindings:</strong></p>
+<ul>
+<li>Press <code>&lt;</code> or <code>&gt;</code> to rotate the key
+binding info grid.</li>
+<li>Generally the most commonly used key bindings are put closer to the
+left side of the grid.</li>
+</ul>
 <h3 id="filtering">Filtering <a href="#filtering"
 class="heading-anchor">#</a></h3>
 <p>Steps:</p>
@@ -244,30 +251,113 @@ alt="Figure: Docfd TUI After Filtering Step 5" />
 <figcaption aria-hidden="true">Figure: Docfd TUI After Filtering Step
 5</figcaption>
 </figure>
+<h3 id="dropping">Dropping <a href="#dropping"
+class="heading-anchor">#</a></h3>
+<p>To keep the UI less cluttered, it’s often useful to “clear the table”
+and just focus on the documents at hand with input fields ready for new
+filter or search criteria.</p>
+<p>Steps:</p>
+<ul>
+<li>Type <code>d</code> to enter DROP mode</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-dropping-after-step-1.png"
+alt="Figure: Docfd TUI After Dropping Step 1" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Dropping Step
+1</figcaption>
+</figure>
+<ul>
+<li>Type <code>Shift</code>+<code>L</code> to drop the unlisted
+documents (documents that do not match the filter and search criteria).
+In this specific case, we saw <code>7/44 documents listed</code> on the
+status bar prior, that means we will be dropping 37 documents. After
+which the status bar should read <code>7/7 documents listed</code>.</li>
+<li>Type <code>xf</code> to clear the filter field now that we don’t
+need to keep seeing the filter expression.</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-dropping-after-step-3.png"
+alt="Figure: Docfd TUI After Dropping Step 3" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Dropping Step
+3</figcaption>
+</figure>
 <h3 id="searching">Searching <a href="#searching"
 class="heading-anchor">#</a></h3>
 <p>Steps:</p>
 <ul>
 <li>Type <code>/</code> to enter SEARCH mode</li>
-<li>Type <code>search engine</code></li>
-<li>Press Enter to exit SEARCH mode</li>
-<li>Use <code>Shift</code> + <code>j</code>/<code>k</code> or up/down to
-select a search result within a document</li>
-<li>Use <code>j</code>/<code>k</code> or up/down to select a
-document</li>
-<li>Press Enter to open the search result in editor</li>
+<li>Type <code>search engine</code>.</li>
+<li>Press Enter to submit and exit SEARCH mode. Note that since Docfd is
+“search as you type”, a lot of the times the search is already done by
+the time you hit Enter.</li>
 </ul>
-<p>TODO: final screenshot</p>
-<p>TODO: opening a search result in editor</p>
-<h4 id="undoredo">Undo/redo <a href="#undoredo"
-class="heading-anchor">#</a></h4>
+<figure>
+<img src="docfd-screenshot-searching-after-step-3.png"
+alt="Figure: Docfd TUI After Searching Step 3" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Searching Step
+3</figcaption>
+</figure>
+<ul>
+<li>Use <code>Shift</code> + <code>j</code>/<code>k</code> or up/down to
+select a search result within a document.</li>
+<li>Use <code>j</code>/<code>k</code> or up/down to select a
+document.</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-searching-after-step-5.png"
+alt="Figure: Docfd TUI After Searching Step 5" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Searching Step
+5</figcaption>
+</figure>
+<ul>
+<li>Press Enter to open the search result in editor. Docfd recognises
+common text editors from <code>$VISUAL</code> or <code>$EDITOR</code>,
+and invokes the editor with the line number to open to when
+possible.</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-searching-after-step-6.png"
+alt="Figure: Docfd TUI After Searching Step 6" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Searching Step
+6</figcaption>
+</figure>
+<h3 id="undoredo">Undo/redo <a href="#undoredo"
+class="heading-anchor">#</a></h3>
+<p>Steps:</p>
+<ul>
+<li>Type <code>u</code> or <code>Ctrl</code>+<code>Z</code> to undo</li>
+<li>Type <code>Ctrl</code>+<code>R</code> or
+<code>Ctrl</code>+<code>Y</code> to redo</li>
+</ul>
+<p>Note that as Docfd only stores a limited number of session snapshots
+at a time, sometimes undoing or redoing requires recomputation of search
+or filter result and can take longer.</p>
+<h3 id="editing-command-history">Editing Command History <a
+href="#editing-command-history" class="heading-anchor">#</a></h3>
+<p>If you want to undo in bulk, or just look at the actions done in the
+session thus far, you can make use of the command history
+functionality.</p>
+<p>Steps:</p>
+<ul>
+<li>Type <code>h</code> to bring up the session command history into the
+editor.</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-command-history-after-step-1.png"
+alt="Figure: Docfd TUI After Command History Step 1" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Command History
+Step 1</figcaption>
+</figure>
+<ul>
+<li>Remove or add commands as desired, and upon saving Docfd will
+recompute the session based on the revised history.</li>
+</ul>
+<p>TODO: screenshot for incorrect command</p>
+<p>TODO: screenshot for adjusted filter query</p>
 <h2 id="what-to-try-next">What to Try Next <a href="#what-to-try-next"
 class="heading-anchor">#</a></h2>
 <h3 id="config-file">Config File <a href="#config-file"
 class="heading-anchor">#</a></h3>
-<p>TODO</p>
-<h3 id="editing-command-history">Editing Command History <a
-href="#editing-command-history" class="heading-anchor">#</a></h3>
 <p>TODO</p>
 <h3 id="docfd-script">Docfd Script <a href="#docfd-script"
 class="heading-anchor">#</a></h3>
