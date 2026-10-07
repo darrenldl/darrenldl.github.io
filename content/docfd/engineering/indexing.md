@@ -1,6 +1,7 @@
 ---
 maxwidth: "100ch"
 title: Docfd - Indexing
+toc: true
 ---
 
 [**Back to Engineering Page**](index.md)

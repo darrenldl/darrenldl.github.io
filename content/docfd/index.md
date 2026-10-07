@@ -1,6 +1,7 @@
 ---
 maxwidth: "80ch"
 title: Docfd
+toc: true
 ---
 
 [**Back to Home**](..)

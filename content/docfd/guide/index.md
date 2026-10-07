@@ -1,6 +1,7 @@
 ---
 maxwidth: "100ch"
 title: Docfd User Guide
+toc: true
 ---
 
 [**Back to Docfd Main Page**](../index.md)
