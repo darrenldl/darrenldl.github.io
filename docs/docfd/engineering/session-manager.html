@@ -173,19 +173,94 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 100ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
   </style>
 </head>
-<body>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#asynchronous-ui" id="toc-asynchronous-ui">Asynchronous
+UI</a>
+<ul>
+<li><a href="#cancellation-and-debouncing"
+id="toc-cancellation-and-debouncing">Cancellation and
+Debouncing</a></li>
+<li><a href="#blocking-versus-non-blocking-feedback"
+id="toc-blocking-versus-non-blocking-feedback">Blocking Versus
+Non-blocking Feedback</a></li>
+</ul></li>
+<li><a href="#session-history" id="toc-session-history">Session
+History</a>
+<ul>
+<li><a href="#commands-and-immutable-snapshots"
+id="toc-commands-and-immutable-snapshots">Commands and Immutable
+Snapshots</a></li>
+<li><a href="#undoredo" id="toc-undoredo">Undo/Redo</a></li>
+<li><a href="#checkpointing-and-pruning"
+id="toc-checkpointing-and-pruning">Checkpointing and Pruning</a></li>
+<li><a href="#reconstruction"
+id="toc-reconstruction">Reconstruction</a></li>
+</ul></li>
+</ul>
+</nav>
+<main class="page-content">
 <header id="title-block-header">
 <h1 class="title">Docfd - Session Manager</h1>
 </header>
 <p><a href="index.html"><strong>Back to Engineering
 Page</strong></a></p>
-<h2 id="introduction">Introduction <a href="#introduction"
-class="heading-anchor">#</a></h2>
+<h2 id="introduction">Introduction<a href="#introduction"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>Session Manager handles the lifecycle of long-running operations
 (namely searching and filtering) to allow for a responsive asynchronous
 UI, and centralizes the logic related to management of session
@@ -196,58 +271,62 @@ alt="Figure: Interaction between UI and Session Manager" />
 <figcaption aria-hidden="true">Figure: Interaction between UI and
 Session Manager</figcaption>
 </figure>
-<h2 id="asynchronous-ui">Asynchronous UI <a href="#asynchronous-ui"
-class="heading-anchor">#</a></h2>
+<h2 id="asynchronous-ui">Asynchronous UI<a href="#asynchronous-ui"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>Asynchronous UI was introduced to deliver a “search as you type” user
 experience.</p>
 <p>Search is asynchronous, specifically: - Editing of search field is
 not blocked by search progress - Updating/clearing the search field
 cancels the current search and starts a new search immediately</p>
-<h3 id="cancellation-and-debouncing">Cancellation and Debouncing <a
-href="#cancellation-and-debouncing" class="heading-anchor">#</a></h3>
+<h3 id="cancellation-and-debouncing">Cancellation and Debouncing<a
+href="#cancellation-and-debouncing" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain stop signals, request
 overwriting/coalescing, the workload-centric debounce window, and the
 deliberate distinction between cancellation and interruption.</p>
 </blockquote>
 <h3 id="blocking-versus-non-blocking-feedback">Blocking Versus
-Non-blocking Feedback <a href="#blocking-versus-non-blocking-feedback"
-class="heading-anchor">#</a></h3>
+Non-blocking Feedback<a href="#blocking-versus-non-blocking-feedback"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain why asynchronous search/filter
 progress belongs in the status line, while synchronous snapshot
 reconstruction and document reload use a noninteractive overlay.</p>
 </blockquote>
-<h2 id="session-history">Session History <a href="#session-history"
-class="heading-anchor">#</a></h2>
+<h2 id="session-history">Session History<a href="#session-history"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <h3 id="commands-and-immutable-snapshots">Commands and Immutable
-Snapshots <a href="#commands-and-immutable-snapshots"
-class="heading-anchor">#</a></h3>
+Snapshots<a href="#commands-and-immutable-snapshots"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Describe the command representation, session
 state, committed versus preview commands, and how snapshots connect
 commands to states.</p>
 </blockquote>
-<h3 id="undoredo">Undo/Redo <a href="#undoredo"
-class="heading-anchor">#</a></h3>
+<h3 id="undoredo">Undo/Redo<a href="#undoredo" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Cover history truncation after editing an
 older version, input-field synchronization, worker quiescence, and the
 blocking reconstruction overlay.</p>
 </blockquote>
-<h3 id="checkpointing-and-pruning">Checkpointing and Pruning <a
-href="#checkpointing-and-pruning" class="heading-anchor">#</a></h3>
+<h3 id="checkpointing-and-pruning">Checkpointing and Pruning<a
+href="#checkpointing-and-pruning" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain why retaining every snapshot state
 consumed too much memory, which states are retained, and when compaction
 occurs.</p>
 </blockquote>
-<h3 id="reconstruction">Reconstruction <a href="#reconstruction"
-class="heading-anchor">#</a></h3>
+<h3 id="reconstruction">Reconstruction<a href="#reconstruction"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain how a missing snapshot is
 reconstructed from the nearest preceding checkpoint by replaying
 commands.</p>
 </blockquote>
+</main>
+</div>
 </body>
 </html>

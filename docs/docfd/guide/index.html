@@ -173,34 +173,106 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 100ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
   </style>
 </head>
-<body>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#installation" id="toc-installation">Installation</a></li>
+<li><a href="#getting-started" id="toc-getting-started">Getting
+Started</a>
+<ul>
+<li><a href="#startup" id="toc-startup">Startup</a></li>
+<li><a href="#filtering" id="toc-filtering">Filtering</a></li>
+<li><a href="#dropping" id="toc-dropping">Dropping</a></li>
+<li><a href="#searching" id="toc-searching">Searching</a></li>
+<li><a href="#undoredo" id="toc-undoredo">Undo/redo</a></li>
+<li><a href="#editing-command-history"
+id="toc-editing-command-history">Editing Command History</a></li>
+</ul></li>
+<li><a href="#what-to-try-next" id="toc-what-to-try-next">What to Try
+Next</a>
+<ul>
+<li><a href="#config-file" id="toc-config-file">Config File</a></li>
+<li><a href="#docfd-script" id="toc-docfd-script">Docfd Script</a></li>
+</ul></li>
+<li><a href="#reference-and-help" id="toc-reference-and-help">Reference
+and Help</a></li>
+</ul>
+</nav>
+<main class="page-content">
 <header id="title-block-header">
 <h1 class="title">Docfd User Guide</h1>
 </header>
 <p><a href="../index.html"><strong>Back to Docfd Main
 Page</strong></a></p>
-<h2 id="installation">Installation <a href="#installation"
-class="heading-anchor">#</a></h2>
+<h2 id="installation">Installation<a href="#installation"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>Docfd is primarily distributed as statically linked binaries via <a
 href="https://github.com/darrenldl/docfd/releases">GitHub
 Releases</a></p>
 <p>Refer to the <a
 href="https://github.com/darrenldl/docfd#installation">Installation</a>
 section for other distribution channels.</p>
-<h2 id="getting-started">Getting Started <a href="#getting-started"
-class="heading-anchor">#</a></h2>
+<h2 id="getting-started">Getting Started<a href="#getting-started"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>We will use the Docfd Engineering pages of this GitHub site for this
 walkthrough, which can be cloned by:</p>
 <pre><code>$ git clone https://github.com/darrenldl/darrenldl.github.io.git</code></pre>
 <p>But feel free to use any local directory as Docfd is fully offline
 and does not modify or move your documents.</p>
-<h3 id="startup">Startup <a href="#startup"
-class="heading-anchor">#</a></h3>
+<h3 id="startup">Startup<a href="#startup" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <pre><code>$ cd darrenldl.github.io/
 $ docfd</code></pre>
 <figure>
@@ -216,8 +288,8 @@ binding info grid.</li>
 <li>Generally the most commonly used key bindings are put closer to the
 left side of the grid.</li>
 </ul>
-<h3 id="filtering">Filtering <a href="#filtering"
-class="heading-anchor">#</a></h3>
+<h3 id="filtering">Filtering<a href="#filtering" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>Steps:</p>
 <ul>
 <li>Type <code>f</code> to enter FILTER mode</li>
@@ -251,8 +323,8 @@ alt="Figure: Docfd TUI After Filtering Step 5" />
 <figcaption aria-hidden="true">Figure: Docfd TUI After Filtering Step
 5</figcaption>
 </figure>
-<h3 id="dropping">Dropping <a href="#dropping"
-class="heading-anchor">#</a></h3>
+<h3 id="dropping">Dropping<a href="#dropping" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>To keep the UI less cluttered, it’s often useful to “clear the table”
 and just focus on the documents at hand with input fields ready for new
 filter or search criteria.</p>
@@ -281,8 +353,8 @@ alt="Figure: Docfd TUI After Dropping Step 3" />
 <figcaption aria-hidden="true">Figure: Docfd TUI After Dropping Step
 3</figcaption>
 </figure>
-<h3 id="searching">Searching <a href="#searching"
-class="heading-anchor">#</a></h3>
+<h3 id="searching">Searching<a href="#searching" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>Steps:</p>
 <ul>
 <li>Type <code>/</code> to enter SEARCH mode</li>
@@ -321,8 +393,8 @@ alt="Figure: Docfd TUI After Searching Step 6" />
 <figcaption aria-hidden="true">Figure: Docfd TUI After Searching Step
 6</figcaption>
 </figure>
-<h3 id="undoredo">Undo/redo <a href="#undoredo"
-class="heading-anchor">#</a></h3>
+<h3 id="undoredo">Undo/redo<a href="#undoredo" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>Steps:</p>
 <ul>
 <li>Type <code>u</code> or <code>Ctrl</code>+<code>Z</code> to undo</li>
@@ -332,8 +404,9 @@ class="heading-anchor">#</a></h3>
 <p>Note that as Docfd only stores a limited number of session snapshots
 at a time, sometimes undoing or redoing requires recomputation of search
 or filter result and can take longer.</p>
-<h3 id="editing-command-history">Editing Command History <a
-href="#editing-command-history" class="heading-anchor">#</a></h3>
+<h3 id="editing-command-history">Editing Command History<a
+href="#editing-command-history" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>If you want to undo in bulk, add new actions, or just look at the
 actions done in the session thus far, you can make use of the command
 history editing functionality.</p>
@@ -380,16 +453,17 @@ alt="Figure: Docfd TUI After Command History Step 4" />
 <figcaption aria-hidden="true">Figure: Docfd TUI After Command History
 Step 4</figcaption>
 </figure>
-<h2 id="what-to-try-next">What to Try Next <a href="#what-to-try-next"
-class="heading-anchor">#</a></h2>
-<h3 id="config-file">Config File <a href="#config-file"
-class="heading-anchor">#</a></h3>
+<h2 id="what-to-try-next">What to Try Next<a href="#what-to-try-next"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<h3 id="config-file">Config File<a href="#config-file"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <p>TODO</p>
-<h3 id="docfd-script">Docfd Script <a href="#docfd-script"
-class="heading-anchor">#</a></h3>
+<h3 id="docfd-script">Docfd Script<a href="#docfd-script"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <p>TODO</p>
-<h2 id="reference-and-help">Reference and Help <a
-href="#reference-and-help" class="heading-anchor">#</a></h2>
+<h2 id="reference-and-help">Reference and Help<a
+href="#reference-and-help" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
 <ul>
 <li><a href="searching.html">Searching</a></li>
 <li><a href="filtering-and-navigation.html">Filtering and navigating
@@ -399,5 +473,7 @@ results</a></li>
 <li><a href="keyboard-reference.html">Keyboard reference</a></li>
 <li><a href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
+</main>
+</div>
 </body>
 </html>

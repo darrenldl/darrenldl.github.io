@@ -173,19 +173,82 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 100ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
   </style>
 </head>
-<body>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#search-procedure" id="toc-search-procedure">Search
+Procedure</a>
+<ul>
+<li><a href="#first-word-candidate-generation-and-pruning"
+id="toc-first-word-candidate-generation-and-pruning">First-word
+Candidate Generation and Pruning</a></li>
+<li><a href="#depth-first-search"
+id="toc-depth-first-search">Depth-first Search</a></li>
+<li><a href="#ranking" id="toc-ranking">Ranking</a></li>
+</ul></li>
+</ul>
+</nav>
+<main class="page-content">
 <header id="title-block-header">
 <h1 class="title">Docfd - Search Engine</h1>
 </header>
 <p><a href="index.html"><strong>Back to Engineering
 Page</strong></a></p>
-<h2 id="introduction">Introduction <a href="#introduction"
-class="heading-anchor">#</a></h2>
+<h2 id="introduction">Introduction<a href="#introduction"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <ul>
 <li>The dictionary is first searched through once to find the matches
 for the first word in the search phrase.</li>
@@ -197,8 +260,8 @@ in the document matching the search phrase.</li>
 of the matching criteria for each word. An automaton is computed for
 each word of the search phrase for optimised repeated matching.</li>
 </ul>
-<h2 id="search-procedure">Search Procedure <a href="#search-procedure"
-class="heading-anchor">#</a></h2>
+<h2 id="search-procedure">Search Procedure<a href="#search-procedure"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>User input in the search field are tokenized in the same way as
 document content (see <a href="indexing.html#tokenization">here</a>). A
 search phrase is then a list of said tokens.</p>
@@ -212,22 +275,25 @@ search phrase being the substring) - They are within the configured
 case-insensitive edit distance threshold</p>
 <p>Search results are then ranked using a heuristic.</p>
 <h3 id="first-word-candidate-generation-and-pruning">First-word
-Candidate Generation and Pruning <a
+Candidate Generation and Pruning<a
 href="#first-word-candidate-generation-and-pruning"
-class="heading-anchor">#</a></h3>
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain global first-word candidate
 generation, document pruning, search scopes, and how the search is
 divided into parallel jobs.</p>
 </blockquote>
-<h3 id="depth-first-search">Depth-first Search <a
-href="#depth-first-search" class="heading-anchor">#</a></h3>
-<h3 id="ranking">Ranking <a href="#ranking"
-class="heading-anchor">#</a></h3>
+<h3 id="depth-first-search">Depth-first Search<a
+href="#depth-first-search" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<h3 id="ranking">Ranking<a href="#ranking" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Explain the result-ranking heuristic and the
 interaction between content relevance, path ordering, and path fuzzy
 ranking.</p>
 </blockquote>
+</main>
+</div>
 </body>
 </html>

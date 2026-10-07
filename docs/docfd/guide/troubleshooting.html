@@ -173,6 +173,52 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 120ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
@@ -185,20 +231,22 @@
 <p><a href="index.html"><strong>User Guide</strong></a> | <a
 href="../index.html"><strong>Engineering Case Study</strong></a></p>
 <h2 id="indexing-and-document-conversion">Indexing and Document
-Conversion <a href="#indexing-and-document-conversion"
-class="heading-anchor">#</a></h2>
+Conversion<a href="#indexing-and-document-conversion"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Add common indexing, extension, and
 external-converter problems.</p>
 </blockquote>
-<h2 id="configuration-and-scripts">Configuration and Scripts <a
-href="#configuration-and-scripts" class="heading-anchor">#</a></h2>
+<h2 id="configuration-and-scripts">Configuration and Scripts<a
+href="#configuration-and-scripts" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Add common discovery, parsing, and
 script-resolution problems.</p>
 </blockquote>
-<h2 id="debug-logging-and-bug-reports">Debug Logging and Bug Reports <a
-href="#debug-logging-and-bug-reports" class="heading-anchor">#</a></h2>
+<h2 id="debug-logging-and-bug-reports">Debug Logging and Bug Reports<a
+href="#debug-logging-and-bug-reports" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Explain <code>--debug-log</code>, what
 diagnostic information to collect, and where to report bugs.</p>

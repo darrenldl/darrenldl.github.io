@@ -173,19 +173,102 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 100ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
   </style>
 </head>
-<body>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#preparation-for-indexing"
+id="toc-preparation-for-indexing">Preparation for Indexing</a>
+<ul>
+<li><a href="#document-discovery" id="toc-document-discovery">Document
+Discovery</a></li>
+<li><a href="#hashing" id="toc-hashing">Hashing</a></li>
+</ul></li>
+<li><a href="#indexing-work" id="toc-indexing-work">Indexing Work</a>
+<ul>
+<li><a href="#text-extraction" id="toc-text-extraction">Text
+Extraction</a></li>
+<li><a href="#tokenization" id="toc-tokenization">Tokenization</a></li>
+</ul></li>
+<li><a href="#indexing-pipeline" id="toc-indexing-pipeline">Indexing
+Pipeline</a></li>
+<li><a href="#index-storage" id="toc-index-storage">Index Storage</a>
+<ul>
+<li><a href="#json-and-compression" id="toc-json-and-compression">JSON
+and Compression</a></li>
+<li><a href="#moving-to-cbor" id="toc-moving-to-cbor">Moving to
+CBOR</a></li>
+<li><a href="#moving-to-sqlite" id="toc-moving-to-sqlite">Moving to
+SQLite</a></li>
+<li><a href="#subsequent-sqlite-optimisation"
+id="toc-subsequent-sqlite-optimisation">Subsequent SQLite
+Optimisation</a></li>
+</ul></li>
+<li><a href="#storage-and-performance-trade-offs"
+id="toc-storage-and-performance-trade-offs">Storage and Performance
+Trade-offs</a></li>
+</ul>
+</nav>
+<main class="page-content">
 <header id="title-block-header">
 <h1 class="title">Docfd - Indexing</h1>
 </header>
 <p><a href="index.html"><strong>Back to Engineering
 Page</strong></a></p>
-<h2 id="introduction">Introduction <a href="#introduction"
-class="heading-anchor">#</a></h2>
+<h2 id="introduction">Introduction<a href="#introduction"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>The indexing stage of Docfd workflow is responsible for the
 construction of the core data structures behind Docfd search engine,
 which are the dictionary (collection of words observed across all
@@ -195,19 +278,21 @@ positions within the documents).</p>
 discovery, identification of documents to be indexed, and finally the
 core indexing work is handled by the indexing pipeline to deal with the
 mix of I/O-bound and CPU-bound tasks efficiently.</p>
-<h2 id="preparation-for-indexing">Preparation for Indexing <a
-href="#preparation-for-indexing" class="heading-anchor">#</a></h2>
-<h3 id="document-discovery">Document Discovery <a
-href="#document-discovery" class="heading-anchor">#</a></h3>
-<h3 id="hashing">Hashing <a href="#hashing"
-class="heading-anchor">#</a></h3>
+<h2 id="preparation-for-indexing">Preparation for Indexing<a
+href="#preparation-for-indexing" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
+<h3 id="document-discovery">Document Discovery<a
+href="#document-discovery" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<h3 id="hashing">Hashing<a href="#hashing" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>TODO</p>
-<h2 id="indexing-work">Indexing Work <a href="#indexing-work"
-class="heading-anchor">#</a></h2>
-<h3 id="text-extraction">Text Extraction <a href="#text-extraction"
-class="heading-anchor">#</a></h3>
-<h3 id="tokenization">Tokenization <a href="#tokenization"
-class="heading-anchor">#</a></h3>
+<h2 id="indexing-work">Indexing Work<a href="#indexing-work"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<h3 id="text-extraction">Text Extraction<a href="#text-extraction"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
+<h3 id="tokenization">Tokenization<a href="#tokenization"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <p>Document content is tokenized based on:</p>
 <ul>
 <li>Contiguous alphanumeric characters</li>
@@ -215,8 +300,8 @@ class="heading-anchor">#</a></h3>
 <li>Individual UTF-8 characters</li>
 <li>Spaces</li>
 </ul>
-<h2 id="indexing-pipeline">Indexing Pipeline <a
-href="#indexing-pipeline" class="heading-anchor">#</a></h2>
+<h2 id="indexing-pipeline">Indexing Pipeline<a href="#indexing-pipeline"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>Docfd uses the typical pipelining setup to avoid CPU bound tasks
 waiting on I/O bound tasks and vice versa.</p>
 <p>We begin by examining the naive setup:</p>
@@ -256,33 +341,34 @@ alt="Figure: Final Pipeline Design" />
 <figcaption aria-hidden="true">Figure: Final Pipeline
 Design</figcaption>
 </figure>
-<h2 id="index-storage">Index Storage <a href="#index-storage"
-class="heading-anchor">#</a></h2>
-<h3 id="json-and-compression">JSON and Compression <a
-href="#json-and-compression" class="heading-anchor">#</a></h3>
+<h2 id="index-storage">Index Storage<a href="#index-storage"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<h3 id="json-and-compression">JSON and Compression<a
+href="#json-and-compression" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Version 7.1.0: Explain why GZIP compression
 was added to the JSON index and what it improved without changing the
 fully materialized index design.</p>
 </blockquote>
-<h3 id="moving-to-cbor">Moving to CBOR <a href="#moving-to-cbor"
-class="heading-anchor">#</a></h3>
+<h3 id="moving-to-cbor">Moving to CBOR<a href="#moving-to-cbor"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Version 9.0.0-rc1: Explain why JSON+GZIP was
 replaced by CBOR+GZIP, and which serialization costs or limitations
 remained.</p>
 </blockquote>
-<h3 id="moving-to-sqlite">Moving to SQLite <a href="#moving-to-sqlite"
-class="heading-anchor">#</a></h3>
+<h3 id="moving-to-sqlite">Moving to SQLite<a href="#moving-to-sqlite"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Version 9.0.0: Explain why CBOR+GZIP was
 replaced by SQLite after the in-memory index reached 1.9 GB on the 1.4
 GB PDF corpus, including the reduction to 39 MB and the resulting
 search-speed trade-off.</p>
 </blockquote>
-<h3 id="subsequent-sqlite-optimisation">Subsequent SQLite Optimisation
-<a href="#subsequent-sqlite-optimisation"
-class="heading-anchor">#</a></h3>
+<h3 id="subsequent-sqlite-optimisation">Subsequent SQLite Optimisation<a
+href="#subsequent-sqlite-optimisation" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <blockquote>
 <p><strong>TODO:</strong> Version 10.0.0: Explain why the database
 schema was redesigned, how this reduced index size by roughly 60%, and
@@ -294,12 +380,14 @@ word table was introduced, how it reduced duplication and improved
 search speed, and why this caused another breaking database change.</p>
 </blockquote>
 <h2 id="storage-and-performance-trade-offs">Storage and Performance
-Trade-offs <a href="#storage-and-performance-trade-offs"
-class="heading-anchor">#</a></h2>
+Trade-offs<a href="#storage-and-performance-trade-offs"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <blockquote>
 <p><strong>TODO:</strong> Add measured data for index size, startup
 time, search latency, and memory use. State the corpus and hardware used
 for each measurement.</p>
 </blockquote>
+</main>
+</div>
 </body>
 </html>

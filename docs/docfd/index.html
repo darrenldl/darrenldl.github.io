@@ -173,18 +173,86 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 80ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
   </style>
 </head>
-<body>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#demonstrations" id="toc-demonstrations">Demonstrations</a>
+<ul>
+<li><a href="#searching-through-text-files"
+id="toc-searching-through-text-files">Searching Through Text
+Files</a></li>
+<li><a href="#searching-through-pdf"
+id="toc-searching-through-pdf">Searching Through PDF</a></li>
+<li><a href="#non-interactive-use"
+id="toc-non-interactive-use">Non-interactive Use</a></li>
+</ul></li>
+<li><a href="#getting-started" id="toc-getting-started">Getting
+Started</a></li>
+<li><a href="#engineering" id="toc-engineering">Engineering</a></li>
+<li><a href="#versioning-and-releasing"
+id="toc-versioning-and-releasing">Versioning and Releasing</a></li>
+</ul>
+</nav>
+<main class="page-content">
 <header id="title-block-header">
 <h1 class="title">Docfd</h1>
 </header>
 <p><a href=".."><strong>Back to Home</strong></a></p>
-<h2 id="introduction">Introduction <a href="#introduction"
-class="heading-anchor">#</a></h2>
+<h2 id="introduction">Introduction<a href="#introduction"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p><a href="https://demo.docfd.sh">Online Demo</a> | <a
 href="guide/index.html">User Guide</a> | <a
 href="https://github.com/darrenldl/docfd">GitHub</a></p>
@@ -203,10 +271,11 @@ explicitly runs it, reducing the possibility of unexpected resource
 usage disrupting other desktop applications.</p>
 <p><a href="engineering/design-context.html">Read about the design
 constraints and alternatives considered.</a></p>
-<h2 id="demonstrations">Demonstrations <a href="#demonstrations"
-class="heading-anchor">#</a></h2>
-<h3 id="searching-through-text-files">Searching Through Text Files <a
-href="#searching-through-text-files" class="heading-anchor">#</a></h3>
+<h2 id="demonstrations">Demonstrations<a href="#demonstrations"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<h3 id="searching-through-text-files">Searching Through Text Files<a
+href="#searching-through-text-files" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <figure>
 <img
 src="https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo.gif"
@@ -214,11 +283,13 @@ alt="Docfd interactive demonstration" />
 <figcaption aria-hidden="true">Docfd interactive
 demonstration</figcaption>
 </figure>
-<h3 id="searching-through-pdf">Searching Through PDF <a
-href="#searching-through-pdf" class="heading-anchor">#</a></h3>
+<h3 id="searching-through-pdf">Searching Through PDF<a
+href="#searching-through-pdf" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>TODO</p>
-<h3 id="non-interactive-use">Non-interactive Use <a
-href="#non-interactive-use" class="heading-anchor">#</a></h3>
+<h3 id="non-interactive-use">Non-interactive Use<a
+href="#non-interactive-use" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>Docfd also provides a non-interactive mode for scripting uses:</p>
 <figure>
 <img
@@ -229,11 +300,11 @@ demonstration</figcaption>
 </figure>
 <p>But since this is not the primary use case, and some gaps remain,
 e.g. structured JSON output of search results.</p>
-<h2 id="getting-started">Getting Started <a href="#getting-started"
-class="heading-anchor">#</a></h2>
+<h2 id="getting-started">Getting Started<a href="#getting-started"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <p>See <a href="guide/index.html">here</a> to get started.</p>
-<h2 id="engineering">Engineering <a href="#engineering"
-class="heading-anchor">#</a></h2>
+<h2 id="engineering">Engineering<a href="#engineering"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <figure>
 <img src="engineering/docfd-workflow-overview.svg"
 alt="Figure: Workflow Overview" />
@@ -241,8 +312,9 @@ alt="Figure: Workflow Overview" />
 </figure>
 <p>See <a href="engineering/index.html">here</a> for engineering
 details.</p>
-<h2 id="versioning-and-releasing">Versioning and Releasing <a
-href="#versioning-and-releasing" class="heading-anchor">#</a></h2>
+<h2 id="versioning-and-releasing">Versioning and Releasing<a
+href="#versioning-and-releasing" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
 <p>Docfd follows <a href="https://semver.org/">Semantic Versioning</a>
 (SemVer), with the occassional suffices such as <code>-alpha.X</code>
 when the some design decisions are still in flux and committing to
@@ -259,5 +331,7 @@ dropped.</p>
 tracking file through a script to lock down the concrete versions, but
 this was not explored further as this is fairly low priority for a
 non-safety-critical project such as Docfd.</p>
+</main>
+</div>
 </body>
 </html>

@@ -173,19 +173,87 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 100ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
   </style>
 </head>
-<body>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#initial-motivation" id="toc-initial-motivation">Initial
+Motivation</a></li>
+<li><a href="#design-decisions" id="toc-design-decisions">Design
+Decisions</a>
+<ul>
+<li><a href="#primary-use-case-and-main-technical-requirements"
+id="toc-primary-use-case-and-main-technical-requirements">Primary Use
+Case and Main Technical Requirements</a></li>
+<li><a href="#why-a-custom-search-engine"
+id="toc-why-a-custom-search-engine">Why a Custom Search Engine</a></li>
+<li><a href="#supporting-ad-hoc-workflow"
+id="toc-supporting-ad-hoc-workflow">Supporting Ad Hoc Workflow</a></li>
+<li><a href="#resource-constraints"
+id="toc-resource-constraints">Resource Constraints</a></li>
+</ul></li>
+</ul>
+</nav>
+<main class="page-content">
 <header id="title-block-header">
 <h1 class="title">Docfd - Design Context</h1>
 </header>
 <p><a href="index.html"><strong>Back to Engineering
 Page</strong></a></p>
-<h2 id="initial-motivation">Initial Motivation <a
-href="#initial-motivation" class="heading-anchor">#</a></h2>
+<h2 id="initial-motivation">Initial Motivation<a
+href="#initial-motivation" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
 <p>Docfd was born out of my personal frustrations with existing search
 tools in the context of human text search.</p>
 <p>This is not to say I think the tools are not well implemented or not
@@ -306,12 +374,12 @@ give any results for a search word, then I am confident the word does
 not exist in the documents, but I cannot say the same for LLMs.</li>
 </ul></li>
 </ul>
-<h2 id="design-decisions">Design Decisions <a href="#design-decisions"
-class="heading-anchor">#</a></h2>
+<h2 id="design-decisions">Design Decisions<a href="#design-decisions"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
 <h3 id="primary-use-case-and-main-technical-requirements">Primary Use
-Case and Main Technical Requirements <a
+Case and Main Technical Requirements<a
 href="#primary-use-case-and-main-technical-requirements"
-class="heading-anchor">#</a></h3>
+class="heading-anchor" aria-label="Link to this section"></a></h3>
 <p>The main use case Docfd targets is a user navigating through an
 unstructured folder of human text documents with a mix of text files and
 PDFs, at a scale more commonly seen at personal storage or small office
@@ -377,8 +445,9 @@ a desktop environment rather than dedicated server</td>
 </tr>
 </tbody>
 </table>
-<h3 id="why-a-custom-search-engine">Why a Custom Search Engine <a
-href="#why-a-custom-search-engine" class="heading-anchor">#</a></h3>
+<h3 id="why-a-custom-search-engine">Why a Custom Search Engine<a
+href="#why-a-custom-search-engine" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>I opted to implement a custom search engine instead of using an
 off-the-shelf engine for a mix of reasons, listed in the order of
 relevance:</p>
@@ -405,8 +474,9 @@ difficult to beat the optimisation of existing search engines. And even
 if a custom query language is needed, a translation layer on top of the
 search engine’s native query language would likely cover all the
 practical cases.</p>
-<h3 id="supporting-ad-hoc-workflow">Supporting Ad Hoc Workflow <a
-href="#supporting-ad-hoc-workflow" class="heading-anchor">#</a></h3>
+<h3 id="supporting-ad-hoc-workflow">Supporting Ad Hoc Workflow<a
+href="#supporting-ad-hoc-workflow" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>Docfd only processes the current directory or the specified
 directories and files upon startup. Hashing is used to check if file has
 been previously indexed. This means there is no central storage
@@ -415,8 +485,9 @@ requirement, and no background indexing.</p>
 compared to programs with background indexing. But since the set of
 documents of interest is usually small (&lt;100 documents), the start-up
 is often instantaneous.</p>
-<h3 id="resource-constraints">Resource Constraints <a
-href="#resource-constraints" class="heading-anchor">#</a></h3>
+<h3 id="resource-constraints">Resource Constraints<a
+href="#resource-constraints" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
 <p>There were some concessions made to avoid disrupting other desktop
 applications. One particularly noticeable choice is giving up storage of
 heavy indices in memory and instead rely on disk I/O via SQLite.</p>
@@ -427,5 +498,7 @@ will take seconds instead of less than a second to show up.</p>
 holding some indices into a caching memory layer with heuristic-based
 eviction, but this was not further explored as the basic design already
 suffices for the scale targetted.</p>
+</main>
+</div>
 </body>
 </html>
