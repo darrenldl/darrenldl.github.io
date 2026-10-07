@@ -113,7 +113,8 @@ or filter result and can take longer.
 
 ### Editing Command History
 
-If you want to undo in bulk, or just look at the actions done in the session thus far, you can make use of the command history functionality.
+If you want to undo in bulk, add new actions, or just look at the actions done
+in the session thus far, you can make use of the command history editing functionality.
 
 Steps:
 
@@ -123,10 +124,18 @@ Steps:
 
 - Remove or add commands as desired, and upon saving Docfd will
   recompute the session based on the revised history.
+  In this case we change our filter query to be `path-fuzzy:"search engine"` and
+  our search query to be `search: depth` instead.
 
-TODO: screenshot for incorrect command
+![Figure: Docfd TUI After Command History Step 2](docfd-screenshot-command-history-after-step-2.png)
 
-TODO: screenshot for adjusted filter query
+- Save and exit the editor, Docfd should now display the newest session state according to the new version of session history.
+
+![Figure: Docfd TUI After Command History Step 3](docfd-screenshot-command-history-after-step-3.png)
+
+- If Docfd fails to parse any line, you would be brought back to the editor (similar to `git rebase -i`).
+
+![Figure: Docfd TUI After Command History Step 4](docfd-screenshot-command-history-after-step-4.png)
 
 ## What to Try Next
 

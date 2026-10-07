@@ -334,9 +334,9 @@ at a time, sometimes undoing or redoing requires recomputation of search
 or filter result and can take longer.</p>
 <h3 id="editing-command-history">Editing Command History <a
 href="#editing-command-history" class="heading-anchor">#</a></h3>
-<p>If you want to undo in bulk, or just look at the actions done in the
-session thus far, you can make use of the command history
-functionality.</p>
+<p>If you want to undo in bulk, add new actions, or just look at the
+actions done in the session thus far, you can make use of the command
+history editing functionality.</p>
 <p>Steps:</p>
 <ul>
 <li>Type <code>h</code> to bring up the session command history into the
@@ -350,10 +350,36 @@ Step 1</figcaption>
 </figure>
 <ul>
 <li>Remove or add commands as desired, and upon saving Docfd will
-recompute the session based on the revised history.</li>
+recompute the session based on the revised history. In this case we
+change our filter query to be <code>path-fuzzy:"search engine"</code>
+and our search query to be <code>search: depth</code> instead.</li>
 </ul>
-<p>TODO: screenshot for incorrect command</p>
-<p>TODO: screenshot for adjusted filter query</p>
+<figure>
+<img src="docfd-screenshot-command-history-after-step-2.png"
+alt="Figure: Docfd TUI After Command History Step 2" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Command History
+Step 2</figcaption>
+</figure>
+<ul>
+<li>Save and exit the editor, Docfd should now display the newest
+session state according to the new version of session history.</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-command-history-after-step-3.png"
+alt="Figure: Docfd TUI After Command History Step 3" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Command History
+Step 3</figcaption>
+</figure>
+<ul>
+<li>If Docfd fails to parse any line, you would be brought back to the
+editor (similar to <code>git rebase -i</code>).</li>
+</ul>
+<figure>
+<img src="docfd-screenshot-command-history-after-step-4.png"
+alt="Figure: Docfd TUI After Command History Step 4" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Command History
+Step 4</figcaption>
+</figure>
 <h2 id="what-to-try-next">What to Try Next <a href="#what-to-try-next"
 class="heading-anchor">#</a></h2>
 <h3 id="config-file">Config File <a href="#config-file"
