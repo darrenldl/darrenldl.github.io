@@ -10,12 +10,11 @@ def action(elem, doc):
             return elem
 
     if isinstance(elem, pf.Header) and elem.identifier:
-        elem.content.append(pf.Space())
         elem.content.append(
             pf.Link(
-                pf.Str('#'),
                 url=f'#{elem.identifier}',
                 classes=['heading-anchor'],
+                attributes={'aria-label': 'Link to this section'},
             )
         )
         return elem

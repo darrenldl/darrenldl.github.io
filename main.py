@@ -16,12 +16,27 @@ def load_hashes():
         return {}
 
 
-def blake2_hash(path):
+def blake2_hash(*paths):
     digest = hashlib.blake2b()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(1024 * 1024), b""):
-            digest.update(chunk)
+    for path in paths:
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                digest.update(chunk)
     return digest.hexdigest()
+
+
+def front_matter_flag(path, name):
+    with open(path) as f:
+        if f.readline().strip() != "---":
+            return False
+        for line in f:
+            if line.strip() in ("---", "..."):
+                return False
+            key, separator, value = line.partition(":")
+            if separator and key.strip() == name:
+                return value.strip().lower() == "true"
+    return False
+
 
 def main():
     old_hashes = load_hashes()
@@ -32,7 +47,12 @@ def main():
             if ext == ".md":
                 in_path = os.path.join(root, file)
                 out_path = os.path.join(OUT_DIR, root.removeprefix(CONTENT_DIR).removeprefix("/"), f"{file_no_ext}.html")
-                content_hash = blake2_hash(in_path)
+                content_hash = blake2_hash(
+                    in_path,
+                    "template.html",
+                    "filter.py",
+                    __file__,
+                )
                 new_hashes[in_path] = content_hash
                 if old_hashes.get(in_path) == content_hash and os.path.exists(out_path):
                     continue
@@ -45,12 +65,17 @@ def main():
                        in_path,
                        "--filter",
                        "./filter.py",
-                       "--standalone",
-                       "--template",
-                       "template.html",
-                       "-o",
-                       out_path
                        ]
+                if front_matter_flag(in_path, "toc"):
+                    cmd.append("--toc")
+                cmd.extend([
+                    "--toc-depth=3",
+                    "--standalone",
+                    "--template",
+                    "template.html",
+                    "-o",
+                    out_path,
+                ])
                 subprocess.run(cmd, check=True)
 
     for root, dirs, files in os.walk(OUT_DIR):

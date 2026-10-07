@@ -19,6 +19,52 @@ $endif$
   <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
   <style>
     $styles.html()$
+    :root {
+      --content-max-width: $if(maxwidth)$$maxwidth$$else$72em$endif$;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
     tbody tr + tr {
       border-top: 1px solid #d8d8d8;
     }
@@ -33,10 +79,20 @@ $if(math)$
   $math$
 $endif$
 </head>
-<body>
+<body$if(toc)$ class="has-toc"$endif$>
 $for(include-before)$
 $include-before$
 $endfor$
+$if(toc)$
+<div class="page-layout">
+<nav id="$idprefix$TOC" role="doc-toc">
+$if(toc-title)$
+<h2 id="$idprefix$toc-title">$toc-title$</h2>
+$endif$
+$table-of-contents$
+</nav>
+<main class="page-content">
+$endif$
 $if(title)$
 <header id="title-block-header">
 <h1 class="title">$title$</h1>
@@ -57,15 +113,11 @@ $abstract$
 $endif$
 </header>
 $endif$
-$if(toc)$
-<nav id="$idprefix$TOC" role="doc-toc">
-$if(toc-title)$
-<h2 id="$idprefix$toc-title">$toc-title$</h2>
-$endif$
-$table-of-contents$
-</nav>
-$endif$
 $body$
+$if(toc)$
+</main>
+</div>
+$endif$
 $for(include-after)$
 $include-after$
 $endfor$
