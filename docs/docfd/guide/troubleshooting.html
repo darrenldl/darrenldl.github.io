@@ -198,6 +198,16 @@
       list-style: none;
       padding-left: 1rem;
     }
+    #TOC li {
+      position: relative;
+      padding-left: 1em;
+    }
+    #TOC li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      opacity: 0.6;
+    }
     #TOC a {
       text-decoration: none;
     }
