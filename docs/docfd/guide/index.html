@@ -267,6 +267,7 @@ id="toc-cache-directory-location">Cache Directory Location</a></li>
 <li><a href="#data-directory-location"
 id="toc-data-directory-location">Data Directory Location</a></li>
 </ul></li>
+<li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </nav>
 <main class="page-content">
@@ -412,6 +413,17 @@ alt="Figure: Docfd TUI After Searching Step 6" />
 <figcaption aria-hidden="true">Figure: Docfd TUI After Searching Step
 6</figcaption>
 </figure>
+<ul>
+<li>If this was a PDF file, then Docfd would open up your default PDF
+viewer.
+<ul>
+<li>Special handling for Linux: the default PDF viewer is extracted via
+<code>xdg-mime</code> to generate the final command that opens the PDF
+viewer to the page of the search result and with the most unique word of
+the search result put in the search bar. This should work even if the
+PDF viewer is installed via Flatpak.</li>
+</ul></li>
+</ul>
 <h3 id="undoredo">Undo/redo<a href="#undoredo" class="heading-anchor"
 aria-label="Link to this section"></a></h3>
 <p>Steps:</p>
@@ -599,6 +611,12 @@ aria-label="Link to this section"></a></h3>
 <ul>
 <li>You may need to navigate to this location to back up your Docfd
 scripts, for instance.</li>
+</ul>
+<h2 id="references">References<a href="#references"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="search-language.html">Search Language</a></li>
+<li><a href="filter-language.html">Filter Language</a></li>
 </ul>
 </main>
 </div>

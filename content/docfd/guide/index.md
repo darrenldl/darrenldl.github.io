@@ -101,6 +101,14 @@ Steps:
 
 ![Figure: Docfd TUI After Searching Step 6](docfd-screenshot-searching-after-step-6.png)
 
+- If this was a PDF file, then Docfd would open up your default
+  PDF viewer.
+    - Special handling for Linux: the default PDF viewer is extracted
+      via `xdg-mime` to generate the final command that opens the PDF
+      viewer to the page of the search result and with the most unique
+      word of the search result put in the search bar. This should work
+      even if the PDF viewer is installed via Flatpak.
+
 ### Undo/redo
 
 Steps:
@@ -264,3 +272,8 @@ $ docfd --help=plain | grep -- --data-dir
 **When you might need this**:
 
 - You may need to navigate to this location to back up your Docfd scripts, for instance.
+
+## References
+
+- [Search Language](search-language.md)
+- [Filter Language](filter-language.md)
