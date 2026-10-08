@@ -110,7 +110,7 @@ Steps:
 
 Note that as Docfd only stores a limited number of session snapshots at
 a time, sometimes undoing or redoing requires recomputation of search
-or filter result and can take longer.
+or filter results and can take a bit longer.
 
 ### Editing Command History
 
@@ -134,17 +134,32 @@ Steps:
 
 ![Figure: Docfd TUI After Command History Step 3](docfd-screenshot-command-history-after-step-3.png)
 
-- If Docfd fails to parse any line, you would be brought back to the editor (similar to `git rebase -i`).
+- If Docfd fails to parse any line, you would be brought back to the editor
+  (similar to `git rebase -i`), where the problematic line would be followed by
+  `# Failed to parse the above command`.
 
 ![Figure: Docfd TUI After Command History Step 4](docfd-screenshot-command-history-after-step-4.png)
 
 ## What to Try Next
 
-### Config File
-
-TODO
-
 ### Docfd Script
+
+If you often repeat some search or repeat some starting steps for a particular project,
+you may find the scripting capability handy. Docfd script follows the same format as the command history
+
+Steps to save a script:
+
+- Type `Ctrl`+`S`
+
+Steps to open a script:
+
+- Type `Ctrl`+`O`
+
+Steps to delete a script:
+
+- Type `Ctrl`+`O`
+
+### Config File
 
 TODO
 
