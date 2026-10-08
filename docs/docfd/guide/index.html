@@ -253,11 +253,20 @@ id="toc-editing-command-history">Editing Command History</a></li>
 <li><a href="#what-to-try-next" id="toc-what-to-try-next">What to Try
 Next</a>
 <ul>
-<li><a href="#config-file" id="toc-config-file">Config File</a></li>
 <li><a href="#docfd-script" id="toc-docfd-script">Docfd Script</a></li>
+<li><a href="#common-cli-arguments" id="toc-common-cli-arguments">Common
+Cli Arguments</a></li>
+<li><a href="#config-file" id="toc-config-file">Config File</a></li>
 </ul></li>
-<li><a href="#reference-and-help" id="toc-reference-and-help">Reference
-and Help</a></li>
+<li><a href="#troubleshooting"
+id="toc-troubleshooting">Troubleshooting</a>
+<ul>
+<li><a href="#debug-log" id="toc-debug-log">Debug Log</a></li>
+<li><a href="#cache-directory-location"
+id="toc-cache-directory-location">Cache Directory Location</a></li>
+<li><a href="#data-directory-location"
+id="toc-data-directory-location">Data Directory Location</a></li>
+</ul></li>
 </ul>
 </nav>
 <main class="page-content">
@@ -413,7 +422,7 @@ aria-label="Link to this section"></a></h3>
 </ul>
 <p>Note that as Docfd only stores a limited number of session snapshots
 at a time, sometimes undoing or redoing requires recomputation of search
-or filter result and can take longer.</p>
+or filter results and can take a bit longer.</p>
 <h3 id="editing-command-history">Editing Command History<a
 href="#editing-command-history" class="heading-anchor"
 aria-label="Link to this section"></a></h3>
@@ -455,7 +464,9 @@ Step 3</figcaption>
 </figure>
 <ul>
 <li>If Docfd fails to parse any line, you would be brought back to the
-editor (similar to <code>git rebase -i</code>).</li>
+editor (similar to <code>git rebase -i</code>), where the problematic
+line would be followed by
+<code># Failed to parse the above command</code>.</li>
 </ul>
 <figure>
 <img src="docfd-screenshot-command-history-after-step-4.png"
@@ -465,23 +476,129 @@ Step 4</figcaption>
 </figure>
 <h2 id="what-to-try-next">What to Try Next<a href="#what-to-try-next"
 class="heading-anchor" aria-label="Link to this section"></a></h2>
-<h3 id="config-file">Config File<a href="#config-file"
-class="heading-anchor" aria-label="Link to this section"></a></h3>
-<p>TODO</p>
 <h3 id="docfd-script">Docfd Script<a href="#docfd-script"
 class="heading-anchor" aria-label="Link to this section"></a></h3>
-<p>TODO</p>
-<h2 id="reference-and-help">Reference and Help<a
-href="#reference-and-help" class="heading-anchor"
-aria-label="Link to this section"></a></h2>
+<p>If you often repeat some search or repeat some starting steps for a
+particular project, you may find the scripting capability handy. Docfd
+script follows the same format as the command history</p>
+<p>Steps to save a script:</p>
 <ul>
-<li><a href="searching.html">Searching</a></li>
-<li><a href="filtering-and-navigation.html">Filtering and navigating
-results</a></li>
-<li><a href="scripts.html">Scripts and repeatable workflows</a></li>
-<li><a href="configuration.html">Configuration</a></li>
-<li><a href="keyboard-reference.html">Keyboard reference</a></li>
-<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li>Type <code>Ctrl</code>+<code>S</code></li>
+</ul>
+<figure>
+<img src="docfd-screenshot-docfd-script-save-after-step-1.png"
+alt="Figure: Docfd TUI After Docfd Script Saving Step 1" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Docfd Script
+Saving Step 1</figcaption>
+</figure>
+<p>Steps to open a script:</p>
+<ul>
+<li>Type <code>Ctrl</code>+<code>O</code></li>
+</ul>
+<figure>
+<img src="docfd-screenshot-docfd-script-open-after-step-1.png"
+alt="Figure: Docfd TUI After Docfd Script Opening Step 1" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Docfd Script
+Opening Step 1</figcaption>
+</figure>
+<p>Steps to delete a script:</p>
+<ul>
+<li>Type <code>Ctrl</code>+<code>O</code></li>
+<li>Type <code>Ctrl</code>+<code>X</code></li>
+</ul>
+<figure>
+<img src="docfd-screenshot-docfd-script-delete-after-step-2.png"
+alt="Figure: Docfd TUI After Docfd Script Deletion Step 2" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After Docfd Script
+Deletion Step 2</figcaption>
+</figure>
+<h3 id="common-cli-arguments">Common Cli Arguments<a
+href="#common-cli-arguments" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<p>Here we list some common cli arguments that you may find useful.</p>
+<p>Limit to just specific extensions, e.g. <code>.md</code>,
+<code>.txt</code>:</p>
+<ul>
+<li><code>docfd --exts md,txt</code></li>
+</ul>
+<p>Add onto the default list of extensions, e.g. <code>.js</code>:</p>
+<ul>
+<li><code>docfd --add-exts js</code></li>
+</ul>
+<p>Scan by globbing:</p>
+<ul>
+<li><code>docfd --glob 'content/**'</code></li>
+</ul>
+<p>Use list of paths from other programs, e.g. <code>fd</code>:</p>
+<ul>
+<li><code>fd | docfd --paths-from -</code></li>
+</ul>
+<h3 id="config-file">Config File<a href="#config-file"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
+<h4 id="location">Location<a href="#location" class="heading-anchor"
+aria-label="Link to this section"></a></h4>
+<p>Docfd looks up the config file in the following order:</p>
+<ul>
+<li>If <code>--config FILE</code> was provided as a cli argument, then
+<code>FILE</code> is used</li>
+<li>Closest <code>.docfd-config</code> (scanning from current directory
+up to root directory)</li>
+<li>Home directory config <code>$XDG_CONFIG_HOME/docfd/config</code>
+(Linux) or
+<code>$HOME/Library/Application Support/docfd/config</code></li>
+</ul>
+<p>Note that only one config file is picked, i.e. there is no merging of
+cli arguments from multiple config files.</p>
+<p>Typical usage would be a <code>.docfd-config</code> at the project
+root for project specific configurations.</p>
+<h4 id="format">Format<a href="#format" class="heading-anchor"
+aria-label="Link to this section"></a></h4>
+<p>Docfd config file uses the “one cli argument per line” format. For
+instance, if we are to store one of the examples from previous section
+into a config file, we would have:</p>
+<pre><code>--exts
+md,txt</code></pre>
+<p>or</p>
+<pre><code>--exts=md,txt</code></pre>
+<h2 id="troubleshooting">Troubleshooting<a href="#troubleshooting"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<h3 id="debug-log">Debug Log<a href="#debug-log" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<p>You can enable debug log via:</p>
+<pre><code>$ docfd --debug-log FILE</code></pre>
+<p>where <code>FILE</code> is the log file for Docfd to output to.</p>
+<p><strong>When you might need this</strong>:</p>
+<ul>
+<li>Docfd gets stuck when indexing some files and you want to narrow
+down the files.</li>
+<li>You want to check which config file Docfd is loading exactly.</li>
+</ul>
+<p>Note that the debug log is not very structured as it’s only intended
+for ad hoc diagnostics.</p>
+<h3 id="cache-directory-location">Cache Directory Location<a
+href="#cache-directory-location" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<p>You can find the cache directory location in the help message:</p>
+<pre><code>$ docfd --help=plain | grep -- --cache-dir</code></pre>
+<p><strong>When you might need this</strong>:</p>
+<ul>
+<li>You may need to navigate to this location to clear Docfd index DB
+during some version upgrades (CHANGELOG will note explicitly in this
+case).</li>
+<li>Docfd index DB becomes corrupted and causes Docfd to freeze. Though
+this should be unlikely as there are already precautions in place,
+e.g. careful ordering of writes to ensure consistency and use of SQLite
+transactions.</li>
+</ul>
+<h3 id="data-directory-location">Data Directory Location<a
+href="#data-directory-location" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<p>You can find the data directory location in the help message:</p>
+<pre><code>$ docfd --help=plain | grep -- --data-dir</code></pre>
+<p><strong>When you might need this</strong>:</p>
+<ul>
+<li>You may need to navigate to this location to back up your Docfd
+scripts, for instance.</li>
 </ul>
 </main>
 </div>

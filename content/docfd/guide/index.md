@@ -151,23 +151,116 @@ Steps to save a script:
 
 - Type `Ctrl`+`S`
 
+![Figure: Docfd TUI After Docfd Script Saving Step 1](docfd-screenshot-docfd-script-save-after-step-1.png)
+
 Steps to open a script:
 
 - Type `Ctrl`+`O`
 
+![Figure: Docfd TUI After Docfd Script Opening Step 1](docfd-screenshot-docfd-script-open-after-step-1.png)
+
 Steps to delete a script:
 
 - Type `Ctrl`+`O`
+- Type `Ctrl`+`X`
+
+![Figure: Docfd TUI After Docfd Script Deletion Step 2](docfd-screenshot-docfd-script-delete-after-step-2.png)
+
+### Common Cli Arguments
+
+Here we list some common cli arguments that you may find useful.
+
+Limit to just specific extensions, e.g. `.md`, `.txt`:
+
+- `docfd --exts md,txt`
+
+Add onto the default list of extensions, e.g. `.js`:
+
+- `docfd --add-exts js`
+
+Scan by globbing:
+
+- `docfd --glob 'content/**'`
+
+Use list of paths from other programs, e.g. `fd`:
+
+- `fd | docfd --paths-from -`
 
 ### Config File
 
-TODO
+#### Location
 
-## Reference and Help
+Docfd looks up the config file in the following order:
 
-- [Searching](searching.md)
-- [Filtering and navigating results](filtering-and-navigation.md)
-- [Scripts and repeatable workflows](scripts.md)
-- [Configuration](configuration.md)
-- [Keyboard reference](keyboard-reference.md)
-- [Troubleshooting](troubleshooting.md)
+- If `--config FILE` was provided as a cli argument, then `FILE` is used
+- Closest `.docfd-config` (scanning from current directory up to root directory)
+- Home directory config `$XDG_CONFIG_HOME/docfd/config` (Linux) or `$HOME/Library/Application Support/docfd/config`
+
+Note that only one config file is picked, i.e. there is no merging of cli arguments from multiple config files.
+
+Typical usage would be a `.docfd-config` at the project root for project specific configurations.
+
+#### Format
+
+Docfd config file uses the "one cli argument per line" format. For instance, if
+we are to store one of the examples from previous section into a config file,
+we would have:
+
+```
+--exts
+md,txt
+```
+
+or
+
+```
+--exts=md,txt
+```
+
+## Troubleshooting
+
+### Debug Log
+
+You can enable debug log via:
+
+```
+$ docfd --debug-log FILE
+```
+
+where `FILE` is the log file for Docfd to output to.
+
+**When you might need this**:
+
+- Docfd gets stuck when indexing some files and you want to narrow down the files.
+- You want to check which config file Docfd is loading exactly.
+
+Note that the debug log is not very structured as it's only intended for ad hoc
+diagnostics.
+
+### Cache Directory Location
+
+You can find the cache directory location in the help message:
+
+```
+$ docfd --help=plain | grep -- --cache-dir
+```
+
+**When you might need this**:
+
+- You may need to navigate to this location to clear Docfd index DB during some
+  version upgrades (CHANGELOG will note explicitly in this case).
+- Docfd index DB becomes corrupted and causes Docfd to freeze. Though this
+  should be unlikely as there are already precautions in place, e.g. careful
+  ordering of writes to ensure consistency and use of SQLite transactions.
+
+### Data Directory Location
+
+You can find the data directory location in the help message:
+
+```
+$ docfd --help=plain | grep -- --data-dir
+```
+
+**When you might need this**:
+
+- You may need to navigate to this location to back up your Docfd scripts, for instance.
