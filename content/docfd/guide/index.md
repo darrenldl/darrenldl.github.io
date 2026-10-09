@@ -150,6 +150,24 @@ Steps:
 
 ## What to Try Next
 
+### LINKS Mode
+
+Docfd provides a quick way to open and copy links within a document.
+We will use the `design-context.md` file from engineering directory for this.
+
+Steps:
+
+- Filter with `path-fuzzy:design`
+- Type `l` to enter LINKS mode
+
+![Figure: Docfd TUI After LINKS Step 2](docfd-screenshot-LINKS-after-step-2.png)
+
+Types of links currently supported are:
+
+- Markdown links: `[text](link)`
+- Simple Wiki links: `[[link]]`
+- Contiguous string that begin with one of: `http://`, `https://`, `file://`
+
 ### Docfd Script
 
 If you often repeat some search or repeat some starting steps for a particular project,

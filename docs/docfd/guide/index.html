@@ -253,6 +253,7 @@ id="toc-editing-command-history">Editing Command History</a></li>
 <li><a href="#what-to-try-next" id="toc-what-to-try-next">What to Try
 Next</a>
 <ul>
+<li><a href="#links-mode" id="toc-links-mode">LINKS Mode</a></li>
 <li><a href="#docfd-script" id="toc-docfd-script">Docfd Script</a></li>
 <li><a href="#common-cli-arguments" id="toc-common-cli-arguments">Common
 Cli Arguments</a></li>
@@ -488,6 +489,29 @@ Step 4</figcaption>
 </figure>
 <h2 id="what-to-try-next">What to Try Next<a href="#what-to-try-next"
 class="heading-anchor" aria-label="Link to this section"></a></h2>
+<h3 id="links-mode">LINKS Mode<a href="#links-mode"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
+<p>Docfd provides a quick way to open and copy links within a document.
+We will use the <code>design-context.md</code> file from engineering
+directory for this.</p>
+<p>Steps:</p>
+<ul>
+<li>Filter with <code>path-fuzzy:design</code></li>
+<li>Type <code>l</code></li>
+</ul>
+<figure>
+<img src="docfd-screenshot-LINKS-after-step-2.png"
+alt="Figure: Docfd TUI After LINKS Step 2" />
+<figcaption aria-hidden="true">Figure: Docfd TUI After LINKS Step
+2</figcaption>
+</figure>
+<p>Types of links currently supported are:</p>
+<ul>
+<li>Markdown links: <code>[text](link)</code></li>
+<li>Simple Wiki links: <code>[[link]]</code></li>
+<li>Contiguous string that begin with one of: <code>http://</code>,
+<code>https://</code>, <code>file://</code></li>
+</ul>
 <h3 id="docfd-script">Docfd Script<a href="#docfd-script"
 class="heading-anchor" aria-label="Link to this section"></a></h3>
 <p>If you often repeat some search or repeat some starting steps for a
