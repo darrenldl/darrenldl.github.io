@@ -2,7 +2,7 @@
 
 This is the repository for https://darrenldl.github.io
 
-## Note to Self
+## Notes to Self
 
 ### Building
 
