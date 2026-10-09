@@ -1,5 +1,5 @@
 ---
-maxwidth: "120ch"
+maxwidth: "100ch"
 title: Docfd User Guide - Keyboard Reference
 ---
 

@@ -1,5 +1,5 @@
 ---
-maxwidth: "80%"
+maxwidth: "100ch"
 title: Docfd - Search Language
 ---
 
