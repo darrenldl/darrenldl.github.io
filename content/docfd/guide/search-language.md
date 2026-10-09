@@ -3,7 +3,7 @@ maxwidth: "100ch"
 title: Docfd - Search Language
 ---
 
-[**User Guide**](index.md) | [**Engineering Case Study**](../index.md)
+[**Back to User Guide**](index.md)
 
 An expression in the search language is one of:
 

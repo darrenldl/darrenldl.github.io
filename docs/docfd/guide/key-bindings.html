@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docfd User Guide - Key Bindings</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 100ch;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    :root {
+      --content-max-width: 100ch;
+    }
+    .heading-anchor {
+      margin-left: 0.35em;
+      text-decoration: none;
+      opacity: 0.35;
+    }
+    .heading-anchor::after {
+      content: "#";
+    }
+    .heading-anchor:hover,
+    .heading-anchor:focus {
+      opacity: 1;
+    }
+    #TOC {
+      margin-bottom: 2rem;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    #TOC li {
+      position: relative;
+      padding-left: 1em;
+    }
+    #TOC li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      opacity: 0.6;
+    }
+    #TOC a {
+      text-decoration: none;
+    }
+    @media (min-width: 60rem) {
+      body.has-toc {
+        max-width: calc(var(--content-max-width) + 18rem);
+      }
+      body.has-toc .page-layout {
+        display: grid;
+        grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+        gap: 2rem;
+        align-items: start;
+      }
+      #TOC {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        margin-bottom: 0;
+        overflow-y: auto;
+      }
+    }
+    tbody tr + tr {
+      border-top: 1px solid #d8d8d8;
+    }
+  </style>
+</head>
+<body class="has-toc">
+<div class="page-layout">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#navigate" id="toc-navigate">Navigate</a>
+<ul>
+<li><a href="#selection-and-opening"
+id="toc-selection-and-opening">Selection and Opening</a></li>
+<li><a href="#search-filter-and-ranking"
+id="toc-search-filter-and-ranking">Search, Filter, and Ranking</a></li>
+<li><a href="#views-and-session-history"
+id="toc-views-and-session-history">Views and Session History</a></li>
+<li><a href="#actions-and-scripts" id="toc-actions-and-scripts">Actions
+and Scripts</a></li>
+</ul></li>
+<li><a href="#search-and-filter-inputs"
+id="toc-search-and-filter-inputs">Search and Filter Inputs</a></li>
+<li><a href="#action-modes" id="toc-action-modes">Action Modes</a>
+<ul>
+<li><a href="#clear-and-sort" id="toc-clear-and-sort">Clear and
+Sort</a></li>
+<li><a href="#drop-mark-and-narrow" id="toc-drop-mark-and-narrow">Drop,
+Mark, and Narrow</a></li>
+<li><a href="#copy" id="toc-copy">Copy</a></li>
+<li><a href="#reload" id="toc-reload">Reload</a></li>
+</ul></li>
+<li><a href="#links-and-path-ranking"
+id="toc-links-and-path-ranking">Links and Path Ranking</a>
+<ul>
+<li><a href="#links" id="toc-links">Links</a></li>
+<li><a href="#path-fuzzy-rank" id="toc-path-fuzzy-rank">Path Fuzzy
+Rank</a></li>
+</ul></li>
+<li><a href="#script-inputs-and-dialogs"
+id="toc-script-inputs-and-dialogs">Script Inputs and Dialogs</a>
+<ul>
+<li><a href="#save-script" id="toc-save-script">Save Script</a></li>
+<li><a href="#open-or-delete-script" id="toc-open-or-delete-script">Open
+or Delete Script</a></li>
+</ul></li>
+<li><a href="#command-history-editing"
+id="toc-command-history-editing">Command History Editing</a></li>
+</ul>
+</nav>
+<main class="page-content">
+<header id="title-block-header">
+<h1 class="title">Docfd User Guide - Key Bindings</h1>
+</header>
+<p><a href="index.html"><strong>Back to User Guide</strong></a></p>
+<p>Docfd is modal: most keys in NAVIGATE mode either perform an action
+or open a short-lived mode with its own bindings. The current mode is
+shown at the left of the status bar.</p>
+<p>Press <code>&lt;</code> or <code>&gt;</code> in NAVIGATE mode to
+rotate the on-screen key binding grid, and press <code>?</code> to show
+or hide it.</p>
+<h2 id="navigate">Navigate<a href="#navigate" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
+<h3 id="selection-and-opening">Selection and Opening<a
+href="#selection-and-opening" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>j</code>, <code>Down</code>, or <code>Page Down</code></td>
+<td>Select the next document. If only one document is listed, select its
+next search result instead.</td>
+</tr>
+<tr>
+<td><code>k</code>, <code>Up</code>, or <code>Page Up</code></td>
+<td>Select the previous document. If only one document is listed, select
+its previous search result instead.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>j</code>,
+<code>Shift</code>+<code>Down</code>, or
+<code>Shift</code>+<code>Page Down</code></td>
+<td>Select the next search result in the current document.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>k</code>,
+<code>Shift</code>+<code>Up</code>, or
+<code>Shift</code>+<code>Page Up</code></td>
+<td>Select the previous search result in the current document.</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>Select the first document.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>g</code></td>
+<td>Select the last document.</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Open the selected document at the selected search result, when
+possible.</td>
+</tr>
+<tr>
+<td><code>Space</code></td>
+<td>Toggle the mark on the selected document.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="search-filter-and-ranking">Search, Filter, and Ranking<a
+href="#search-filter-and-ranking" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>Enter SEARCH mode.</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>Enter FILTER mode.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>f</code></td>
+<td>Enter PATH-FUZZY-RANK mode.</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>Enter CLEAR mode.</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>Enter NARROW mode.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="views-and-session-history">Views and Session History<a
+href="#views-and-session-history" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-</code> / <code>=</code></td>
+<td>Scroll the document content view up/down.</td>
+</tr>
+<tr>
+<td><code>Left</code> / <code>Right</code></td>
+<td>Adjust the screen split.</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td>Show or hide the content/search-result pane.</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Show or hide the key binding pane.</td>
+</tr>
+<tr>
+<td><code>&lt;</code> / <code>&gt;</code></td>
+<td>Rotate the on-screen key binding grid.</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>Enter LINKS mode for links found in the selected document.</td>
+</tr>
+<tr>
+<td><code>u</code> or <code>Ctrl</code>+<code>z</code></td>
+<td>Undo.</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>r</code> or
+<code>Ctrl</code>+<code>y</code></td>
+<td>Redo.</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>Edit the complete command history in an external editor.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="actions-and-scripts">Actions and Scripts<a
+href="#actions-and-scripts" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>Enter ascending SORT mode.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>s</code></td>
+<td>Enter descending SORT mode.</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Enter COPY mode for search results.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>y</code></td>
+<td>Enter COPY-PATHS mode.</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>Enter DROP mode.</td>
+</tr>
+<tr>
+<td><code>m</code></td>
+<td>Enter MARK mode.</td>
+</tr>
+<tr>
+<td><code>Shift</code>+<code>m</code></td>
+<td>Enter UNMARK mode.</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>Enter RELOAD mode.</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>s</code></td>
+<td>Save the session as a Docfd script.</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>o</code></td>
+<td>Open the script picker.</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>c</code> or
+<code>Ctrl</code>+<code>q</code></td>
+<td>Exit Docfd.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="search-and-filter-inputs">Search and Filter Inputs<a
+href="#search-and-filter-inputs" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
+<p>SEARCH and FILTER update their results as text is entered.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>SEARCH</th>
+<th>FILTER</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Printable character</td>
+<td>Insert at the cursor.</td>
+<td>Insert at the cursor.</td>
+</tr>
+<tr>
+<td><code>Backspace</code></td>
+<td>Delete before the cursor.</td>
+<td>Delete before the cursor.</td>
+</tr>
+<tr>
+<td><code>Left</code> / <code>Right</code></td>
+<td>Move the cursor.</td>
+<td>Move the cursor.</td>
+</tr>
+<tr>
+<td><code>Enter</code> or <code>Esc</code></td>
+<td>Commit the current text and return to NAVIGATE.</td>
+<td>Commit the current text and return to NAVIGATE.</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>No action.</td>
+<td>Autocomplete the current filter keyword.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="action-modes">Action Modes<a href="#action-modes"
+class="heading-anchor" aria-label="Link to this section"></a></h2>
+<p>Pressing <code>Esc</code> cancels any of the modes in this section
+and returns to NAVIGATE.</p>
+<h3 id="clear-and-sort">Clear and Sort<a href="#clear-and-sort"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLEAR</td>
+<td><code>/</code></td>
+<td>Clear the search field.</td>
+</tr>
+<tr>
+<td>CLEAR</td>
+<td><code>f</code></td>
+<td>Clear the filter field.</td>
+</tr>
+<tr>
+<td>CLEAR</td>
+<td><code>h</code></td>
+<td>Clear the command history and restore the starting state.</td>
+</tr>
+<tr>
+<td>SORT-ASC / SORT-DESC</td>
+<td><code>s</code></td>
+<td>Sort by search-result score.</td>
+</tr>
+<tr>
+<td>SORT-ASC / SORT-DESC</td>
+<td><code>p</code></td>
+<td>Sort by path.</td>
+</tr>
+<tr>
+<td>SORT-ASC / SORT-DESC</td>
+<td><code>d</code></td>
+<td>Sort by path date.</td>
+</tr>
+<tr>
+<td>SORT-ASC / SORT-DESC</td>
+<td><code>m</code></td>
+<td>Sort by modification time.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="drop-mark-and-narrow">Drop, Mark, and Narrow<a
+href="#drop-mark-and-narrow" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DROP</td>
+<td><code>d</code></td>
+<td>Drop the selected document.</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td><code>Shift</code>+<code>d</code></td>
+<td>Drop every document except the selected one.</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td><code>l</code> / <code>Shift</code>+<code>l</code></td>
+<td>Drop listed/unlisted documents.</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td><code>m</code> / <code>Shift</code>+<code>m</code></td>
+<td>Drop marked/unmarked documents.</td>
+</tr>
+<tr>
+<td>MARK</td>
+<td><code>l</code></td>
+<td>Mark all listed documents.</td>
+</tr>
+<tr>
+<td>UNMARK</td>
+<td><code>l</code></td>
+<td>Unmark all listed documents.</td>
+</tr>
+<tr>
+<td>UNMARK</td>
+<td><code>a</code></td>
+<td>Unmark all documents.</td>
+</tr>
+<tr>
+<td>NARROW</td>
+<td><code>0</code>–<code>9</code></td>
+<td>Narrow the search scope to level N.</td>
+</tr>
+</tbody>
+</table>
+<p>Dropping removes documents from the current session, not from the
+filesystem.</p>
+<h3 id="copy">Copy<a href="#copy" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COPY</td>
+<td><code>y</code></td>
+<td>Copy the selected search result.</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td><code>a</code></td>
+<td>Copy all results from the selected document.</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td><code>m</code></td>
+<td>Copy results from marked documents.</td>
+</tr>
+<tr>
+<td>COPY</td>
+<td><code>l</code></td>
+<td>Copy results from listed documents.</td>
+</tr>
+<tr>
+<td>COPY-PATHS</td>
+<td><code>y</code></td>
+<td>Copy the selected document path.</td>
+</tr>
+<tr>
+<td>COPY-PATHS</td>
+<td><code>m</code> / <code>Shift</code>+<code>m</code></td>
+<td>Copy paths of marked/unmarked documents.</td>
+</tr>
+<tr>
+<td>COPY-PATHS</td>
+<td><code>l</code> / <code>Shift</code>+<code>l</code></td>
+<td>Copy paths of listed/unlisted documents.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reload">Reload<a href="#reload" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>Reload the selected document.</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Rescan and reload the complete document source.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="links-and-path-ranking">Links and Path Ranking<a
+href="#links-and-path-ranking" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
+<h3 id="links">Links<a href="#links" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>j</code>, <code>Down</code>, or <code>Page Down</code></td>
+<td>Select the next link.</td>
+</tr>
+<tr>
+<td><code>k</code>, <code>Up</code>, or <code>Page Up</code></td>
+<td>Select the previous link.</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Open the selected link and return to NAVIGATE.</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Open the selected link and remain in LINKS mode.</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Copy the selected link and return to NAVIGATE.</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Return to NAVIGATE.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="path-fuzzy-rank">Path Fuzzy Rank<a href="#path-fuzzy-rank"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
+<p>Typing updates the path ranking. <code>Up</code> and
+<code>Down</code> select a document, <code>Enter</code> pins the current
+ranking and returns to NAVIGATE, and <code>Esc</code> returns without
+pinning it.</p>
+<h2 id="script-inputs-and-dialogs">Script Inputs and Dialogs<a
+href="#script-inputs-and-dialogs" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
+<h3 id="save-script">Save Script<a href="#save-script"
+class="heading-anchor" aria-label="Link to this section"></a></h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Printable character, <code>Backspace</code>, <code>Left</code>, or
+<code>Right</code></td>
+<td>Edit the script name.</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Autocomplete the name from existing scripts.</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Submit the name. A new script is saved immediately, an existing
+script opens the overwrite confirmation.</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Cancel and return to NAVIGATE.</td>
+</tr>
+</tbody>
+</table>
+<p>If the name is invalid, <code>Enter</code> or <code>Esc</code>
+dismisses the message and returns to name editing with the entered name
+restored.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Prompt</th>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overwrite existing script</td>
+<td><code>y</code></td>
+<td>Overwrite it, then show the edit prompt.</td>
+</tr>
+<tr>
+<td>Overwrite existing script</td>
+<td><code>n</code> or <code>Esc</code></td>
+<td>Cancel and return to NAVIGATE.</td>
+</tr>
+<tr>
+<td>Edit saved script</td>
+<td><code>y</code></td>
+<td>Open the script in an external editor.</td>
+</tr>
+<tr>
+<td>Edit saved script</td>
+<td><code>n</code> or <code>Esc</code></td>
+<td>Skip editing and return to NAVIGATE.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="open-or-delete-script">Open or Delete Script<a
+href="#open-or-delete-script" class="heading-anchor"
+aria-label="Link to this section"></a></h3>
+<p>Typing filters the script list.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Up</code> / <code>Down</code></td>
+<td>Select a script.</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Run the selected script.</td>
+</tr>
+<tr>
+<td><code>Ctrl</code>+<code>x</code></td>
+<td>Ask to delete the selected script.</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Cancel and return to NAVIGATE.</td>
+</tr>
+</tbody>
+</table>
+<p>At the deletion prompt, press <code>y</code> to delete the script, or
+<code>n</code>/<code>Esc</code> to return to the script picker.</p>
+<h2 id="command-history-editing">Command History Editing<a
+href="#command-history-editing" class="heading-anchor"
+aria-label="Link to this section"></a></h2>
+<p><code>h</code> leaves the TUI temporarily and opens the session
+command history in the configured external editor. The editor’s own
+keyboard bindings apply there. Saving and exiting causes Docfd to replay
+the edited history. Exiting without changing the file leaves the session
+unchanged.</p>
+<p>If a command cannot be parsed or run, Docfd reopens the editor at the
+first error and inserts a temporary <code>;</code> diagnostic below the
+offending line. Lines beginning with <code>#</code> are persistent user
+comments, while blank lines and <code>;</code> system comments are
+omitted when the history is rebuilt.</p>
+</main>
+</div>
+</body>
+</html>

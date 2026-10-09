@@ -144,7 +144,7 @@ Steps:
 
 - If Docfd fails to parse any line, you would be brought back to the editor
   (similar to `git rebase -i`), where the problematic line would be followed by
-  `# Failed to parse the above command`.
+  `; Failed to parse the above command ...`.
 
 ![Figure: Docfd TUI After Command History Step 4](docfd-screenshot-command-history-after-step-4.png)
 
@@ -277,3 +277,4 @@ $ docfd --help=plain | grep -- --data-dir
 
 - [Search Language](search-language.md)
 - [Filter Language](filter-language.md)
+- [Key Bindings](key-bindings.md)
