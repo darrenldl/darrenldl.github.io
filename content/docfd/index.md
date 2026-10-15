@@ -30,7 +30,7 @@ reducing the possibility of unexpected resource usage disrupting other desktop a
 
 ### Searching Through PDF
 
-TODO
+![Docfd interactive demonstration with PDF](https://github.com/darrenldl/docfd/raw/main/screen-recording-gifs/pdf.gif)
 
 ### Non-interactive Use
 
