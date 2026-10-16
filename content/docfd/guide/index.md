@@ -225,6 +225,20 @@ or
 --exts=md,txt
 ```
 
+#### Special Tokens
+
+- `<CONFIG_DIR>` expands into the absolute directory containing the config file
+- `<HOME>` expands into the value of the HOME environment variable
+
+Example usage with a `.docfd-config` file at the root of a project folder:
+
+```
+--data-dir
+<CONFIG_DIR>/.docfd/data
+--cache-dir
+<CONFIG_DIR>/.docfd/cache
+```
+
 ### LINKS Mode
 
 Docfd provides a quick way to open and copy links within a document.
