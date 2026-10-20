@@ -251,14 +251,19 @@ Steps:
 
 ![Figure: Docfd TUI After LINKS Step 2](docfd-screenshot-LINKS-after-step-2.png)
 
+- Hit `Enter` to open the link and exit LINKS mode or type `o` to open and remain in LINKS mode
+
 Types of links currently supported are:
 
 - Simple markdown links: `[text](link)`
 - Simple Wiki links: `[[link]]`
-- Contiguous string that begin with one of: `http://`, `https://`, `file://`
-
-Note that link detection and extraction is not quite complete yet
-as of 13.1.3, but will be enhanced in a future release.
+- Contiguous string that begin with one of:
+    - `http://`
+    - `https://`
+    - `file://`
+    - `ftp://`
+    - `obsidian://`
+    - `mailto:`
 
 ## Troubleshooting
 
