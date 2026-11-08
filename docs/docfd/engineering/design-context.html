@@ -458,32 +458,23 @@ a desktop environment rather than dedicated server</td>
 <h3 id="why-a-custom-search-engine">Why a Custom Search Engine<a
 href="#why-a-custom-search-engine" class="heading-anchor"
 aria-label="Link to this section"></a></h3>
-<p>I opted to implement a custom search engine instead of using an
-off-the-shelf engine for a mix of reasons, listed in the order of
-relevance:</p>
-<ul>
-<li>I wanted to use OCaml as it is my favourite language and is
-excellent for implementation of complex systems and query language
-processing, but there wasn’t an off-the-shelf engine available in
-OCaml.</li>
-<li>I want to have precise control over fundamental components,
-including the search behaviour, result ranking heuristics, and the
-design of the query language. A custom search engine is a simplest way
-to ensure this.</li>
-<li>The core search functionality I wanted (proximity search + DFS) is
-fairly straightforward to implement correctly, and I only need the
-implementation to be “good enough” for the type of workload I’m
-expecting myself (&lt;1k files to search through at a time).</li>
-<li>And lastly, I want side projects to give a good learning or
-exploratory experience, and I thought it would be nice to get a concrete
-feel of the core search and ranking problem.</li>
-</ul>
-<p>Suffice to say my choices would be different had this been an actual
-product that targets more general and larger use cases, as it is very
-difficult to beat the optimisation of existing search engines. And even
-if a custom query language is needed, a translation layer on top of the
-search engine’s native query language would likely cover all the
-practical cases.</p>
+<p>Docfd is designed around a narrower search interaction than a
+conventional document retrieval engine. The primary search result is not
+just the ranked list of documents, but the ranked search results (fuzzy
+and proximity-constrained phrase search) within the documents.</p>
+<p>Although established engines provide all the necessary machineary,
+their usual query model is document oriented where the output is set of
+scored documents. In order to obtain the finer ranked search results
+within a document, further queries and processing would be needed.</p>
+<p>So for Docfd’s intended workload of a few thousand documents, I made
+the trade-off of building a smaller search engine with first-class
+support of the fine-grained search results, which also gives me precise
+control over other aspects, such as the search algorithm behaviour,
+result ranking heuristics, and the design of the query language.</p>
+<p>If Docfd was instead a general-purpose product serving larger
+collections of documents, I likely would have chosen to use an
+established engine such as Tantivy or Lucene, then build a custom
+processing layer on top.</p>
 <h3 id="supporting-ad-hoc-workflow">Supporting Ad Hoc Workflow<a
 href="#supporting-ad-hoc-workflow" class="heading-anchor"
 aria-label="Link to this section"></a></h3>
