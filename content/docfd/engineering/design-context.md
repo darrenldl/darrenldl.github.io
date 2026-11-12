@@ -152,7 +152,8 @@ start-up is often instantaneous.
 
 There were some concessions made to avoid disrupting other desktop
 applications. One particularly noticeable choice is giving up storage of
-heavy indices in memory and instead rely on disk I/O via SQLite.
+heavy indices in memory and instead rely on disk I/O via SQLite, as
+well as avoidance of extremely large on-disk indices.
 
 The tradeoff is that at larger scale (say a few thousand documents, depending
 on the sizes), Docfd will noticeably struggle where results will take seconds

@@ -17,6 +17,9 @@ toc: true
 - Fuzzy matching is handled by using the Levenshtein distance as part of
   the matching criteria for each word. An automaton is computed for
   each word of the search phrase for optimised repeated matching.
+    - BK-tree and Symspell style approaches were explored briefly, but I decided
+      the additional overhead in memory, storage, as well as implementation complexity
+      were not worthwhile for the small scale workload that Docfd targets.
 
 ## Search Procedure
 
