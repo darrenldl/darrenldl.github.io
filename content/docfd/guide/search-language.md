@@ -62,7 +62,7 @@ i.e. it is treated as `(?word0) word1 ...`.
 
 This one comes more from author's personal preference than implementation difficulty.
 
-### Explanation
+#### Explanation
 
 There are a lot of similar software that provide a `&` operator in the primary search/filter field, so it seems natural for Docfd to carry it in the search language as well.
 However, there is a mismatch in where a search result sits in the hierarchy of data between Docfd and other programs, which
