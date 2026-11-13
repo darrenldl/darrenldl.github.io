@@ -11,7 +11,10 @@
     */
     html {
       color: #1a1a1a;
+      color: light-dark(#1a1a1a, #fdfdfd);
       background-color: #fdfdfd;
+      background-color: light-dark(#fdfdfd, #1a1a1a);
+      color-scheme: light dark;
     }
     body {
       margin: 0 auto;
@@ -36,12 +39,16 @@
     }
     @media print {
       html {
-        background-color: white;
+        color-scheme: light only;
       }
-      body {
+      html, body, pre, code {
         background-color: transparent;
+      }
+      body, a, a:visited, blockquote {
         color: black;
-        font-size: 12pt;
+      }
+      pre, code {
+        padding: 0;
       }
       p, h2, h3 {
         orphans: 3;
@@ -54,11 +61,8 @@
     p {
       margin: 1em 0;
     }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
+    a, a:visited {
+      color: inherit;
     }
     img {
       max-width: 100%;
@@ -87,8 +91,11 @@
     blockquote {
       margin: 1em 0 1em 1.7em;
       padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
+      border-left: 2px solid;
+      border-color: #e6e6e6;
+      border-color: light-dark(#e6e6e6, #4c4c4c);
       color: #606060;
+      color: light-dark(#606060, #b6b6b6);
     }
     code {
       white-space: pre-wrap;
@@ -112,7 +119,7 @@
     }
     hr {
       border: none;
-      border-top: 1px solid #1a1a1a;
+      border-top: 1px solid currentColor;
       height: 1px;
       margin: 1em 0;
     }
@@ -129,11 +136,11 @@
     }
     tbody {
       margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
     }
     th {
-      border-top: 1px solid #1a1a1a;
+      border-top: 1px solid currentColor;
       padding: 0.25em 0.5em 0.25em 0.5em;
     }
     td {
@@ -172,7 +179,6 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     :root {
       --content-max-width: 100ch;
     }
@@ -242,25 +248,40 @@
 <p>The filter language is designed around narrowing the set of documents
 listed, but does not impact the fine-grained search results
 otherwise.</p>
-<p>An expression in the filter language is one of: -
-<code>"search_exp"</code>, <code>'search_exp'</code> or
-<code>content:search_exp</code> - <code>search_exp</code> is the same
-search expression supported by content search field, but only determines
-whether the document is listed and does not impact the search results
-listed - <code>path-date:"op date"</code>,
+<p>An expression in the filter language is one of:</p>
+<ul>
+<li><code>"search_exp"</code>, <code>'search_exp'</code> or
+<code>content:search_exp</code>
+<ul>
+<li><code>search_exp</code> is the same search expression supported by
+content search field, but only determines whether the document is listed
+and does not impact the search results listed</li>
+</ul></li>
+<li><code>path-date:"op date"</code>,
 e.g. <code>path-date:&gt;2025-01-01</code>,
-<code>path-date:"&gt;= 2025-01-10"</code> - <code>op</code> is one of
-<code>=</code>, <code>&gt;=</code>, <code>&lt;=</code>,
-<code>&gt;</code>, <code>&lt;</code> - <code>date</code> is ISO8601
-date, i.e. <code>yyyy-mm-dd</code> - <code>path-fuzzy:search_exp</code>,
+<code>path-date:"&gt;= 2025-01-10"</code>
+<ul>
+<li><code>op</code> is one of <code>=</code>, <code>&gt;=</code>,
+<code>&lt;=</code>, <code>&gt;</code>, <code>&lt;</code></li>
+<li><code>date</code> is ISO8601 date, i.e. <code>yyyy-mm-dd</code></li>
+</ul></li>
+<li><code>path-fuzzy:search_exp</code>,
 e.g. <code>path-fuzzy:"meeting notes 2025"</code>,
-<code>path-fuzzy:changelog</code> - <code>search_exp</code> is the same
-search expression supported by content search field -
-<code>path-glob:/**/*.md</code> - <code>ext:txt</code> -
-<code>expression OR expression</code> (<code>OR</code> is
-case-insensitive) - <code>expression AND expression</code>
-(<code>AND</code> is case-insensitive) - <code>NOT expression</code>
-(<code>NOT</code> is case-insensitive) - <code>(expression)</code></p>
+<code>path-fuzzy:changelog</code>
+<ul>
+<li><code>search_exp</code> is the same search expression supported by
+content search field</li>
+</ul></li>
+<li><code>path-glob:/**/*.md</code></li>
+<li><code>ext:txt</code></li>
+<li><code>expression OR expression</code> (<code>OR</code> is
+case-insensitive)</li>
+<li><code>expression AND expression</code> (<code>AND</code> is
+case-insensitive)</li>
+<li><code>NOT expression</code> (<code>NOT</code> is
+case-insensitive)</li>
+<li><code>(expression)</code></li>
+</ul>
 <p>All arguments after the colon may be quoted via either single
 quotation marks (<code>'</code>) or double quotation mark
 (<code>"</code>).</p>
@@ -277,17 +298,31 @@ incomplete.</p>
 <h2 id="date-extraction-from-document-path">Date extraction from
 document path<a href="#date-extraction-from-document-path"
 class="heading-anchor" aria-label="Link to this section"></a></h2>
-<p>Docfd recognizes the following patterns from a document path: -
-<code>yyyy-mm-dd</code> - where<code>-</code> is a mandatory separator
-that is not a digit - <code>yyyymmdd</code> - <code>yyyy-mmm-dd</code>,
-<code>dd-mmm-yyyy</code> - where <code>-</code> is an optional separator
-that is neither a digit nor a letter - and <code>mmm</code> is an
-abbreviated month name (case-insensitive), e.g. <code>jan</code>,
-<code>Mar</code>, <code>SEP</code> - <code>yyyy-mmmm-dd</code>,
-<code>dd-mmmm-yyyy</code> - where <code>-</code> is an optional
-separator that is neither a digit nor a letter - and <code>mmmm</code>
-is a full month name (case-insensitive), e.g. <code>january</code>,
-<code>March</code>, <code>SEPTEMBER</code></p>
+<p>Docfd recognizes the following patterns from a document path:</p>
+<ul>
+<li><code>yyyy-mm-dd</code>
+<ul>
+<li>where<code>-</code> is a mandatory separator that is not a
+digit</li>
+</ul></li>
+<li><code>yyyymmdd</code></li>
+<li><code>yyyy-mmm-dd</code>, <code>dd-mmm-yyyy</code>
+<ul>
+<li>where <code>-</code> is an optional separator that is neither a
+digit nor a letter</li>
+<li>and <code>mmm</code> is an abbreviated month name
+(case-insensitive), e.g. <code>jan</code>, <code>Mar</code>,
+<code>SEP</code></li>
+</ul></li>
+<li><code>yyyy-mmmm-dd</code>, <code>dd-mmmm-yyyy</code>
+<ul>
+<li>where <code>-</code> is an optional separator that is neither a
+digit nor a letter</li>
+<li>and <code>mmmm</code> is a full month name (case-insensitive),
+e.g. <code>january</code>, <code>March</code>,
+<code>SEPTEMBER</code></li>
+</ul></li>
+</ul>
 <p>which recognises the rightmost sequence of <code>yyyy</code>
 <code>mm</code> <code>dd</code> separated by any non-digit
 character.</p>

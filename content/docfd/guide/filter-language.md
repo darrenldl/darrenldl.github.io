@@ -9,6 +9,7 @@ The filter language is designed around narrowing the set of documents listed,
 but does not impact the fine-grained search results otherwise.
 
 An expression in the filter language is one of:
+
 - `"search_exp"`, `'search_exp'` or `content:search_exp`
     - `search_exp` is the same search expression supported by content search field,
       but only determines whether the document is listed and does not impact the search results listed
@@ -44,6 +45,7 @@ This allows for the results of filtering to be updated in the UI as one types ev
 ## Date extraction from document path
 
 Docfd recognizes the following patterns from a document path:
+
 - `yyyy-mm-dd`
     - where`-` is a mandatory separator that is not a digit
 - `yyyymmdd`
